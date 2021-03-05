@@ -14,6 +14,23 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302134432_added_entity_Processus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302223915_added_entity_AnalyseSWOT.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224015_added_entity_BesoinPI.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224115_added_entity_PolitiqueQSE.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224215_added_entity_Risque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224315_added_entity_AnalyseSST.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224415_added_entity_Constat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224515_added_entity_Action.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224615_added_entity_NonConformite.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224715_added_entity_Objectif.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224815_added_entity_Reclamation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224915_added_entity_ObligationConformite.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225015_added_entity_AnalyseEnvirommentale.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225115_added_entity_AutreAction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225215_added_entity_ProcessusSMI.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225315_added_entity_ResultatIndicateur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225415_added_entity_IndicateurSMI.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->

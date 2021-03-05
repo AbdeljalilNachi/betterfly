@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="constat">
+            <h2><span>Constat</span> {{ constat.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ constat.processus }}</span>
+                </dd>
+                <dt><span>Audit</span></dt>
+                <dd>
+                    <span>{{ constat.audit }}</span>
+                </dd>
+                <dt><span>Constat</span></dt>
+                <dd>
+                    <span>{{ constat.constat }}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ constat.type }}</span>
+                </dd>
+                <dt><span>Origine</span></dt>
+                <dd>
+                    <span>{{ constat.origine }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/constat', constat.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

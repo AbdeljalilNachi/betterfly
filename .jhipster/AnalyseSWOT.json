@@ -1,0 +1,50 @@
+{
+  "name": "AnalyseSWOT",
+  "fields": [
+    {
+      "fieldName": "processus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateIdentification",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pilote",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TypeAnalyseSWOT",
+      "fieldValues": "FORCE,FAIBLESSE,MENACE,OPPORTUNITE"
+    },
+    {
+      "fieldName": "bu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "afficher",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210302223915",
+  "entityTableName": "analyse_swot",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

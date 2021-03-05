@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-processus-smi-heading">Create or edit a Processus SMI</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_processus">Processus</label>
+                    <input type="text" class="form-control" name="processus" id="field_processus"
+                           formControlName="processus"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_date">Date</label>
+                    <div class="input-group">
+                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_version">Version</label>
+                    <input type="number" class="form-control" name="version" id="field_version"
+                           formControlName="version"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pilote">Pilote</label>
+                    <input type="text" class="form-control" name="pilote" id="field_pilote"
+                           formControlName="pilote"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_finalite">Finalite</label>
+                    <input type="text" class="form-control" name="finalite" id="field_finalite"
+                           formControlName="finalite"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ficheProcessus">Fiche Processus</label>
+                    <div>
+                        <div *ngIf="editForm.get('ficheProcessus')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('ficheProcessusContentType')!.value, editForm.get('ficheProcessus')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('ficheProcessusContentType')!.value }}, {{ byteSize(editForm.get('ficheProcessus')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({ficheProcessus: null});editForm.patchValue({ficheProcessusContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_ficheProcessus" (change)="setFileData($event, 'ficheProcessus', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="ficheProcessus" id="field_ficheProcessus"
+                           formControlName="ficheProcessus"/>
+                    <input type="hidden" class="form-control" name="ficheProcessusContentType" id="field_ficheProcessusContentType"
+                           formControlName="ficheProcessusContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="MANAGEMENT">MANAGEMENT</option>
+                        <option value="REALISATION">REALISATION</option>
+                        <option value="SUPPORT">SUPPORT</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vigueur">Vigueur</label>
+                    <input type="checkbox" class="form-control" name="vigueur" id="field_vigueur"
+                           formControlName="vigueur"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_indicateur">Indicateur</label>
+                    <input type="text" class="form-control" name="indicateur" id="field_indicateur"
+                           formControlName="indicateur"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+{
+  "name": "AnalyseEnvirommentale",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "processus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "businessUnit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "activite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "aspectEnvironnemental",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "impactEnvironnemental",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "competencesRequises",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "situation",
+      "fieldType": "Situation",
+      "fieldValues": "Normale,Anormale,Urgence"
+    },
+    {
+      "fieldName": "frequence",
+      "fieldType": "EnumFive",
+      "fieldValues": "ONE,TWO,THREE,FOUR,FIVE"
+    },
+    {
+      "fieldName": "sensibiliteMilieu",
+      "fieldType": "EnumFive",
+      "fieldValues": "ONE,TWO,THREE,FOUR,FIVE"
+    },
+    {
+      "fieldName": "coefficientMaitrise",
+      "fieldType": "EnumFive",
+      "fieldValues": "ONE,TWO,THREE,FOUR,FIVE"
+    },
+    {
+      "fieldName": "gravite",
+      "fieldType": "EnumFive",
+      "fieldValues": "ONE,TWO,THREE,FOUR,FIVE"
+    },
+    {
+      "fieldName": "criticite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maitriseExistante",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "origine",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210302225015",
+  "entityTableName": "analyse_envirommentale",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

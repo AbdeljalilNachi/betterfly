@@ -1,0 +1,240 @@
+entity AnalyseSWOT {
+processus	String ,
+dateIdentification	LocalDate , 
+description	String , 
+pilote	String , 
+type	TypeAnalyseSWOT , 
+bu	String  , 
+commentaire	String , 
+afficher	Boolean 
+}
+
+entity BesoinPI {
+processus	String ,
+dateIdentification	LocalDate  ,
+piPertinentes	String ,
+pertinente	Boolean ,
+priseEnCharge	Boolean,
+afficher	Boolean 
+}
+
+entity PolitiqueQSE {
+processus	String ,
+date	LocalDate  ,
+axePolitiqueQSE	String ,
+objectifQSE	String ,
+vigueur	Boolean ,
+indicateur String 
+}
+
+
+entity Risque {
+  processus String,
+  dateIdentification LocalDate,
+  description String,
+  causePotentielle String,
+  effetPotentiel String,
+  type TypeRisque,
+  gravite EnumFive,
+  probabilite EnumFive,
+  criticite Integer,
+  traitement Traitement,
+  commentaire String,
+  origine String
+}
+
+entity AnalyseSST {
+  date LocalDate,
+  processus String,
+  buisnessUnit String,
+  uniteTravail String,
+  danger String,
+  risque String,
+  competence String,
+  situation Situation,
+  frequence EnumFive,
+  dureeExposition EnumFive,
+  coefficientMaitrise EnumFive,
+  gravite EnumFive,
+  criticite Integer,
+  maitriseExistante String,
+  origine String
+}
+entity Constat {
+  processus String,
+  audit String,
+  constat String,
+  type String,
+  origine String
+}
+
+entity Action {
+datePlanification LocalDate ,
+action	String,
+type	String,
+delai	LocalDate,
+avancement	String,
+realisee	Boolean,
+critereResultat	String,
+efficace	Boolean,
+ressourcesNecessaires	String,
+statut	Statut
+
+}
+
+
+entity NonConformite {
+  processus String,
+  date LocalDate,
+  description String,
+  causesPotentielles String,
+  origine String
+}
+entity Objectif {
+  processus String,
+  axedelapolitiqueqse String,
+  objectifqse String,
+  indicateur String,
+  origine String
+}
+
+entity Reclamation {
+  processus String,
+  date LocalDate,
+  description String,
+  justifiee Boolean,
+  client String,
+  piecejointe AnyBlob,
+  origine String
+}
+
+entity ObligationConformite {
+date	LocalDate ,
+rubrique	Rubrique ,
+reference	String ,
+num	Integer , 
+exigence	String ,
+applicable	Boolean ,
+conforme	Boolean ,
+statut	Integer ,
+observation	String ,
+processus	String ,
+ORIGINE	String  ,
+}
+
+
+entity AnalyseEnvirommentale {
+date  LocalDate,
+processus	String,
+businessUnit	String,
+activite String,
+aspectEnvironnemental	String ,
+impactEnvironnemental	String ,
+competencesRequises	 String,
+situation	Situation,
+frequence 	EnumFive,
+sensibiliteMilieu 	EnumFive,
+coefficientMaitrise	EnumFive,
+gravite EnumFive,
+criticite	Integer,
+maitriseExistante	String,
+origine	String
+	
+}
+
+entity AutreAction {
+processus	String,
+origineAction	String,
+origine	String
+	
+}
+
+
+entity ProcessusSMI {
+processus	String ,
+date	LocalDate , 
+version	Integer , 
+pilote	String , 
+finalite	String , 
+ficheProcessus	Blob  , 
+type	TypeProcessus , 
+vigueur	Boolean ,
+indicateur String
+}
+
+
+
+entity ResultatIndicateur {
+mois	Mois,
+cible	Float,
+resultat	Float,
+indicateur String
+}
+
+
+entity IndicateurSMI {
+processus	String ,
+dateIdentification	LocalDate,
+indicateur	String,
+formuleCalcul	String,
+cible	Float,
+seuilTolerance	Float,
+unite	String,
+periodicite	String,
+responsableCalcul	String,
+observations	String ,
+vigueur	Boolean,
+annee Integer,
+observation String
+}
+
+
+
+
+enum TypeProcessus {
+   MANAGEMENT , REALISATION, SUPPORT
+}
+
+enum TypeAnalyseSWOT {
+  FORCE, FAIBLESSE, MENACE , OPPORTUNITE
+}
+enum Mois {
+   JAN, FEV, MAR, AVR, MAI , JUN , JUL, AUT , SEP,  OCT, NOV , DEC 
+}
+enum TypeRisque {
+ MENACE , OPPORTUNITE
+}
+
+
+enum EnumFive {
+ONE , TWO , THREE , FOUR , FIVE
+}
+
+enum Traitement {
+ACCEPTE, REFUSE , A_TRAITER , A_TRANSFERER
+}
+
+enum Situation {
+Normale, Anormale, Urgence
+}
+
+enum Statut {
+EN_COURS, PLANIFIEE
+}
+enum Rubrique {
+RUBRIQUE , NETTOYAGE , EVACUATION_EAUX , SANITAIRES , REFECTOIRES_HEBERGEMENT , DISPOSITIONS_DIVERSES , AMENAGEMENT_LOCAUX
+AMBIANCES , ORGANISATION_RH , CHS , CONVENTION119 , PROTECTION_MACHINES , DISPOSITIFS_PROTECTION , CONFORMITE,
+APPAREILS_LEVAGE , CABINES_MOYENS_ACCES ,  INSTALLATIONS_ELECTRIQUES , ECLAIRAGE_SECOURS,
+CABINE_PEINTURE_PULVIRISEE , AT , PRODUIT_CHIMIQUES, SERVICE_MEDICAL , DISPOSITIONS_COMMUNES , PREVENTION_CONTRE_INCENDIE,
+COVID, ENVIRONNEMENT , CODE_TRAVAIL
+}
+
+
+
+
+paginate AnalyseSWOT , BesoinPI, PolitiqueQSE, AnalyseSST, Risque, Constat,
+Action , NonConformite, Objectif, Reclamation ,
+ObligationConformite , AnalyseEnvirommentale , AutreAction , 
+ProcessusSMI , IndicateurSMI , ResultatIndicateur   with pagination
+
+

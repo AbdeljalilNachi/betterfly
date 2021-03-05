@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="risque">
+            <h2><span>Risque</span> {{ risque.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ risque.processus }}</span>
+                </dd>
+                <dt><span>Date Identification</span></dt>
+                <dd>
+                    <span>{{ risque.dateIdentification }}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ risque.description }}</span>
+                </dd>
+                <dt><span>Cause Potentielle</span></dt>
+                <dd>
+                    <span>{{ risque.causePotentielle }}</span>
+                </dd>
+                <dt><span>Effet Potentiel</span></dt>
+                <dd>
+                    <span>{{ risque.effetPotentiel }}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ risque.type }}</span>
+                </dd>
+                <dt><span>Gravite</span></dt>
+                <dd>
+                    <span>{{ risque.gravite }}</span>
+                </dd>
+                <dt><span>Probabilite</span></dt>
+                <dd>
+                    <span>{{ risque.probabilite }}</span>
+                </dd>
+                <dt><span>Criticite</span></dt>
+                <dd>
+                    <span>{{ risque.criticite }}</span>
+                </dd>
+                <dt><span>Traitement</span></dt>
+                <dd>
+                    <span>{{ risque.traitement }}</span>
+                </dd>
+                <dt><span>Commentaire</span></dt>
+                <dd>
+                    <span>{{ risque.commentaire }}</span>
+                </dd>
+                <dt><span>Origine</span></dt>
+                <dd>
+                    <span>{{ risque.origine }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/risque', risque.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

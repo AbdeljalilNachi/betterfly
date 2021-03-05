@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="obligationConformite">
+            <h2><span>Obligation Conformite</span> {{ obligationConformite.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.date }}</span>
+                </dd>
+                <dt><span>Rubrique</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.rubrique }}</span>
+                </dd>
+                <dt><span>Reference</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.reference }}</span>
+                </dd>
+                <dt><span>Num</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.num }}</span>
+                </dd>
+                <dt><span>Exigence</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.exigence }}</span>
+                </dd>
+                <dt><span>Applicable</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.applicable }}</span>
+                </dd>
+                <dt><span>Conforme</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.conforme }}</span>
+                </dd>
+                <dt><span>Statut</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.statut }}</span>
+                </dd>
+                <dt><span>Observation</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.observation }}</span>
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.processus }}</span>
+                </dd>
+                <dt><span>O RIGINE</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.oRIGINE }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/obligation-conformite', obligationConformite.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{
+  "name": "PolitiqueQSE",
+  "fields": [
+    {
+      "fieldName": "processus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "axePolitiqueQSE",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectifQSE",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vigueur",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "indicateur",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210302224115",
+  "entityTableName": "politique_qse",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

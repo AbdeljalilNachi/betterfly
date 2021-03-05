@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-action-heading">Create or edit a Action</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_datePlanification">Date Planification</label>
+                    <div class="input-group">
+                        <input id="field_datePlanification" type="text" class="form-control" name="datePlanification" ngbDatepicker #datePlanificationDp="ngbDatepicker" formControlName="datePlanification"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="datePlanificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_action">Action</label>
+                    <input type="text" class="form-control" name="action" id="field_action"
+                           formControlName="action"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <input type="text" class="form-control" name="type" id="field_type"
+                           formControlName="type"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_delai">Delai</label>
+                    <div class="input-group">
+                        <input id="field_delai" type="text" class="form-control" name="delai" ngbDatepicker #delaiDp="ngbDatepicker" formControlName="delai"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="delaiDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_avancement">Avancement</label>
+                    <input type="text" class="form-control" name="avancement" id="field_avancement"
+                           formControlName="avancement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_realisee">Realisee</label>
+                    <input type="checkbox" class="form-control" name="realisee" id="field_realisee"
+                           formControlName="realisee"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_critereResultat">Critere Resultat</label>
+                    <input type="text" class="form-control" name="critereResultat" id="field_critereResultat"
+                           formControlName="critereResultat"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_efficace">Efficace</label>
+                    <input type="checkbox" class="form-control" name="efficace" id="field_efficace"
+                           formControlName="efficace"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ressourcesNecessaires">Ressources Necessaires</label>
+                    <input type="text" class="form-control" name="ressourcesNecessaires" id="field_ressourcesNecessaires"
+                           formControlName="ressourcesNecessaires"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_statut">Statut</label>
+                    <select class="form-control" name="statut" formControlName="statut" id="field_statut">
+                        <option value="EN_COURS">EN_COURS</option>
+                        <option value="PLANIFIEE">PLANIFIEE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

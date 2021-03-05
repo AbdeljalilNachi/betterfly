@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="nonConformite">
+            <h2><span>Non Conformite</span> {{ nonConformite.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ nonConformite.processus }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ nonConformite.date }}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ nonConformite.description }}</span>
+                </dd>
+                <dt><span>Causes Potentielles</span></dt>
+                <dd>
+                    <span>{{ nonConformite.causesPotentielles }}</span>
+                </dd>
+                <dt><span>Origine</span></dt>
+                <dd>
+                    <span>{{ nonConformite.origine }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/non-conformite', nonConformite.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

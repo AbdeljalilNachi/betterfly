@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="processusSMI">
+            <h2><span>Processus SMI</span> {{ processusSMI.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ processusSMI.processus }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ processusSMI.date }}</span>
+                </dd>
+                <dt><span>Version</span></dt>
+                <dd>
+                    <span>{{ processusSMI.version }}</span>
+                </dd>
+                <dt><span>Pilote</span></dt>
+                <dd>
+                    <span>{{ processusSMI.pilote }}</span>
+                </dd>
+                <dt><span>Finalite</span></dt>
+                <dd>
+                    <span>{{ processusSMI.finalite }}</span>
+                </dd>
+                <dt><span>Fiche Processus</span></dt>
+                <dd>
+                    <div *ngIf="processusSMI.ficheProcessus">
+                        <a (click)="openFile(processusSMI.ficheProcessusContentType, processusSMI.ficheProcessus)">open</a>
+                        {{ processusSMI.ficheProcessusContentType }}, {{ byteSize(processusSMI.ficheProcessus) }}
+                    </div>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ processusSMI.type }}</span>
+                </dd>
+                <dt><span>Vigueur</span></dt>
+                <dd>
+                    <span>{{ processusSMI.vigueur }}</span>
+                </dd>
+                <dt><span>Indicateur</span></dt>
+                <dd>
+                    <span>{{ processusSMI.indicateur }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/processus-smi', processusSMI.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

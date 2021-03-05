@@ -1,0 +1,37 @@
+{
+  "name": "Objectif",
+  "fields": [
+    {
+      "fieldName": "processus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "axedelapolitiqueqse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectifqse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "indicateur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "origine",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210302224715",
+  "entityTableName": "objectif",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

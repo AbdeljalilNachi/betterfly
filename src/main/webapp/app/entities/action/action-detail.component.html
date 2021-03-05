@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="action">
+            <h2><span>Action</span> {{ action.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date Planification</span></dt>
+                <dd>
+                    <span>{{ action.datePlanification }}</span>
+                </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <span>{{ action.action }}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ action.type }}</span>
+                </dd>
+                <dt><span>Delai</span></dt>
+                <dd>
+                    <span>{{ action.delai }}</span>
+                </dd>
+                <dt><span>Avancement</span></dt>
+                <dd>
+                    <span>{{ action.avancement }}</span>
+                </dd>
+                <dt><span>Realisee</span></dt>
+                <dd>
+                    <span>{{ action.realisee }}</span>
+                </dd>
+                <dt><span>Critere Resultat</span></dt>
+                <dd>
+                    <span>{{ action.critereResultat }}</span>
+                </dd>
+                <dt><span>Efficace</span></dt>
+                <dd>
+                    <span>{{ action.efficace }}</span>
+                </dd>
+                <dt><span>Ressources Necessaires</span></dt>
+                <dd>
+                    <span>{{ action.ressourcesNecessaires }}</span>
+                </dd>
+                <dt><span>Statut</span></dt>
+                <dd>
+                    <span>{{ action.statut }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/action', action.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

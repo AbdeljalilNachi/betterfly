@@ -1,0 +1,41 @@
+{
+  "name": "BesoinPI",
+  "fields": [
+    {
+      "fieldName": "processus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateIdentification",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "piPertinentes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pertinente",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "priseEnCharge",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "afficher",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210302224015",
+  "entityTableName": "besoin_pi",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

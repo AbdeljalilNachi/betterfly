@@ -1,0 +1,29 @@
+{
+  "name": "AutreAction",
+  "fields": [
+    {
+      "fieldName": "processus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "origineAction",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "origine",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210302225115",
+  "entityTableName": "autre_action",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

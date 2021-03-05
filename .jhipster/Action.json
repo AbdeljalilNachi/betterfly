@@ -1,0 +1,58 @@
+{
+  "name": "Action",
+  "fields": [
+    {
+      "fieldName": "datePlanification",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "delai",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "avancement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "realisee",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "critereResultat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "efficace",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "ressourcesNecessaires",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "Statut",
+      "fieldValues": "EN_COURS,PLANIFIEE"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210302224515",
+  "entityTableName": "action",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

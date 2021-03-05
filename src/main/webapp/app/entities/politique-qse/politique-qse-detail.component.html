@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="politiqueQSE">
+            <h2><span>Politique QSE</span> {{ politiqueQSE.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ politiqueQSE.processus }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ politiqueQSE.date }}</span>
+                </dd>
+                <dt><span>Axe Politique QSE</span></dt>
+                <dd>
+                    <span>{{ politiqueQSE.axePolitiqueQSE }}</span>
+                </dd>
+                <dt><span>Objectif QSE</span></dt>
+                <dd>
+                    <span>{{ politiqueQSE.objectifQSE }}</span>
+                </dd>
+                <dt><span>Vigueur</span></dt>
+                <dd>
+                    <span>{{ politiqueQSE.vigueur }}</span>
+                </dd>
+                <dt><span>Indicateur</span></dt>
+                <dd>
+                    <span>{{ politiqueQSE.indicateur }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/politique-qse', politiqueQSE.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

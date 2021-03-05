@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="besoinPI">
+            <h2><span>Besoin PI</span> {{ besoinPI.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ besoinPI.processus }}</span>
+                </dd>
+                <dt><span>Date Identification</span></dt>
+                <dd>
+                    <span>{{ besoinPI.dateIdentification }}</span>
+                </dd>
+                <dt><span>Pi Pertinentes</span></dt>
+                <dd>
+                    <span>{{ besoinPI.piPertinentes }}</span>
+                </dd>
+                <dt><span>Pertinente</span></dt>
+                <dd>
+                    <span>{{ besoinPI.pertinente }}</span>
+                </dd>
+                <dt><span>Prise En Charge</span></dt>
+                <dd>
+                    <span>{{ besoinPI.priseEnCharge }}</span>
+                </dd>
+                <dt><span>Afficher</span></dt>
+                <dd>
+                    <span>{{ besoinPI.afficher }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/besoin-pi', besoinPI.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

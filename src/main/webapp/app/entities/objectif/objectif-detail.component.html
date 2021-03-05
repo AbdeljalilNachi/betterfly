@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="objectif">
+            <h2><span>Objectif</span> {{ objectif.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ objectif.processus }}</span>
+                </dd>
+                <dt><span>Axedelapolitiqueqse</span></dt>
+                <dd>
+                    <span>{{ objectif.axedelapolitiqueqse }}</span>
+                </dd>
+                <dt><span>Objectifqse</span></dt>
+                <dd>
+                    <span>{{ objectif.objectifqse }}</span>
+                </dd>
+                <dt><span>Indicateur</span></dt>
+                <dd>
+                    <span>{{ objectif.indicateur }}</span>
+                </dd>
+                <dt><span>Origine</span></dt>
+                <dd>
+                    <span>{{ objectif.origine }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/objectif', objectif.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

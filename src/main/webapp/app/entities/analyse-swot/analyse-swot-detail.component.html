@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="analyseSWOT">
+            <h2><span>Analyse SWOT</span> {{ analyseSWOT.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.processus }}</span>
+                </dd>
+                <dt><span>Date Identification</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.dateIdentification }}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.description }}</span>
+                </dd>
+                <dt><span>Pilote</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.pilote }}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.type }}</span>
+                </dd>
+                <dt><span>Bu</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.bu }}</span>
+                </dd>
+                <dt><span>Commentaire</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.commentaire }}</span>
+                </dd>
+                <dt><span>Afficher</span></dt>
+                <dd>
+                    <span>{{ analyseSWOT.afficher }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/analyse-swot', analyseSWOT.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

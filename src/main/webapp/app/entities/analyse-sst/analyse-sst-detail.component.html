@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="analyseSST">
+            <h2><span>Analyse SST</span> {{ analyseSST.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ analyseSST.date }}</span>
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <span>{{ analyseSST.processus }}</span>
+                </dd>
+                <dt><span>Buisness Unit</span></dt>
+                <dd>
+                    <span>{{ analyseSST.buisnessUnit }}</span>
+                </dd>
+                <dt><span>Unite Travail</span></dt>
+                <dd>
+                    <span>{{ analyseSST.uniteTravail }}</span>
+                </dd>
+                <dt><span>Danger</span></dt>
+                <dd>
+                    <span>{{ analyseSST.danger }}</span>
+                </dd>
+                <dt><span>Risque</span></dt>
+                <dd>
+                    <span>{{ analyseSST.risque }}</span>
+                </dd>
+                <dt><span>Competence</span></dt>
+                <dd>
+                    <span>{{ analyseSST.competence }}</span>
+                </dd>
+                <dt><span>Situation</span></dt>
+                <dd>
+                    <span>{{ analyseSST.situation }}</span>
+                </dd>
+                <dt><span>Frequence</span></dt>
+                <dd>
+                    <span>{{ analyseSST.frequence }}</span>
+                </dd>
+                <dt><span>Duree Exposition</span></dt>
+                <dd>
+                    <span>{{ analyseSST.dureeExposition }}</span>
+                </dd>
+                <dt><span>Coefficient Maitrise</span></dt>
+                <dd>
+                    <span>{{ analyseSST.coefficientMaitrise }}</span>
+                </dd>
+                <dt><span>Gravite</span></dt>
+                <dd>
+                    <span>{{ analyseSST.gravite }}</span>
+                </dd>
+                <dt><span>Criticite</span></dt>
+                <dd>
+                    <span>{{ analyseSST.criticite }}</span>
+                </dd>
+                <dt><span>Maitrise Existante</span></dt>
+                <dd>
+                    <span>{{ analyseSST.maitriseExistante }}</span>
+                </dd>
+                <dt><span>Origine</span></dt>
+                <dd>
+                    <span>{{ analyseSST.origine }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/analyse-sst', analyseSST.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
