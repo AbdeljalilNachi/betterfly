@@ -1,0 +1,22 @@
+version: '2'
+services:
+  betterfly-app:
+    image: betterfly
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://betterfly-postgresql:5432/betterFly
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATA_JEST_URI=http://betterfly-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://betterfly-elasticsearch:9200
+    ports:
+      - 8080:8080
+  betterfly-postgresql:
+    extends:
+      file: postgresql.yml
+      service: betterfly-postgresql
+  betterfly-elasticsearch:
+    extends:
+      file: elasticsearch.yml
+      service: betterfly-elasticsearch
