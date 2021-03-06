@@ -41,27 +41,12 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="version"><span>Version</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="finalite"><span>Finalite</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="fiche"><span>Fiche</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="type"><span>Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let processus of processuses ;trackBy: trackId">
                     <td><a [routerLink]="['/processus', processus.id, 'view']">{{ processus.id }}</a></td>
-                    <td>{{ processus.processus }}</td>
-                    <td>{{ processus.date | date:'mediumDate' }}</td>
-                    <td>{{ processus.version }}</td>
-                    <td>{{ processus.finalite }}</td>
-                    <td>
-                        <a *ngIf="processus.fiche" (click)="openFile(processus.ficheContentType, processus.fiche)">open</a>
-                        <span *ngIf="processus.fiche">{{ processus.ficheContentType }}, {{ byteSize(processus.fiche) }}</span>
-                    </td>
-                    <td>{{ processus.type }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

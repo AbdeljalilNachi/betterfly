@@ -69,9 +69,6 @@ public class ProcessusSMIResourceIT {
     private static final Boolean DEFAULT_VIGUEUR = false;
     private static final Boolean UPDATED_VIGUEUR = true;
 
-    private static final String DEFAULT_INDICATEUR = "AAAAAAAAAA";
-    private static final String UPDATED_INDICATEUR = "BBBBBBBBBB";
-
     @Autowired
     private ProcessusSMIRepository processusSMIRepository;
 
@@ -107,8 +104,7 @@ public class ProcessusSMIResourceIT {
             .ficheProcessus(DEFAULT_FICHE_PROCESSUS)
             .ficheProcessusContentType(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE)
             .type(DEFAULT_TYPE)
-            .vigueur(DEFAULT_VIGUEUR)
-            .indicateur(DEFAULT_INDICATEUR);
+            .vigueur(DEFAULT_VIGUEUR);
         return processusSMI;
     }
     /**
@@ -127,8 +123,7 @@ public class ProcessusSMIResourceIT {
             .ficheProcessus(UPDATED_FICHE_PROCESSUS)
             .ficheProcessusContentType(UPDATED_FICHE_PROCESSUS_CONTENT_TYPE)
             .type(UPDATED_TYPE)
-            .vigueur(UPDATED_VIGUEUR)
-            .indicateur(UPDATED_INDICATEUR);
+            .vigueur(UPDATED_VIGUEUR);
         return processusSMI;
     }
 
@@ -160,7 +155,6 @@ public class ProcessusSMIResourceIT {
         assertThat(testProcessusSMI.getFicheProcessusContentType()).isEqualTo(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE);
         assertThat(testProcessusSMI.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testProcessusSMI.isVigueur()).isEqualTo(DEFAULT_VIGUEUR);
-        assertThat(testProcessusSMI.getIndicateur()).isEqualTo(DEFAULT_INDICATEUR);
 
         // Validate the ProcessusSMI in Elasticsearch
         verify(mockProcessusSMISearchRepository, times(1)).save(testProcessusSMI);
@@ -208,8 +202,7 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.[*].ficheProcessusContentType").value(hasItem(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].ficheProcessus").value(hasItem(Base64Utils.encodeToString(DEFAULT_FICHE_PROCESSUS))))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)));
+            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
     
     @Test
@@ -231,8 +224,7 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.ficheProcessusContentType").value(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE))
             .andExpect(jsonPath("$.ficheProcessus").value(Base64Utils.encodeToString(DEFAULT_FICHE_PROCESSUS)))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.vigueur").value(DEFAULT_VIGUEUR.booleanValue()))
-            .andExpect(jsonPath("$.indicateur").value(DEFAULT_INDICATEUR));
+            .andExpect(jsonPath("$.vigueur").value(DEFAULT_VIGUEUR.booleanValue()));
     }
     @Test
     @Transactional
@@ -263,8 +255,7 @@ public class ProcessusSMIResourceIT {
             .ficheProcessus(UPDATED_FICHE_PROCESSUS)
             .ficheProcessusContentType(UPDATED_FICHE_PROCESSUS_CONTENT_TYPE)
             .type(UPDATED_TYPE)
-            .vigueur(UPDATED_VIGUEUR)
-            .indicateur(UPDATED_INDICATEUR);
+            .vigueur(UPDATED_VIGUEUR);
 
         restProcessusSMIMockMvc.perform(put("/api/processus-smis")
             .contentType(MediaType.APPLICATION_JSON)
@@ -284,7 +275,6 @@ public class ProcessusSMIResourceIT {
         assertThat(testProcessusSMI.getFicheProcessusContentType()).isEqualTo(UPDATED_FICHE_PROCESSUS_CONTENT_TYPE);
         assertThat(testProcessusSMI.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testProcessusSMI.isVigueur()).isEqualTo(UPDATED_VIGUEUR);
-        assertThat(testProcessusSMI.getIndicateur()).isEqualTo(UPDATED_INDICATEUR);
 
         // Validate the ProcessusSMI in Elasticsearch
         verify(mockProcessusSMISearchRepository, times(1)).save(testProcessusSMI);
@@ -352,7 +342,6 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.[*].ficheProcessusContentType").value(hasItem(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].ficheProcessus").value(hasItem(Base64Utils.encodeToString(DEFAULT_FICHE_PROCESSUS))))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)));
+            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
 }

@@ -12,7 +12,6 @@ export interface IProcessusSMI {
   ficheProcessus?: any;
   type?: TypeProcessus;
   vigueur?: boolean;
-  indicateur?: string;
 }
 
 export class ProcessusSMI implements IProcessusSMI {
@@ -26,8 +25,7 @@ export class ProcessusSMI implements IProcessusSMI {
     public ficheProcessusContentType?: string,
     public ficheProcessus?: any,
     public type?: TypeProcessus,
-    public vigueur?: boolean,
-    public indicateur?: string
+    public vigueur?: boolean
   ) {
     this.vigueur = this.vigueur || false;
   }

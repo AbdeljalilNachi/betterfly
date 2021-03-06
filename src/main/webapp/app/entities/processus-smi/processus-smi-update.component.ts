@@ -29,7 +29,6 @@ export class ProcessusSMIUpdateComponent implements OnInit {
     ficheProcessusContentType: [],
     type: [],
     vigueur: [],
-    indicateur: [],
   });
 
   constructor(
@@ -58,7 +57,6 @@ export class ProcessusSMIUpdateComponent implements OnInit {
       ficheProcessusContentType: processusSMI.ficheProcessusContentType,
       type: processusSMI.type,
       vigueur: processusSMI.vigueur,
-      indicateur: processusSMI.indicateur,
     });
   }
 
@@ -105,7 +103,6 @@ export class ProcessusSMIUpdateComponent implements OnInit {
       ficheProcessus: this.editForm.get(['ficheProcessus'])!.value,
       type: this.editForm.get(['type'])!.value,
       vigueur: this.editForm.get(['vigueur'])!.value,
-      indicateur: this.editForm.get(['indicateur'])!.value,
     };
   }
 

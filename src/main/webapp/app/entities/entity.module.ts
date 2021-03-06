@@ -5,10 +5,6 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule.forChild([
       {
-        path: 'processus',
-        loadChildren: () => import('./processus/processus.module').then(m => m.BetterFlyProcessusModule),
-      },
-      {
         path: 'analyse-swot',
         loadChildren: () => import('./analyse-swot/analyse-swot.module').then(m => m.BetterFlyAnalyseSWOTModule),
       },
@@ -73,6 +69,7 @@ import { RouterModule } from '@angular/router';
         path: 'indicateur-smi',
         loadChildren: () => import('./indicateur-smi/indicateur-smi.module').then(m => m.BetterFlyIndicateurSMIModule),
       },
+     
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

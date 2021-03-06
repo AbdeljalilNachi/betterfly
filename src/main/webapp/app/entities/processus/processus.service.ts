@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import * as moment from 'moment';
 
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption, SearchWithPagination } from 'app/shared/util/request-util';
 import { IProcessus } from 'app/shared/model/processus.model';
@@ -20,30 +17,20 @@ export class ProcessusService {
   constructor(protected http: HttpClient) {}
 
   create(processus: IProcessus): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(processus);
-    return this.http
-      .post<IProcessus>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    return this.http.post<IProcessus>(this.resourceUrl, processus, { observe: 'response' });
   }
 
   update(processus: IProcessus): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(processus);
-    return this.http
-      .put<IProcessus>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    return this.http.put<IProcessus>(this.resourceUrl, processus, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http
-      .get<IProcessus>(`${this.resourceUrl}/${id}`, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    return this.http.get<IProcessus>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http
-      .get<IProcessus[]>(this.resourceUrl, { params: options, observe: 'response' })
-      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    return this.http.get<IProcessus[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
@@ -52,31 +39,6 @@ export class ProcessusService {
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http
-      .get<IProcessus[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
-      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
-  }
-
-  protected convertDateFromClient(processus: IProcessus): IProcessus {
-    const copy: IProcessus = Object.assign({}, processus, {
-      date: processus.date && processus.date.isValid() ? processus.date.format(DATE_FORMAT) : undefined,
-    });
-    return copy;
-  }
-
-  protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
-    if (res.body) {
-      res.body.date = res.body.date ? moment(res.body.date) : undefined;
-    }
-    return res;
-  }
-
-  protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
-    if (res.body) {
-      res.body.forEach((processus: IProcessus) => {
-        processus.date = processus.date ? moment(processus.date) : undefined;
-      });
-    }
-    return res;
+    return this.http.get<IProcessus[]>(this.resourceSearchUrl, { params: options, observe: 'response' });
   }
 }

@@ -2,17 +2,17 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
-import { IProcessusSMI, ProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessussmiService } from 'app/entities/processussmi/processussmi.service';
+import { IProcessussmi, Processussmi } from 'app/shared/model/processussmi.model';
 import { TypeProcessus } from 'app/shared/model/enumerations/type-processus.model';
 
 describe('Service Tests', () => {
-  describe('ProcessusSMI Service', () => {
+  describe('Processussmi Service', () => {
     let injector: TestBed;
-    let service: ProcessusSMIService;
+    let service: ProcessussmiService;
     let httpMock: HttpTestingController;
-    let elemDefault: IProcessusSMI;
-    let expectedResult: IProcessusSMI | IProcessusSMI[] | boolean | null;
+    let elemDefault: IProcessussmi;
+    let expectedResult: IProcessussmi | IProcessussmi[] | boolean | null;
     let currentDate: moment.Moment;
 
     beforeEach(() => {
@@ -21,11 +21,11 @@ describe('Service Tests', () => {
       });
       expectedResult = null;
       injector = getTestBed();
-      service = injector.get(ProcessusSMIService);
+      service = injector.get(ProcessussmiService);
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new ProcessusSMI(
+      elemDefault = new Processussmi(
         0,
         'AAAAAAA',
         currentDate,
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a ProcessusSMI', () => {
+      it('should create a Processussmi', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -71,14 +71,14 @@ describe('Service Tests', () => {
           returnedFromService
         );
 
-        service.create(new ProcessusSMI()).subscribe(resp => (expectedResult = resp.body));
+        service.create(new Processussmi()).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a ProcessusSMI', () => {
+      it('should update a Processussmi', () => {
         const returnedFromService = Object.assign(
           {
             processus: 'BBBBBB',
@@ -107,7 +107,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of ProcessusSMI', () => {
+      it('should return a list of Processussmi', () => {
         const returnedFromService = Object.assign(
           {
             processus: 'BBBBBB',
@@ -137,7 +137,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a ProcessusSMI', () => {
+      it('should delete a Processussmi', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });

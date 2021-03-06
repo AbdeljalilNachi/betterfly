@@ -1,11 +1,19 @@
 package com.betterfly.domain;
 
 
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.betterfly.domain.enumeration.TypeProcessus;
 
@@ -52,9 +60,6 @@ public class ProcessusSMI implements Serializable {
 
     @Column(name = "vigueur")
     private Boolean vigueur;
-
-    @Column(name = "indicateur")
-    private String indicateur;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -181,19 +186,6 @@ public class ProcessusSMI implements Serializable {
     public void setVigueur(Boolean vigueur) {
         this.vigueur = vigueur;
     }
-
-    public String getIndicateur() {
-        return indicateur;
-    }
-
-    public ProcessusSMI indicateur(String indicateur) {
-        this.indicateur = indicateur;
-        return this;
-    }
-
-    public void setIndicateur(String indicateur) {
-        this.indicateur = indicateur;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -226,7 +218,6 @@ public class ProcessusSMI implements Serializable {
             ", ficheProcessusContentType='" + getFicheProcessusContentType() + "'" +
             ", type='" + getType() + "'" +
             ", vigueur='" + isVigueur() + "'" +
-            ", indicateur='" + getIndicateur() + "'" +
             "}";
     }
 }

@@ -8,33 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ processus.processus }}</span>
-                </dd>
-                <dt><span>Date</span></dt>
-                <dd>
-                    <span>{{ processus.date }}</span>
-                </dd>
-                <dt><span>Version</span></dt>
-                <dd>
-                    <span>{{ processus.version }}</span>
-                </dd>
-                <dt><span>Finalite</span></dt>
-                <dd>
-                    <span>{{ processus.finalite }}</span>
-                </dd>
-                <dt><span>Fiche</span></dt>
-                <dd>
-                    <div *ngIf="processus.fiche">
-                        <a (click)="openFile(processus.ficheContentType, processus.fiche)">open</a>
-                        {{ processus.ficheContentType }}, {{ byteSize(processus.fiche) }}
-                    </div>
-                </dd>
-                <dt><span>Type</span></dt>
-                <dd>
-                    <span>{{ processus.type }}</span>
-                </dd>
             </dl>
 
             <button type="submit"

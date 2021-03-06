@@ -2,33 +2,7 @@
   "fluentMethods": true,
   "clientRootFolder": "",
   "relationships": [],
-  "fields": [
-    {
-      "fieldName": "processus",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "date",
-      "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "version",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "finalite",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "fiche",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "any"
-    },
-    {
-      "fieldName": "type",
-      "fieldType": "String"
-    }
-  ],
+  "fields": [],
   "changelogDate": "20210302134432",
   "dto": "no",
   "searchEngine": "elasticsearch",

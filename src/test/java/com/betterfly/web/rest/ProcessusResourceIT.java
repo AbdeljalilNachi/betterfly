@@ -19,10 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,26 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WithMockUser
 public class ProcessusResourceIT {
-
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final Integer DEFAULT_VERSION = 1;
-    private static final Integer UPDATED_VERSION = 2;
-
-    private static final String DEFAULT_FINALITE = "AAAAAAAAAA";
-    private static final String UPDATED_FINALITE = "BBBBBBBBBB";
-
-    private static final byte[] DEFAULT_FICHE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_FICHE = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_FICHE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_FICHE_CONTENT_TYPE = "image/png";
-
-    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
     @Autowired
     private ProcessusRepository processusRepository;
@@ -88,14 +65,7 @@ public class ProcessusResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Processus createEntity(EntityManager em) {
-        Processus processus = new Processus()
-            .processus(DEFAULT_PROCESSUS)
-            .date(DEFAULT_DATE)
-            .version(DEFAULT_VERSION)
-            .finalite(DEFAULT_FINALITE)
-            .fiche(DEFAULT_FICHE)
-            .ficheContentType(DEFAULT_FICHE_CONTENT_TYPE)
-            .type(DEFAULT_TYPE);
+        Processus processus = new Processus();
         return processus;
     }
     /**
@@ -105,14 +75,7 @@ public class ProcessusResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Processus createUpdatedEntity(EntityManager em) {
-        Processus processus = new Processus()
-            .processus(UPDATED_PROCESSUS)
-            .date(UPDATED_DATE)
-            .version(UPDATED_VERSION)
-            .finalite(UPDATED_FINALITE)
-            .fiche(UPDATED_FICHE)
-            .ficheContentType(UPDATED_FICHE_CONTENT_TYPE)
-            .type(UPDATED_TYPE);
+        Processus processus = new Processus();
         return processus;
     }
 
@@ -135,13 +98,6 @@ public class ProcessusResourceIT {
         List<Processus> processusList = processusRepository.findAll();
         assertThat(processusList).hasSize(databaseSizeBeforeCreate + 1);
         Processus testProcessus = processusList.get(processusList.size() - 1);
-        assertThat(testProcessus.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
-        assertThat(testProcessus.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testProcessus.getVersion()).isEqualTo(DEFAULT_VERSION);
-        assertThat(testProcessus.getFinalite()).isEqualTo(DEFAULT_FINALITE);
-        assertThat(testProcessus.getFiche()).isEqualTo(DEFAULT_FICHE);
-        assertThat(testProcessus.getFicheContentType()).isEqualTo(DEFAULT_FICHE_CONTENT_TYPE);
-        assertThat(testProcessus.getType()).isEqualTo(DEFAULT_TYPE);
 
         // Validate the Processus in Elasticsearch
         verify(mockProcessusSearchRepository, times(1)).save(testProcessus);
@@ -180,14 +136,7 @@ public class ProcessusResourceIT {
         restProcessusMockMvc.perform(get("/api/processuses?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(processus.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION)))
-            .andExpect(jsonPath("$.[*].finalite").value(hasItem(DEFAULT_FINALITE)))
-            .andExpect(jsonPath("$.[*].ficheContentType").value(hasItem(DEFAULT_FICHE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].fiche").value(hasItem(Base64Utils.encodeToString(DEFAULT_FICHE))))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(processus.getId().intValue())));
     }
     
     @Test
@@ -200,14 +149,7 @@ public class ProcessusResourceIT {
         restProcessusMockMvc.perform(get("/api/processuses/{id}", processus.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(processus.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.version").value(DEFAULT_VERSION))
-            .andExpect(jsonPath("$.finalite").value(DEFAULT_FINALITE))
-            .andExpect(jsonPath("$.ficheContentType").value(DEFAULT_FICHE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.fiche").value(Base64Utils.encodeToString(DEFAULT_FICHE)))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE));
+            .andExpect(jsonPath("$.id").value(processus.getId().intValue()));
     }
     @Test
     @Transactional
@@ -229,14 +171,6 @@ public class ProcessusResourceIT {
         Processus updatedProcessus = processusRepository.findById(processus.getId()).get();
         // Disconnect from session so that the updates on updatedProcessus are not directly saved in db
         em.detach(updatedProcessus);
-        updatedProcessus
-            .processus(UPDATED_PROCESSUS)
-            .date(UPDATED_DATE)
-            .version(UPDATED_VERSION)
-            .finalite(UPDATED_FINALITE)
-            .fiche(UPDATED_FICHE)
-            .ficheContentType(UPDATED_FICHE_CONTENT_TYPE)
-            .type(UPDATED_TYPE);
 
         restProcessusMockMvc.perform(put("/api/processuses")
             .contentType(MediaType.APPLICATION_JSON)
@@ -247,13 +181,6 @@ public class ProcessusResourceIT {
         List<Processus> processusList = processusRepository.findAll();
         assertThat(processusList).hasSize(databaseSizeBeforeUpdate);
         Processus testProcessus = processusList.get(processusList.size() - 1);
-        assertThat(testProcessus.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
-        assertThat(testProcessus.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testProcessus.getVersion()).isEqualTo(UPDATED_VERSION);
-        assertThat(testProcessus.getFinalite()).isEqualTo(UPDATED_FINALITE);
-        assertThat(testProcessus.getFiche()).isEqualTo(UPDATED_FICHE);
-        assertThat(testProcessus.getFicheContentType()).isEqualTo(UPDATED_FICHE_CONTENT_TYPE);
-        assertThat(testProcessus.getType()).isEqualTo(UPDATED_TYPE);
 
         // Validate the Processus in Elasticsearch
         verify(mockProcessusSearchRepository, times(1)).save(testProcessus);
@@ -312,13 +239,6 @@ public class ProcessusResourceIT {
         restProcessusMockMvc.perform(get("/api/_search/processuses?query=id:" + processus.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(processus.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION)))
-            .andExpect(jsonPath("$.[*].finalite").value(hasItem(DEFAULT_FINALITE)))
-            .andExpect(jsonPath("$.[*].ficheContentType").value(hasItem(DEFAULT_FICHE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].fiche").value(hasItem(Base64Utils.encodeToString(DEFAULT_FICHE))))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(processus.getId().intValue())));
     }
 }
