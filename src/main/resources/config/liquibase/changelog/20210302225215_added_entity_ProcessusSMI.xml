@@ -48,6 +48,17 @@
 
     <changeSet id="20210302225215-1-relations" author="jhipster">
 
+        <createTable tableName="processus_smi_indicateurs">
+            <column name="indicateurs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="processussmi_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="processussmi_id, indicateurs_id" tableName="processus_smi_indicateurs"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 

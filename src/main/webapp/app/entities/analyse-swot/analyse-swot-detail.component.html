@@ -12,7 +12,7 @@
                 <dd>
                     <span>{{ analyseSWOT.processus }}</span>
                 </dd>
-                <dt><span>Date Identification</span></dt>
+                <dt><span>Date d'identification</span></dt>
                 <dd>
                     <span>{{ analyseSWOT.dateIdentification }}</span>
                 </dd>
@@ -20,10 +20,13 @@
                 <dd>
                     <span>{{ analyseSWOT.description }}</span>
                 </dd>
+
+            <!--
                 <dt><span>Pilote</span></dt>
                 <dd>
                     <span>{{ analyseSWOT.pilote }}</span>
                 </dd>
+             -->   
                 <dt><span>Type</span></dt>
                 <dd>
                     <span>{{ analyseSWOT.type }}</span>
@@ -45,13 +48,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/analyse-swot', analyseSWOT.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
             </button>
         </div>
     </div>

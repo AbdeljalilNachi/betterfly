@@ -5,7 +5,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-analyse-swot" [routerLink]="['/analyse-swot/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-            Create a new Analyse SWOT
+           Créer un nouveau Analyse SWOT
             </span>
         </button>
     </h2>
@@ -44,8 +44,10 @@
                     <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateIdentification"><span>Date Identification</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    
+                <!--
                     <th scope="col"  jhiSortBy="pilote"><span>Pilote</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="type"><span>Type</span> <fa-icon icon="sort"></fa-icon></th>
+                 -->   <th scope="col"  jhiSortBy="type"><span>Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="bu"><span>Bu</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="commentaire"><span>Commentaire</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="afficher"><span>Afficher</span> <fa-icon icon="sort"></fa-icon></th>
@@ -58,7 +60,7 @@
                     <td>{{ analyseSWOT.processus }}</td>
                     <td>{{ analyseSWOT.dateIdentification | date:'mediumDate' }}</td>
                     <td>{{ analyseSWOT.description }}</td>
-                    <td>{{ analyseSWOT.pilote }}</td>
+                <!--    <td>{{ analyseSWOT.pilote }}</td> -->
                     <td>{{ analyseSWOT.type }}</td>
                     <td>{{ analyseSWOT.bu }}</td>
                     <td>{{ analyseSWOT.commentaire }}</td>
