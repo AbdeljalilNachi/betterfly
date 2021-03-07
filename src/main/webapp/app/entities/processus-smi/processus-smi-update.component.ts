@@ -9,6 +9,9 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IProcessusSMI, ProcessusSMI } from 'app/shared/model/processus-smi.model';
 import { ProcessusSMIService } from './processus-smi.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { UserService } from 'app/core/user/user.service';
+import { IndicateurSMIService } from 'app/entities/indicateur-smi/indicateur-smi.service';
+
 
 @Component({
   selector: 'jhi-processus-smi-update',
@@ -17,6 +20,8 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 export class ProcessusSMIUpdateComponent implements OnInit {
   isSaving = false;
   dateDp: any;
+  users: String[] | null = null;
+
 
   editForm = this.fb.group({
     id: [],
@@ -36,10 +41,13 @@ export class ProcessusSMIUpdateComponent implements OnInit {
     protected eventManager: JhiEventManager,
     protected processusSMIService: ProcessusSMIService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService,
+    private indicateurSMIService: IndicateurSMIService
   ) {}
 
   ngOnInit(): void {
+    this.loadAll();
     this.activatedRoute.data.subscribe(({ processusSMI }) => {
       this.updateForm(processusSMI);
     });
@@ -121,4 +129,18 @@ export class ProcessusSMIUpdateComponent implements OnInit {
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
+  private loadAll(): void {
+    this.userService .getLogins()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(users: String[] | null): void {
+    this.users = users;
+  }
+
+
+
+
 }

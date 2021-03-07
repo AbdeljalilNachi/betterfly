@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-analyse-swot-heading">Create or edit a Analyse SWOT</h2>
+            <h2 id="jhi-analyse-swot-heading">Créer ou mettre à jour Analyse SWOT</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_dateIdentification">Date Identification</label>
+                    <label class="form-control-label" for="field_dateIdentification">Date d'identification</label>
                     <div class="input-group">
                         <input id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
                         <span class="input-group-append">
@@ -33,11 +33,13 @@
                            formControlName="description"/>
                 </div>
 
+      <!--          
                 <div class="form-group">
                     <label class="form-control-label" for="field_pilote">Pilote</label>
                     <input type="text" class="form-control" name="pilote" id="field_pilote"
                            formControlName="pilote"/>
                 </div>
+-->
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
@@ -70,7 +72,7 @@
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

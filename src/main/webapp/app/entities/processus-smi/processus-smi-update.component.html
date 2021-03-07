@@ -1,16 +1,16 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-processus-smi-heading">Create or edit a Processus SMI</h2>
+            <h2 id="jhi-processus-smi-heading">Créer ou mettre à jour un Processus SMI</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+  <!--             <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
-
+--> 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
                     <input type="text" class="form-control" name="processus" id="field_processus"
@@ -35,21 +35,23 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_pilote">Pilote</label>
-                    <input type="text" class="form-control" name="pilote" id="field_pilote"
-                           formControlName="pilote"/>
+                    <select class="form-control" name="pilote" formControlName="pilote" id="field_pilote">
+                        <option *ngFor="let user of users" value={{user}}>{{user}}</option>
+                    </select>
                 </div>
 
+
                 <div class="form-group">
-                    <label class="form-control-label" for="field_finalite">Finalite</label>
+                    <label class="form-control-label" for="field_finalite">Finalité</label>
                     <input type="text" class="form-control" name="finalite" id="field_finalite"
                            formControlName="finalite"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_ficheProcessus">Fiche Processus</label>
+                    <label class="form-control-label" for="field_ficheProcessus">Fiche de processus</label>
                     <div>
                         <div *ngIf="editForm.get('ficheProcessus')!.value" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(editForm.get('ficheProcessusContentType')!.value, editForm.get('ficheProcessus')!.value)">open</a><br>
+                            <a class="pull-left" (click)="openFile(editForm.get('ficheProcessusContentType')!.value, editForm.get('ficheProcessus')!.value)">Ouvrir le ficher</a><br>
                             <span class="pull-left">{{ editForm.get('ficheProcessusContentType')!.value }}, {{ byteSize(editForm.get('ficheProcessus')!.value) }}</span>
                             <button type="button" (click)="editForm.patchValue({ficheProcessus: null});editForm.patchValue({ficheProcessusContentType: null});"
                                     class="btn btn-secondary btn-xs pull-right">
@@ -74,19 +76,33 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_vigueur">Vigueur</label>
+                    <label class="form-control-label" for="field_vigueur">En vigueur</label>
                     <input type="checkbox" class="form-control" name="vigueur" id="field_vigueur"
                            formControlName="vigueur"/>
                 </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_indicateurs">indicateurs</label>
+                    <select class="form-control" name="indicateurs" formControlName="pilote" id="field_indicateurs" multiple >
+                        
+                        <option  value="yuyytt">dsdsq</option>
+                        <option  value="984d8">frfrezf</option>
+                    </select>
+                </div>
+
+
             </div>
+
+            
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregister</span>
                 </button>
             </div>
         </form>

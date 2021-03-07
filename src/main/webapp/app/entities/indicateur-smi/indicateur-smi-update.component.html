@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-indicateur-smi-heading">Create or edit a Indicateur SMI</h2>
+            <h2 id="jhi-indicateur-smi-heading">Créer ou mettre à jour Indicateur SMI</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -96,7 +96,7 @@
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

@@ -2,7 +2,7 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="myUserLabel">
-                Create or edit a User
+                Créer ou mettre à jour User
             </h2>
 
             <div *ngIf="user">
@@ -107,7 +107,7 @@
 
             <div *ngIf="user">
                 <button type="button" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
                 </button>
 
                 <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
