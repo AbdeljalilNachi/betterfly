@@ -1,19 +1,13 @@
 package com.betterfly.domain;
 
 
+import javax.persistence.*;
+
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.betterfly.domain.enumeration.TypeProcessus;
 
@@ -60,6 +54,12 @@ public class ProcessusSMI implements Serializable {
 
     @Column(name = "vigueur")
     private Boolean vigueur;
+
+    @ManyToMany
+    @JoinTable(name = "processus_smi_indicateurs",
+               joinColumns = @JoinColumn(name = "processussmi_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "indicateurs_id", referencedColumnName = "id"))
+    private Set<IndicateurSMI> indicateurs = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -185,6 +185,31 @@ public class ProcessusSMI implements Serializable {
 
     public void setVigueur(Boolean vigueur) {
         this.vigueur = vigueur;
+    }
+
+    public Set<IndicateurSMI> getIndicateurs() {
+        return indicateurs;
+    }
+
+    public ProcessusSMI indicateurs(Set<IndicateurSMI> indicateurSMIS) {
+        this.indicateurs = indicateurSMIS;
+        return this;
+    }
+
+    public ProcessusSMI addIndicateurs(IndicateurSMI indicateurSMI) {
+        this.indicateurs.add(indicateurSMI);
+    //    indicateurSMI.getProcessusSMIS().add(this);
+        return this;
+    }
+
+    public ProcessusSMI removeIndicateurs(IndicateurSMI indicateurSMI) {
+        this.indicateurs.remove(indicateurSMI);
+    //    indicateurSMI.getProcessusSMIS().remove(this);
+        return this;
+    }
+
+    public void setIndicateurs(Set<IndicateurSMI> indicateurSMIS) {
+        this.indicateurs = indicateurSMIS;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

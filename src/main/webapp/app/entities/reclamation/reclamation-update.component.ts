@@ -9,6 +9,8 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IReclamation, Reclamation } from 'app/shared/model/reclamation.model';
 import { ReclamationService } from './reclamation.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-reclamation-update',
@@ -17,7 +19,7 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 export class ReclamationUpdateComponent implements OnInit {
   isSaving = false;
   dateDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -36,9 +38,11 @@ export class ReclamationUpdateComponent implements OnInit {
     protected reclamationService: ReclamationService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+    ,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ reclamation }) => {
       this.updateForm(reclamation);
     });
@@ -117,5 +121,15 @@ export class ReclamationUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

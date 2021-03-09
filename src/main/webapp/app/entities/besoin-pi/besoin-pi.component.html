@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>Besoin PIS</span>
+        <span>Besoins Parties Intéressés</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-besoin-pi" [routerLink]="['/besoin-pi/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="besoinPIS?.length === 0">
-        <span>No besoinPIS found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="besoinPIS && besoinPIS.length > 0">

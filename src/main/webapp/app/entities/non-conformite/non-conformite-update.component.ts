@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { INonConformite, NonConformite } from 'app/shared/model/non-conformite.model';
 import { NonConformiteService } from './non-conformite.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-non-conformite-update',
@@ -15,7 +17,7 @@ import { NonConformiteService } from './non-conformite.service';
 export class NonConformiteUpdateComponent implements OnInit {
   isSaving = false;
   dateDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -25,9 +27,12 @@ export class NonConformiteUpdateComponent implements OnInit {
     origine: [],
   });
 
-  constructor(protected nonConformiteService: NonConformiteService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected nonConformiteService: NonConformiteService, 
+    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ nonConformite }) => {
       this.updateForm(nonConformite);
     });
@@ -84,5 +89,15 @@ export class NonConformiteUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

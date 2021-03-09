@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IObjectif, Objectif } from 'app/shared/model/objectif.model';
 import { ObjectifService } from './objectif.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-objectif-update',
@@ -14,7 +16,7 @@ import { ObjectifService } from './objectif.service';
 })
 export class ObjectifUpdateComponent implements OnInit {
   isSaving = false;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -24,9 +26,12 @@ export class ObjectifUpdateComponent implements OnInit {
     origine: [],
   });
 
-  constructor(protected objectifService: ObjectifService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected objectifService: ObjectifService,
+     protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+     private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ objectif }) => {
       this.updateForm(objectif);
     });
@@ -83,5 +88,15 @@ export class ObjectifUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

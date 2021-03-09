@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IIndicateurSMI } from 'app/shared/model/indicateur-smi.model';
 import { TypeProcessus } from 'app/shared/model/enumerations/type-processus.model';
 
 export interface IProcessusSMI {
@@ -12,6 +13,7 @@ export interface IProcessusSMI {
   ficheProcessus?: any;
   type?: TypeProcessus;
   vigueur?: boolean;
+  indicateurs?: IIndicateurSMI[];
 }
 
 export class ProcessusSMI implements IProcessusSMI {
@@ -25,7 +27,8 @@ export class ProcessusSMI implements IProcessusSMI {
     public ficheProcessusContentType?: string,
     public ficheProcessus?: any,
     public type?: TypeProcessus,
-    public vigueur?: boolean
+    public vigueur?: boolean,
+    public indicateurs?: IIndicateurSMI[]
   ) {
     this.vigueur = this.vigueur || false;
   }

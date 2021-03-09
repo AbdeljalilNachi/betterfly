@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IObligationConformite, ObligationConformite } from 'app/shared/model/obligation-conformite.model';
 import { ObligationConformiteService } from './obligation-conformite.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-obligation-conformite-update',
@@ -15,7 +17,7 @@ import { ObligationConformiteService } from './obligation-conformite.service';
 export class ObligationConformiteUpdateComponent implements OnInit {
   isSaving = false;
   dateDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     date: [],
@@ -35,9 +37,11 @@ export class ObligationConformiteUpdateComponent implements OnInit {
     protected obligationConformiteService: ObligationConformiteService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+    ,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ obligationConformite }) => {
       this.updateForm(obligationConformite);
     });
@@ -106,5 +110,15 @@ export class ObligationConformiteUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

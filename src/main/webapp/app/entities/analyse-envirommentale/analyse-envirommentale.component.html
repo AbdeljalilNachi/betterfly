@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>Analyse Envirommentales</span>
+        <span>Analyses Envirommentales</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-analyse-envirommentale" [routerLink]="['/analyse-envirommentale/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="analyseEnvirommentales?.length === 0">
-        <span>No analyseEnvirommentales found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="analyseEnvirommentales && analyseEnvirommentales.length > 0">
@@ -48,15 +48,9 @@
                     <th scope="col"  jhiSortBy="aspectEnvironnemental"><span>Aspect Environnemental</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="impactEnvironnemental"><span>Impact Environnemental</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="competencesRequises"><span>Competences Requises</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="situation"><span>Situation</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="frequence"><span>Frequence</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="sensibiliteMilieu"><span>Sensibilite Milieu</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="coefficientMaitrise"><span>Coefficient Maitrise</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="gravite"><span>Gravite</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="criticite"><span>Criticite</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="maitriseExistante"><span>Maitrise Existante</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
+          <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,14 +63,9 @@
                     <td>{{ analyseEnvirommentale.aspectEnvironnemental }}</td>
                     <td>{{ analyseEnvirommentale.impactEnvironnemental }}</td>
                     <td>{{ analyseEnvirommentale.competencesRequises }}</td>
-                    <td>{{ analyseEnvirommentale.situation }}</td>
                     <td>{{ analyseEnvirommentale.frequence }}</td>
                     <td>{{ analyseEnvirommentale.sensibiliteMilieu }}</td>
-                    <td>{{ analyseEnvirommentale.coefficientMaitrise }}</td>
-                    <td>{{ analyseEnvirommentale.gravite }}</td>
-                    <td>{{ analyseEnvirommentale.criticite }}</td>
-                    <td>{{ analyseEnvirommentale.maitriseExistante }}</td>
-                    <td>{{ analyseEnvirommentale.origine }}</td>
+
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

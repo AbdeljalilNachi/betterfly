@@ -36,7 +36,16 @@
       "fieldType": "Boolean"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipName": "indicateurs",
+      "otherEntityName": "indicateurSMI",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "indicateur",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "processusSMI"
+    }
+  ],
   "changelogDate": "20210302225215",
   "entityTableName": "processus_smi",
   "dto": "no",

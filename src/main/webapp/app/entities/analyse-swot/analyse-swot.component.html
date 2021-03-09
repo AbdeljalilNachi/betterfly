@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>Analyse SWOTS</span>
+        <span>Analyses SWOT</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-analyse-swot" [routerLink]="['/analyse-swot/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="analyseSWOTS?.length === 0">
-        <span>No analyseSWOTS found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="analyseSWOTS && analyseSWOTS.length > 0">

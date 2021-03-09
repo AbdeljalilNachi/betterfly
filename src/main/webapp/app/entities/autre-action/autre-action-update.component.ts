@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IAutreAction, AutreAction } from 'app/shared/model/autre-action.model';
 import { AutreActionService } from './autre-action.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-autre-action-update',
@@ -14,7 +16,7 @@ import { AutreActionService } from './autre-action.service';
 })
 export class AutreActionUpdateComponent implements OnInit {
   isSaving = false;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -22,9 +24,12 @@ export class AutreActionUpdateComponent implements OnInit {
     origine: [],
   });
 
-  constructor(protected autreActionService: AutreActionService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected autreActionService: AutreActionService, 
+    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ autreAction }) => {
       this.updateForm(autreAction);
     });
@@ -77,5 +82,15 @@ export class AutreActionUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

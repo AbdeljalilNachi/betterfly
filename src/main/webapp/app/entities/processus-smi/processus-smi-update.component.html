@@ -8,20 +8,20 @@
 
   <!--             <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                    <input required  type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
 --> 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
-                    <input type="text" class="form-control" name="processus" id="field_processus"
-                           formControlName="processus"/>
+                    <input required  type="text" class="form-control" name="processus" id="field_processus"
+                           formControlName="processus" />
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_date">Date</label>
-                    <div class="input-group">
-                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
-                        <span class="input-group-append">
+                    <div class="input required -group">
+                        <input required  id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
+                        <span class="input required -group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
                     </div>
@@ -29,13 +29,13 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_version">Version</label>
-                    <input type="number" class="form-control" name="version" id="field_version"
+                    <input required  type="number" class="form-control" name="version" id="field_version"
                            formControlName="version"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_pilote">Pilote</label>
-                    <select class="form-control" name="pilote" formControlName="pilote" id="field_pilote">
+                    <select required class="form-control" name="pilote" formControlName="pilote" id="field_pilote">
                         <option *ngFor="let user of users" value={{user}}>{{user}}</option>
                     </select>
                 </div>
@@ -43,7 +43,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_finalite">Finalité</label>
-                    <input type="text" class="form-control" name="finalite" id="field_finalite"
+                    <input required  type="text" class="form-control" name="finalite" id="field_finalite"
                            formControlName="finalite"/>
                 </div>
 
@@ -58,17 +58,17 @@
                                 <fa-icon icon="times"></fa-icon>
                             </button>
                         </div>
-                        <input type="file" id="file_ficheProcessus" (change)="setFileData($event, 'ficheProcessus', false)"/>
+                        <input  type="file" id="file_ficheProcessus" (change)="setFileData($event, 'ficheProcessus', false)"/>
                     </div>
-                    <input type="hidden" class="form-control" name="ficheProcessus" id="field_ficheProcessus"
+                    <input  type="hidden" class="form-control" name="ficheProcessus" id="field_ficheProcessus"
                            formControlName="ficheProcessus"/>
-                    <input type="hidden" class="form-control" name="ficheProcessusContentType" id="field_ficheProcessusContentType"
+                    <input  type="hidden" class="form-control" name="ficheProcessusContentType" id="field_ficheProcessusContentType"
                            formControlName="ficheProcessusContentType" />
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
-                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                    <select required class="form-control" name="type" formControlName="type" id="field_type">
                         <option value="MANAGEMENT">MANAGEMENT</option>
                         <option value="REALISATION">REALISATION</option>
                         <option value="SUPPORT">SUPPORT</option>
@@ -77,20 +77,18 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_vigueur">En vigueur</label>
-                    <input type="checkbox" class="form-control" name="vigueur" id="field_vigueur"
+                    <input required  type="checkbox" class="form-control" name="vigueur" id="field_vigueur"
                            formControlName="vigueur"/>
                 </div>
 
 
+
                 <div class="form-group">
-                    <label class="form-control-label" for="field_indicateurs">indicateurs</label>
-                    <select class="form-control" name="indicateurs" formControlName="pilote" id="field_indicateurs" multiple >
-                        
-                        <option  value="yuyytt">dsdsq</option>
-                        <option  value="984d8">frfrezf</option>
+                    <label for="field_indicateurs">indicateurs</label>
+                    <select class="form-control" id="field_indicateurs" multiple name="indicateurs" formControlName="indicateurs">
+                        <option [ngValue]="getSelected(editForm.get('indicateurs')!.value, indicateurOption)" *ngFor="let indicateurOption of indicateurs; trackBy: trackById">{{ indicateurOption.indicateur }}</option>
                     </select>
                 </div>
-
 
             </div>
 

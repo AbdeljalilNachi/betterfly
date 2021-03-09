@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IRisque, Risque } from 'app/shared/model/risque.model';
 import { RisqueService } from './risque.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-risque-update',
@@ -15,7 +17,7 @@ import { RisqueService } from './risque.service';
 export class RisqueUpdateComponent implements OnInit {
   isSaving = false;
   dateIdentificationDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -32,9 +34,12 @@ export class RisqueUpdateComponent implements OnInit {
     origine: [],
   });
 
-  constructor(protected risqueService: RisqueService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected risqueService: RisqueService, 
+    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ risque }) => {
       this.updateForm(risque);
     });
@@ -105,5 +110,15 @@ export class RisqueUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

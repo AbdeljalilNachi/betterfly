@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IAnalyseSWOT, AnalyseSWOT } from 'app/shared/model/analyse-swot.model';
 import { AnalyseSWOTService } from './analyse-swot.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
 
 @Component({
   selector: 'jhi-analyse-swot-update',
@@ -15,6 +16,7 @@ import { AnalyseSWOTService } from './analyse-swot.service';
 export class AnalyseSWOTUpdateComponent implements OnInit {
   isSaving = false;
   dateIdentificationDp: any;
+  pros: String[] | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -28,9 +30,12 @@ export class AnalyseSWOTUpdateComponent implements OnInit {
     afficher: [],
   });
 
-  constructor(protected analyseSWOTService: AnalyseSWOTService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected analyseSWOTService: AnalyseSWOTService, 
+    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ analyseSWOT }) => {
       this.updateForm(analyseSWOT);
     });
@@ -89,9 +94,21 @@ export class AnalyseSWOTUpdateComponent implements OnInit {
   protected onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();
-  }
+  } 
 
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
+  }
+
+
 }

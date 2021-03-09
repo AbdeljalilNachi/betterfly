@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IPolitiqueQSE, PolitiqueQSE } from 'app/shared/model/politique-qse.model';
 import { PolitiqueQSEService } from './politique-qse.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-politique-qse-update',
@@ -15,7 +17,7 @@ import { PolitiqueQSEService } from './politique-qse.service';
 export class PolitiqueQSEUpdateComponent implements OnInit {
   isSaving = false;
   dateDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -26,9 +28,12 @@ export class PolitiqueQSEUpdateComponent implements OnInit {
     indicateur: [],
   });
 
-  constructor(protected politiqueQSEService: PolitiqueQSEService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected politiqueQSEService: PolitiqueQSEService, 
+    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ politiqueQSE }) => {
       this.updateForm(politiqueQSE);
     });
@@ -87,5 +92,15 @@ export class PolitiqueQSEUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

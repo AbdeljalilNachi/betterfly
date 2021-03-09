@@ -64,7 +64,7 @@ export class AlertErrorComponent implements OnDestroy {
         }
 
         case 404:
-          this.addErrorAlert('Not found');
+          this.addErrorAlert('Non trouvé');
           break;
 
         default:

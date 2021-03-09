@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>Indicateur SMIS</span>
+        <span>Indicateurs SMI</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-indicateur-smi" [routerLink]="['/indicateur-smi/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="indicateurSMIS?.length === 0">
-        <span>No indicateurSMIS found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="indicateurSMIS && indicateurSMIS.length > 0">
@@ -51,10 +51,7 @@
                     <th scope="col"  jhiSortBy="periodicite"><span>Periodicite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="responsableCalcul"><span>Responsable Calcul</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="observations"><span>Observations</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="vigueur"><span>Vigueur</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="annee"><span>Annee</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="observation"><span>Observation</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
+                        <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -70,10 +67,8 @@
                     <td>{{ indicateurSMI.periodicite }}</td>
                     <td>{{ indicateurSMI.responsableCalcul }}</td>
                     <td>{{ indicateurSMI.observations }}</td>
-                    <td>{{ indicateurSMI.vigueur }}</td>
-                    <td>{{ indicateurSMI.annee }}</td>
-                    <td>{{ indicateurSMI.observation }}</td>
-                    <td class="text-right">
+ 
+                  <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
                                     [routerLink]="['/indicateur-smi', indicateurSMI.id, 'view']"

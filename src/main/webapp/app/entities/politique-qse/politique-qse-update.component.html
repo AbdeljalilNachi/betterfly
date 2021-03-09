@@ -13,14 +13,15 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
-                    <input type="text" class="form-control" name="processus" id="field_processus"
-                           formControlName="processus"/>
+                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
+                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_date">Date</label>
                     <div class="input-group">
-                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
+                        <input required id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -29,13 +30,13 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_axePolitiqueQSE">Axe Politique QSE</label>
-                    <input type="text" class="form-control" name="axePolitiqueQSE" id="field_axePolitiqueQSE"
+                    <input required type="text" class="form-control" name="axePolitiqueQSE" id="field_axePolitiqueQSE"
                            formControlName="axePolitiqueQSE"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_objectifQSE">Objectif QSE</label>
-                    <input type="text" class="form-control" name="objectifQSE" id="field_objectifQSE"
+                    <input required type="text" class="form-control" name="objectifQSE" id="field_objectifQSE"
                            formControlName="objectifQSE"/>
                 </div>
 
@@ -46,7 +47,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_indicateur">Indicateur</label>
+                    <label required class="form-control-label" for="field_indicateur">Indicateur</label>
                     <input type="text" class="form-control" name="indicateur" id="field_indicateur"
                            formControlName="indicateur"/>
                 </div>

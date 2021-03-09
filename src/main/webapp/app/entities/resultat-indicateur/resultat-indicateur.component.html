@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>Resultat Indicateurs</span>
+        <span>Resultats d'Indicateurs</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-resultat-indicateur" [routerLink]="['/resultat-indicateur/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="resultatIndicateurs?.length === 0">
-        <span>No resultatIndicateurs found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="resultatIndicateurs && resultatIndicateurs.length > 0">

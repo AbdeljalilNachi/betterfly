@@ -13,14 +13,16 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
-                    <input type="text" class="form-control" name="processus" id="field_processus"
-                           formControlName="processus"/>
+                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
+                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
+                    </select>
                 </div>
+
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_dateIdentification">Date d'identification</label>
                     <div class="input-group">
-                        <input id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
+                        <input required id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateIdentificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -29,7 +31,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
+                    <input required type="text" class="form-control" name="description" id="field_description"
                            formControlName="description"/>
                 </div>
 
@@ -43,7 +45,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
-                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                    <select required class="form-control" name="type" formControlName="type" id="field_type">
                         <option value="FORCE">FORCE</option>
                         <option value="FAIBLESSE">FAIBLESSE</option>
                         <option value="MENACE">MENACE</option>

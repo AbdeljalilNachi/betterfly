@@ -4,6 +4,9 @@ package com.betterfly.domain;
 import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -60,6 +63,11 @@ public class IndicateurSMI implements Serializable {
 
     @Column(name = "observation")
     private String observation;
+    
+    /*
+    @ManyToMany(mappedBy = "tasks")
+    @JsonIgnore
+    private Set<Job> jobs = new HashSet<>();  */
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {

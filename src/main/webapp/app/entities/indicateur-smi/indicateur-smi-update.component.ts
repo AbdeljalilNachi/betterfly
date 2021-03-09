@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IIndicateurSMI, IndicateurSMI } from 'app/shared/model/indicateur-smi.model';
 import { IndicateurSMIService } from './indicateur-smi.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-indicateur-smi-update',
@@ -15,7 +17,7 @@ import { IndicateurSMIService } from './indicateur-smi.service';
 export class IndicateurSMIUpdateComponent implements OnInit {
   isSaving = false;
   dateIdentificationDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -33,9 +35,12 @@ export class IndicateurSMIUpdateComponent implements OnInit {
     observation: [],
   });
 
-  constructor(protected indicateurSMIService: IndicateurSMIService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected indicateurSMIService: IndicateurSMIService,
+     protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+     private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ indicateurSMI }) => {
       this.updateForm(indicateurSMI);
     });
@@ -108,5 +113,15 @@ export class IndicateurSMIUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

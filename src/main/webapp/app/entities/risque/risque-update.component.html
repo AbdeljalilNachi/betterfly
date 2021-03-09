@@ -13,14 +13,15 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
-                    <input type="text" class="form-control" name="processus" id="field_processus"
-                           formControlName="processus"/>
+                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
+                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_dateIdentification">Date Identification</label>
                     <div class="input-group">
-                        <input id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
+                        <input required id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateIdentificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -29,7 +30,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
+                    <input required type="text" class="form-control" name="description" id="field_description"
                            formControlName="description"/>
                 </div>
 
@@ -47,7 +48,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
-                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                    <select required class="form-control" name="type" formControlName="type" id="field_type">
                         <option value="MENACE">MENACE</option>
                         <option value="OPPORTUNITE">OPPORTUNITE</option>
                     </select>
@@ -55,7 +56,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_gravite">Gravite</label>
-                    <select class="form-control" name="gravite" formControlName="gravite" id="field_gravite">
+                    <select required class="form-control" name="gravite" formControlName="gravite" id="field_gravite">
                         <option value="ONE">ONE</option>
                         <option value="TWO">TWO</option>
                         <option value="THREE">THREE</option>
@@ -66,7 +67,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_probabilite">Probabilite</label>
-                    <select class="form-control" name="probabilite" formControlName="probabilite" id="field_probabilite">
+                    <select required class="form-control" name="probabilite" formControlName="probabilite" id="field_probabilite">
                         <option value="ONE">ONE</option>
                         <option value="TWO">TWO</option>
                         <option value="THREE">THREE</option>
@@ -77,13 +78,13 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_criticite">Criticite</label>
-                    <input type="number" class="form-control" name="criticite" id="field_criticite"
+                    <input required type="number" class="form-control" name="criticite" id="field_criticite"
                            formControlName="criticite"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_traitement">Traitement</label>
-                    <select class="form-control" name="traitement" formControlName="traitement" id="field_traitement">
+                    <select required class="form-control" name="traitement" formControlName="traitement" id="field_traitement">
                         <option value="ACCEPTE">ACCEPTE</option>
                         <option value="REFUSE">REFUSE</option>
                         <option value="A_TRAITER">A_TRAITER</option>
@@ -99,8 +100,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_origine">Origine</label>
-                    <input type="text" class="form-control" name="origine" id="field_origine"
-                           formControlName="origine"/>
+                    <input type="hidden" class="form-control" name="origine" id="field_origine"
+                           formControlName="origine" value="RISQUES"/>
                 </div>
             </div>
 

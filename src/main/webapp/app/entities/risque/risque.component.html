@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="risques?.length === 0">
-        <span>No risques found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="risques && risques.length > 0">
@@ -51,9 +51,7 @@
                     <th scope="col"  jhiSortBy="probabilite"><span>Probabilite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="criticite"><span>Criticite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="traitement"><span>Traitement</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="commentaire"><span>Commentaire</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
+                            <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,9 +67,7 @@
                     <td>{{ risque.probabilite }}</td>
                     <td>{{ risque.criticite }}</td>
                     <td>{{ risque.traitement }}</td>
-                    <td>{{ risque.commentaire }}</td>
-                    <td>{{ risque.origine }}</td>
-                    <td class="text-right">
+                   <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
                                     [routerLink]="['/risque', risque.id, 'view']"

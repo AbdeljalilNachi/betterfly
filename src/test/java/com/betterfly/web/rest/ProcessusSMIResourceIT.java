@@ -23,6 +23,7 @@ import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -71,6 +72,9 @@ public class ProcessusSMIResourceIT {
 
     @Autowired
     private ProcessusSMIRepository processusSMIRepository;
+
+    @Mock
+    private ProcessusSMIRepository processusSMIRepositoryMock;
 
     /**
      * This repository is mocked in the com.betterfly.repository.search test package.
@@ -205,6 +209,26 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllProcessusSMISWithEagerRelationshipsIsEnabled() throws Exception {
+        when(processusSMIRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restProcessusSMIMockMvc.perform(get("/api/processus-smis?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(processusSMIRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllProcessusSMISWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(processusSMIRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restProcessusSMIMockMvc.perform(get("/api/processus-smis?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(processusSMIRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getProcessusSMI() throws Exception {

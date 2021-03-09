@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_rubrique">Rubrique</label>
-                    <select class="form-control" name="rubrique" formControlName="rubrique" id="field_rubrique">
+                    <select required class="form-control" name="rubrique" formControlName="rubrique" id="field_rubrique">
                         <option value="RUBRIQUE">RUBRIQUE</option>
                         <option value="NETTOYAGE">NETTOYAGE</option>
                         <option value="EVACUATION_EAUX">EVACUATION_EAUX</option>
@@ -56,19 +56,19 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_reference">Reference</label>
-                    <input type="text" class="form-control" name="reference" id="field_reference"
+                    <input required type="text" class="form-control" name="reference" id="field_reference"
                            formControlName="reference"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_num">Num</label>
-                    <input type="number" class="form-control" name="num" id="field_num"
+                    <input required type="number" class="form-control" name="num" id="field_num"
                            formControlName="num"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_exigence">Exigence</label>
-                    <input type="text" class="form-control" name="exigence" id="field_exigence"
+                    <input required type="text" class="form-control" name="exigence" id="field_exigence"
                            formControlName="exigence"/>
                 </div>
 
@@ -86,8 +86,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_statut">Statut</label>
-                    <input type="number" class="form-control" name="statut" id="field_statut"
-                           formControlName="statut"/>
+                    <input type="hidden" class="form-control" name="statut" id="field_statut"
+                           formControlName="statut" value = "6"/>
                 </div>
 
                 <div class="form-group">
@@ -98,14 +98,15 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
-                    <input type="text" class="form-control" name="processus" id="field_processus"
-                           formControlName="processus"/>
+                    <select class="form-control" name="processus" formControlName="processus" id="field_processus">
+                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_oRIGINE">O RIGINE</label>
-                    <input type="text" class="form-control" name="oRIGINE" id="field_oRIGINE"
-                           formControlName="oRIGINE"/>
+                    <input type="hidden" class="form-control" name="oRIGINE" id="field_oRIGINE"
+                           formControlName="oRIGINE" value = "Obligation_De_Conformité"/>
                 </div>
             </div>
 

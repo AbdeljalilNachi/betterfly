@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_mois">Mois</label>
-                    <select class="form-control" name="mois" formControlName="mois" id="field_mois">
+                    <select required class="form-control" name="mois" formControlName="mois" id="field_mois">
                         <option value="JAN">JAN</option>
                         <option value="FEV">FEV</option>
                         <option value="MAR">MAR</option>
@@ -31,19 +31,19 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_cible">Cible</label>
-                    <input type="number" class="form-control" name="cible" id="field_cible"
+                    <input required type="number" class="form-control" name="cible" id="field_cible"
                            formControlName="cible"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_resultat">Resultat</label>
-                    <input type="number" class="form-control" name="resultat" id="field_resultat"
+                    <input required type="number" class="form-control" name="resultat" id="field_resultat"
                            formControlName="resultat"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_indicateur">Indicateur</label>
-                    <input type="text" class="form-control" name="indicateur" id="field_indicateur"
+                    <input required type="text" class="form-control" name="indicateur" id="field_indicateur"
                            formControlName="indicateur"/>
                 </div>
             </div>

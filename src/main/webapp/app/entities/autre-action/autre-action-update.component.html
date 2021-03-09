@@ -13,20 +13,21 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
-                    <input type="text" class="form-control" name="processus" id="field_processus"
-                           formControlName="processus"/>
+                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
+                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_origineAction">Origine Action</label>
-                    <input type="text" class="form-control" name="origineAction" id="field_origineAction"
+                    <input required type="text" class="form-control" name="origineAction" id="field_origineAction"
                            formControlName="origineAction"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_origine">Origine</label>
-                    <input type="text" class="form-control" name="origine" id="field_origine"
-                           formControlName="origine"/>
+                    <input type="hidden" class="form-control" name="origine" id="field_origine"
+                           formControlName="origine" value = "AUTRES" />
                 </div>
             </div>
 

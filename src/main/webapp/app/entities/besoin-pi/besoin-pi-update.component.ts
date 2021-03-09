@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 
 import { IBesoinPI, BesoinPI } from 'app/shared/model/besoin-pi.model';
 import { BesoinPIService } from './besoin-pi.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
+
 
 @Component({
   selector: 'jhi-besoin-pi-update',
@@ -15,7 +18,7 @@ import { BesoinPIService } from './besoin-pi.service';
 export class BesoinPIUpdateComponent implements OnInit {
   isSaving = false;
   dateIdentificationDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -26,9 +29,12 @@ export class BesoinPIUpdateComponent implements OnInit {
     afficher: [],
   });
 
-  constructor(protected besoinPIService: BesoinPIService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected besoinPIService: BesoinPIService, 
+    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ besoinPI }) => {
       this.updateForm(besoinPI);
     });
@@ -87,5 +93,15 @@ export class BesoinPIUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
   }
 }

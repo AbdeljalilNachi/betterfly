@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IAnalyseEnvirommentale, AnalyseEnvirommentale } from 'app/shared/model/analyse-envirommentale.model';
 import { AnalyseEnvirommentaleService } from './analyse-envirommentale.service';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+
 
 @Component({
   selector: 'jhi-analyse-envirommentale-update',
@@ -15,7 +17,7 @@ import { AnalyseEnvirommentaleService } from './analyse-envirommentale.service';
 export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
   isSaving = false;
   dateDp: any;
-
+  pros: String[] | null = null;
   editForm = this.fb.group({
     id: [],
     date: [],
@@ -39,9 +41,11 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
     protected analyseEnvirommentaleService: AnalyseEnvirommentaleService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+    ,
+    private processusSMIService : ProcessusSMIService ) {}
 
   ngOnInit(): void {
+    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ analyseEnvirommentale }) => {
       this.updateForm(analyseEnvirommentale);
     });
@@ -119,4 +123,15 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
+  private loadAll(): void {
+    this.processusSMIService .getProcs()
+      .subscribe((res: String[]) => this.onSuccessLogins(res));
+
+  }
+
+  private onSuccessLogins(pros: String[] | null): void {
+    this.pros = pros;
+  }
+
 }

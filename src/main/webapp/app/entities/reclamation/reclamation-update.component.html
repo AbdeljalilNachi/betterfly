@@ -13,14 +13,15 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_processus">Processus</label>
-                    <input type="text" class="form-control" name="processus" id="field_processus"
-                           formControlName="processus"/>
+                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
+                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_date">Date</label>
                     <div class="input-group">
-                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
+                        <input required id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -29,19 +30,19 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
-                    <input type="text" class="form-control" name="description" id="field_description"
+                    <input required type="text" class="form-control" name="description" id="field_description"
                            formControlName="description"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_justifiee">Justifiee</label>
-                    <input type="checkbox" class="form-control" name="justifiee" id="field_justifiee"
+                    <input required type="checkbox" class="form-control" name="justifiee" id="field_justifiee"
                            formControlName="justifiee"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_client">Client</label>
-                    <input type="text" class="form-control" name="client" id="field_client"
+                    <input required type="text" class="form-control" name="client" id="field_client"
                            formControlName="client"/>
                 </div>
 
@@ -66,8 +67,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_origine">Origine</label>
-                    <input type="text" class="form-control" name="origine" id="field_origine"
-                           formControlName="origine"/>
+                    <input  type="text" class="form-control" name="origine" id="field_origine"
+                           formControlName="origine" value="RECLAMATION"/>
                 </div>
             </div>
 

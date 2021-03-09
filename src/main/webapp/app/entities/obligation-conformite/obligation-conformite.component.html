@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>Obligation Conformites</span>
+        <span>Obligations de Conformité</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-obligation-conformite" [routerLink]="['/obligation-conformite/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="obligationConformites?.length === 0">
-        <span>No obligationConformites found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="obligationConformites && obligationConformites.length > 0">
@@ -48,10 +48,8 @@
                     <th scope="col"  jhiSortBy="exigence"><span>Exigence</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="applicable"><span>Applicable</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="conforme"><span>Conforme</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="statut"><span>Statut</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="observation"><span>Observation</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="oRIGINE"><span>O RIGINE</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -65,10 +63,8 @@
                     <td>{{ obligationConformite.exigence }}</td>
                     <td>{{ obligationConformite.applicable }}</td>
                     <td>{{ obligationConformite.conforme }}</td>
-                    <td>{{ obligationConformite.statut }}</td>
                     <td>{{ obligationConformite.observation }}</td>
                     <td>{{ obligationConformite.processus }}</td>
-                    <td>{{ obligationConformite.oRIGINE }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

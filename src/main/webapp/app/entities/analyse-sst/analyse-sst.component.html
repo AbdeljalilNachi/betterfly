@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>Analyse SSTS</span>
+        <span>Analyses SST</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-analyse-sst" [routerLink]="['/analyse-sst/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="analyseSSTS?.length === 0">
-        <span>No analyseSSTS found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="analyseSSTS && analyseSSTS.length > 0">
@@ -47,16 +47,12 @@
                     <th scope="col"  jhiSortBy="uniteTravail"><span>Unite Travail</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="danger"><span>Danger</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="risque"><span>Risque</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="competence"><span>Competence</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="situation"><span>Situation</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="frequence"><span>Frequence</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dureeExposition"><span>Duree Exposition</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="coefficientMaitrise"><span>Coefficient Maitrise</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="gravite"><span>Gravite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="criticite"><span>Criticite</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="maitriseExistante"><span>Maitrise Existante</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"></th>
+   <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -68,15 +64,12 @@
                     <td>{{ analyseSST.uniteTravail }}</td>
                     <td>{{ analyseSST.danger }}</td>
                     <td>{{ analyseSST.risque }}</td>
-                    <td>{{ analyseSST.competence }}</td>
-                    <td>{{ analyseSST.situation }}</td>
                     <td>{{ analyseSST.frequence }}</td>
                     <td>{{ analyseSST.dureeExposition }}</td>
                     <td>{{ analyseSST.coefficientMaitrise }}</td>
                     <td>{{ analyseSST.gravite }}</td>
                     <td>{{ analyseSST.criticite }}</td>
-                    <td>{{ analyseSST.maitriseExistante }}</td>
-                    <td>{{ analyseSST.origine }}</td>
+
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

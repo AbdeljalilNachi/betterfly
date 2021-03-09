@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Constats</span>
+        <span>Constats d'audits</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-constat" [routerLink]="['/constat/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Constat
+           Créer un nouveau Constat d'audit
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="constats?.length === 0">
-        <span>No constats found</span>
+        <span>Aucun élément trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="constats && constats.length > 0">
