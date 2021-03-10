@@ -56,6 +56,9 @@ spring:
     show-sql: true
   data:
     elasticsearch:
+   #   cluster-name: elasticsearch
+   #   cluster-nodes: localhost:9200
+   #   transport.host: localhost
       properties:
         path:
           home: target/elasticsearch
@@ -117,9 +120,9 @@ jhipster:
   logging:
     use-json-format: false # By default, logs are not in Json format
     logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
-      enabled: false
+      enabled: true
       host: localhost
-      port: 5000
+      port: 9600
       queue-size: 512
   audit-events:
     retention-period: 30 # Number of days before audit events are deleted.
