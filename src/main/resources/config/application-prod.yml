@@ -34,8 +34,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/betterFly
-    username: betterFly
-    password:
+    username: postgres
+    password: admin
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -121,7 +121,7 @@ jhipster:
   logging:
     use-json-format: false # By default, logs are not in Json format
     logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
-      enabled: false
+      enabled: true
       host: localhost
       port: 9600
       queue-size: 512
