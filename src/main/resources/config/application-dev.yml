@@ -42,9 +42,12 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/betterfly;DB_CLOSE_DELAY=-1
-    username: betterFly
-    password:
+ #   url: jdbc:h2:file:./target/h2db/db/betterfly;DB_CLOSE_DELAY=-1
+ #   username: betterFly
+ #   password:
+    url: jdbc:postgresql://localhost:5432/betterFly
+    username: postgres
+    password: admin 
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -52,7 +55,8 @@ spring:
     console:
       enabled: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+  #  database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL10Dialect
     show-sql: true
   data:
     elasticsearch:
@@ -66,6 +70,7 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
+  #  drop-first: true
   mail:
     host: smtp.gmail.com
     port: 587

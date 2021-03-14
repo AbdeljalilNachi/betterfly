@@ -66,6 +66,15 @@ public class AnalyseSSTResource {
         if (analyseSST.getId() != null) {
             throw new BadRequestAlertException("A new analyseSST cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
+        int f = analyseSST.getFrequence().ordinal()+1 ; 
+        int d = analyseSST.getDureeExposition().ordinal()+1 ; 
+        int m = analyseSST.getCoefficientMaitrise().ordinal()+1 ; 
+        int g = analyseSST.getGravite().ordinal()+1 ; 
+        
+        analyseSST.setCriticite(f*d*m*g);
+        
+        
         AnalyseSST result = analyseSSTRepository.save(analyseSST);
         analyseSSTSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/analyse-ssts/" + result.getId()))
@@ -88,6 +97,14 @@ public class AnalyseSSTResource {
         if (analyseSST.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        
+        int f = analyseSST.getFrequence().ordinal()+1 ; 
+        int d = analyseSST.getDureeExposition().ordinal()+1 ; 
+        int m = analyseSST.getCoefficientMaitrise().ordinal()+1 ; 
+        int g = analyseSST.getGravite().ordinal()+1 ; 
+        
+        analyseSST.setCriticite(f*d*m*g);
+        
         AnalyseSST result = analyseSSTRepository.save(analyseSST);
         analyseSSTSearchRepository.save(result);
         return ResponseEntity.ok()

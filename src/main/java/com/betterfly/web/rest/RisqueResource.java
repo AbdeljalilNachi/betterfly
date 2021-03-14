@@ -66,6 +66,13 @@ public class RisqueResource {
         if (risque.getId() != null) {
             throw new BadRequestAlertException("A new risque cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        
+        int p = risque.getProbabilite().ordinal()+1 ; 
+        int g = risque.getGravite().ordinal()+1 ; 
+        
+        risque.setCriticite(p*g);
+        
+        
         Risque result = risqueRepository.save(risque);
         risqueSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/risques/" + result.getId()))
@@ -88,6 +95,12 @@ public class RisqueResource {
         if (risque.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        
+        int p = risque.getProbabilite().ordinal()+1 ; 
+        int g = risque.getGravite().ordinal()+1 ; 
+        
+        risque.setCriticite(p*g);
+        
         Risque result = risqueRepository.save(risque);
         risqueSearchRepository.save(result);
         return ResponseEntity.ok()

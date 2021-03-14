@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { IProcessusSMI, ProcessusSMI } from 'app/shared/model/processus-smi.model';
-import { IIndicateurSMI } from 'app/shared/model/indicateur-smi.model';
 import { ProcessusSMIService } from './processus-smi.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { UserService } from 'app/core/user/user.service';
@@ -22,7 +21,6 @@ export class ProcessusSMIUpdateComponent implements OnInit {
   dateDp: any;
   users: String[] | null = null;
 
-  indicateurs: IIndicateurSMI[] = [];
 
 
   editForm = this.fb.group({
@@ -36,7 +34,7 @@ export class ProcessusSMIUpdateComponent implements OnInit {
     ficheProcessusContentType: [],
     type: [],
     vigueur: [],
-    indicateurs: [],
+  
   });
 
   constructor(
@@ -67,7 +65,6 @@ export class ProcessusSMIUpdateComponent implements OnInit {
       ficheProcessusContentType: processusSMI.ficheProcessusContentType,
       type: processusSMI.type,
       vigueur: processusSMI.vigueur,
-      indicateurs: processusSMI.indicateurs,
     });
   }
 
@@ -114,7 +111,6 @@ export class ProcessusSMIUpdateComponent implements OnInit {
       ficheProcessus: this.editForm.get(['ficheProcessus'])!.value,
       type: this.editForm.get(['type'])!.value,
       vigueur: this.editForm.get(['vigueur'])!.value,
-      indicateurs: this.editForm.get(['indicateurs'])!.value,
     };
   }
 
@@ -144,23 +140,7 @@ export class ProcessusSMIUpdateComponent implements OnInit {
     this.users = users;
   }
 
-  trackById(index: number, item: IIndicateurSMI): any {
-    return item.id;
-  }
 
-
-  getSelected(selectedVals: IIndicateurSMI[], option: IIndicateurSMI): IIndicateurSMI {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
-  }
-
- 
 
 
 

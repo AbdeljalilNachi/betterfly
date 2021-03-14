@@ -4,23 +4,27 @@
     </div>
 
     <div class="col-md-9">
-        <h1 class="display-4">Welcome, !</h1>
+        <h1 class="display-4">Bienvenu</h1>
 
-        <p class="lead">This is your homepage</p>
+        <p class="lead">C'est votre page d'accueil</p>
+      <!--
+         <iframe src="http://localhost:5601/app/kibana#/dashboard/afd598c0-839c-11eb-a20b-eba8a23ddcf3?embed=true&_g=(filters%3A!())" height="600" width="800"></iframe>
+-->
+
 
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
+                <span id="home-logged-message" *ngIf="account">Vous êtes connecté en tant que login : "{{ account.login }}".</span>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
+                <span>Si vous voulez </span>
+                <a class="alert-link" (click)="login()">Se connecter</a><span>, vous pouvez essayer les compte par défaut<br/>- Administrateur (login="admin" et mot de passe="admin") <br/>- Utlisateur (login="user" and mot de passe="user").</span>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="account/register">Register a new account</a>
+                <span>Pas encore inscrit?</span>&nbsp;
+                <a class="alert-link" routerLink="account/register">Ajouter un nouveau compte</a>
             </div>
         </div>
 

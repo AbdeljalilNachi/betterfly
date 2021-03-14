@@ -66,6 +66,13 @@ public class AnalyseEnvirommentaleResource {
         if (analyseEnvirommentale.getId() != null) {
             throw new BadRequestAlertException("A new analyseEnvirommentale cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        int f = analyseEnvirommentale.getFrequence().ordinal()+1 ; 
+        int s = analyseEnvirommentale.getSensibiliteMilieu().ordinal()+1 ; 
+        int m = analyseEnvirommentale.getCoefficientMaitrise().ordinal()+1 ; 
+        int g = analyseEnvirommentale.getGravite().ordinal()+1 ; 
+        
+        analyseEnvirommentale.setCriticite(f*s*m*g);
+        
         AnalyseEnvirommentale result = analyseEnvirommentaleRepository.save(analyseEnvirommentale);
         analyseEnvirommentaleSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/analyse-envirommentales/" + result.getId()))
@@ -88,6 +95,14 @@ public class AnalyseEnvirommentaleResource {
         if (analyseEnvirommentale.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        
+        int f = analyseEnvirommentale.getFrequence().ordinal()+1 ; 
+        int s = analyseEnvirommentale.getSensibiliteMilieu().ordinal()+1 ; 
+        int m = analyseEnvirommentale.getCoefficientMaitrise().ordinal()+1 ; 
+        int g = analyseEnvirommentale.getGravite().ordinal()+1 ; 
+        
+        analyseEnvirommentale.setCriticite(f*s*m*g);
+        
         AnalyseEnvirommentale result = analyseEnvirommentaleRepository.save(analyseEnvirommentale);
         analyseEnvirommentaleSearchRepository.save(result);
         return ResponseEntity.ok()
