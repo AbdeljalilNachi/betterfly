@@ -67,6 +67,7 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
       coefficientMaitrise: analyseEnvirommentale.coefficientMaitrise,
       gravite: analyseEnvirommentale.gravite,
       criticite: analyseEnvirommentale.criticite,
+     //  criticite: 5,
       maitriseExistante: analyseEnvirommentale.maitriseExistante,
       origine: analyseEnvirommentale.origine,
     });
@@ -103,6 +104,8 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
       coefficientMaitrise: this.editForm.get(['coefficientMaitrise'])!.value,
       gravite: this.editForm.get(['gravite'])!.value,
       criticite: this.editForm.get(['criticite'])!.value,
+      // criticite: 5,
+
       maitriseExistante: this.editForm.get(['maitriseExistante'])!.value,
       origine: this.editForm.get(['origine'])!.value,
     };
