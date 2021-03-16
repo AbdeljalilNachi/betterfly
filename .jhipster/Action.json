@@ -30,10 +30,6 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "efficace",
-      "fieldType": "Boolean"
-    },
-    {
       "fieldName": "ressourcesNecessaires",
       "fieldType": "String"
     },
@@ -41,6 +37,11 @@
       "fieldName": "statut",
       "fieldType": "Statut",
       "fieldValues": "EN_COURS,PLANIFIEE"
+    },
+    {
+      "fieldName": "efficace",
+      "fieldType": "Efficace",
+      "fieldValues": "EFFICACE,NON_EFFICACE,A_EVALUER"
     }
   ],
   "relationships": [],
@@ -54,5 +55,7 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": "*",
+  "searchEngine": "elasticsearch",
+  "databaseType": "sql"
 }

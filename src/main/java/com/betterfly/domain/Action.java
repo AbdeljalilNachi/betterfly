@@ -9,6 +9,8 @@ import java.time.LocalDate;
 
 import com.betterfly.domain.enumeration.Statut;
 
+import com.betterfly.domain.enumeration.Efficace;
+
 /**
  * A Action.
  */
@@ -45,15 +47,16 @@ public class Action implements Serializable {
     @Column(name = "critere_resultat")
     private String critereResultat;
 
-    @Column(name = "efficace")
-    private Boolean efficace;
-
     @Column(name = "ressources_necessaires")
     private String ressourcesNecessaires;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut")
     private Statut statut;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "efficace")
+    private Efficace efficace;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -155,19 +158,6 @@ public class Action implements Serializable {
         this.critereResultat = critereResultat;
     }
 
-    public Boolean isEfficace() {
-        return efficace;
-    }
-
-    public Action efficace(Boolean efficace) {
-        this.efficace = efficace;
-        return this;
-    }
-
-    public void setEfficace(Boolean efficace) {
-        this.efficace = efficace;
-    }
-
     public String getRessourcesNecessaires() {
         return ressourcesNecessaires;
     }
@@ -192,6 +182,19 @@ public class Action implements Serializable {
 
     public void setStatut(Statut statut) {
         this.statut = statut;
+    }
+
+    public Efficace getEfficace() {
+        return efficace;
+    }
+
+    public Action efficace(Efficace efficace) {
+        this.efficace = efficace;
+        return this;
+    }
+
+    public void setEfficace(Efficace efficace) {
+        this.efficace = efficace;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -223,9 +226,9 @@ public class Action implements Serializable {
             ", avancement='" + getAvancement() + "'" +
             ", realisee='" + isRealisee() + "'" +
             ", critereResultat='" + getCritereResultat() + "'" +
-            ", efficace='" + isEfficace() + "'" +
             ", ressourcesNecessaires='" + getRessourcesNecessaires() + "'" +
             ", statut='" + getStatut() + "'" +
+            ", efficace='" + getEfficace() + "'" +
             "}";
     }
 }

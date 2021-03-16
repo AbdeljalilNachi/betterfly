@@ -5,6 +5,7 @@ import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { ActionService } from 'app/entities/action/action.service';
 import { IAction, Action } from 'app/shared/model/action.model';
 import { Statut } from 'app/shared/model/enumerations/statut.model';
+import { Efficace } from 'app/shared/model/enumerations/efficace.model';
 
 describe('Service Tests', () => {
   describe('Action Service', () => {
@@ -34,9 +35,9 @@ describe('Service Tests', () => {
         'AAAAAAA',
         false,
         'AAAAAAA',
-        false,
         'AAAAAAA',
-        Statut.EN_COURS
+        Statut.EN_COURS,
+        Efficace.EFFICACE
       );
     });
 
@@ -92,9 +93,9 @@ describe('Service Tests', () => {
             avancement: 'BBBBBB',
             realisee: true,
             critereResultat: 'BBBBBB',
-            efficace: true,
             ressourcesNecessaires: 'BBBBBB',
             statut: 'BBBBBB',
+            efficace: 'BBBBBB',
           },
           elemDefault
         );
@@ -124,9 +125,9 @@ describe('Service Tests', () => {
             avancement: 'BBBBBB',
             realisee: true,
             critereResultat: 'BBBBBB',
-            efficace: true,
             ressourcesNecessaires: 'BBBBBB',
             statut: 'BBBBBB',
+            efficace: 'BBBBBB',
           },
           elemDefault
         );

@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { Statut } from 'app/shared/model/enumerations/statut.model';
+import { Efficace } from 'app/shared/model/enumerations/efficace.model';
 
 export interface IAction {
   id?: number;
@@ -10,9 +11,9 @@ export interface IAction {
   avancement?: string;
   realisee?: boolean;
   critereResultat?: string;
-  efficace?: boolean;
   ressourcesNecessaires?: string;
   statut?: Statut;
+  efficace?: Efficace;
 }
 
 export class Action implements IAction {
@@ -25,11 +26,10 @@ export class Action implements IAction {
     public avancement?: string,
     public realisee?: boolean,
     public critereResultat?: string,
-    public efficace?: boolean,
     public ressourcesNecessaires?: string,
-    public statut?: Statut
+    public statut?: Statut,
+    public efficace?: Efficace
   ) {
     this.realisee = this.realisee || false;
-    this.efficace = this.efficace || false;
   }
 }

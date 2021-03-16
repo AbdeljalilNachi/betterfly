@@ -36,13 +36,13 @@
             <column name="critere_resultat" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="efficace" type="boolean">
-                <constraints nullable="true" />
-            </column>
             <column name="ressources_necessaires" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="statut" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="efficace" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -75,9 +75,9 @@
             <column name="avancement" type="string"/>
             <column name="realisee" type="boolean"/>
             <column name="critere_resultat" type="string"/>
-            <column name="efficace" type="boolean"/>
             <column name="ressources_necessaires" type="string"/>
             <column name="statut" type="string"/>
+            <column name="efficace" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

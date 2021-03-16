@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { IRisque, Risque } from 'app/shared/model/risque.model';
 import { RisqueService } from './risque.service';
 import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
-
+// import { ActionService } from 'app/entities/action/action.service.ts';
 
 @Component({
   selector: 'jhi-risque-update',
@@ -18,6 +18,9 @@ export class RisqueUpdateComponent implements OnInit {
   isSaving = false;
   dateIdentificationDp: any;
   pros: String[] | null = null;
+  // actions: String[] | null = null;
+
+
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -32,11 +35,14 @@ export class RisqueUpdateComponent implements OnInit {
     traitement: [],
     commentaire: [],
     origine: [],
+  //  action : [],
   });
 
   constructor(protected risqueService: RisqueService, 
     protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService ) {}
+    private processusSMIService : ProcessusSMIService  , 
+  //  private actionService : ActionService  
+    ) {}
 
   ngOnInit(): void {
     this.loadAll() ;
@@ -60,6 +66,7 @@ export class RisqueUpdateComponent implements OnInit {
       traitement: risque.traitement,
       commentaire: risque.commentaire,
       origine: risque.origine,
+  //    action :  risque.action 
     });
   }
 
@@ -93,6 +100,8 @@ export class RisqueUpdateComponent implements OnInit {
       traitement: this.editForm.get(['traitement'])!.value,
       commentaire: this.editForm.get(['commentaire'])!.value,
       origine: this.editForm.get(['origine'])!.value,
+
+   //   action: this.editForm.get(['action'])!.value,
     };
   }
 
@@ -116,9 +125,16 @@ export class RisqueUpdateComponent implements OnInit {
     this.processusSMIService .getProcs()
       .subscribe((res: String[]) => this.onSuccessLogins(res));
 
+  //  this.actionService .getActions()    .subscribe((res: String[]) => this.onSuccessActions(res));
+
+
   }
 
   private onSuccessLogins(pros: String[] | null): void {
     this.pros = pros;
+  }
+
+  private onSuccessActions(actions: String[] | null): void {
+    this.actions = actions;
   }
 }

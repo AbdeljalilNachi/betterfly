@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { IAction, Action } from 'app/shared/model/action.model';
 import { ActionService } from './action.service';
+import { Statut } from '../../shared/model/enumerations/statut.model';
 
 @Component({
   selector: 'jhi-action-update',
@@ -26,7 +27,7 @@ export class ActionUpdateComponent implements OnInit {
     avancement: [],
     realisee: [],
     critereResultat: [],
-    efficace: [],
+    efficace:  [],
     ressourcesNecessaires: [],
     statut: [],
   });
@@ -82,7 +83,7 @@ export class ActionUpdateComponent implements OnInit {
       critereResultat: this.editForm.get(['critereResultat'])!.value,
       efficace: this.editForm.get(['efficace'])!.value,
       ressourcesNecessaires: this.editForm.get(['ressourcesNecessaires'])!.value,
-      statut: this.editForm.get(['statut'])!.value,
+       statut: Statut.EN_COURS,
     };
   }
 

@@ -1,11 +1,11 @@
-id;date_planification;action;type;delai;avancement;realisee;critere_resultat;efficace;ressources_necessaires;statut
-1;2021-03-02;Intranet collaborative;Manager Buckinghamshire;2021-03-02;microchip Borders;false;Metrics;true;algorithm;EN_COURS
-2;2021-03-02;Customer Rwanda;Markets back-end Field;2021-03-02;radical Incredible Frozen Chicken customer loyalty;false;web-readiness concept;true;HDD;EN_COURS
-3;2021-03-02;capability hacking gold;payment;2021-03-02;Harbors Expressway Manat;true;Syrian Pound Director Producer;false;Strategist deposit Mouse;PLANIFIEE
-4;2021-03-02;Data Buckinghamshire Cayman Islands;Regional task-force;2021-03-02;productize Licensed Metal Bacon Executive;true;Towels;true;Mississippi quantify Investment Account;PLANIFIEE
-5;2021-03-02;Avon Port;Persistent mint green;2021-03-02;Movies 4th generation Health;false;bluetooth;true;ROI yellow;PLANIFIEE
-6;2021-03-02;bluetooth;panel Consultant Jersey;2021-03-02;Louisiana virtual;true;Chips;true;Tools protocol 24/7;EN_COURS
-7;2021-03-02;Gorgeous auxiliary;Fork Chief;2021-03-02;Home Loan Account auxiliary Forward;true;generate Savings Account Iowa;false;Handmade;PLANIFIEE
-8;2021-03-02;Computers Manager wireless;Auto Loan Account Money Market Account;2021-03-02;Sausages China;false;24/7 navigating driver;false;Administrator open architecture;EN_COURS
-9;2021-03-02;Interactions copy Rubber;Practical bluetooth Wooden;2021-03-02;compress;true;Facilitator Corporate;true;Avon;PLANIFIEE
-10;2021-03-02;Games zero defect;ADP Iceland Krona;2021-03-02;Sleek;true;infomediaries Belarussian Ruble Borders;false;Compatible Sleek;EN_COURS
+id;date_planification;action;type;delai;avancement;realisee;critere_resultat;ressources_necessaires;statut;efficace
+1;2021-03-02;Intranet collaborative;Manager Buckinghamshire;2021-03-02;microchip Borders;false;Metrics;Plastic Music Electronics;PLANIFIEE;EFFICACE
+2;2021-03-02;radical Incredible Frozen Chicken customer loyalty;strategize Garden;2021-03-02;cyan Personal Loan Account RAM;true;programming;Sharable;EN_COURS;NON_EFFICACE
+3;2021-03-02;Division;Expressway;2021-03-02;Usability Syrian Pound Director;true;portal Strategist deposit;salmon;PLANIFIEE;NON_EFFICACE
+4;2021-03-02;task-force synthesizing;Program synthesize;2021-03-02;Licensed Keyboard Utah;true;Skyway Home Loan Account;out-of-the-box mobile;EN_COURS;EFFICACE
+5;2021-03-02;auxiliary;4th generation;2021-03-02;Small Soft Soap generate;false;yellow;Assistant incubate;PLANIFIEE;NON_EFFICACE
+6;2021-03-02;virtual Officer;Interactions;2021-03-02;envisioneer;true;Diverse compress;North Dakota;EN_COURS;EFFICACE
+7;2021-03-02;Auto Loan Account Automotive;Togo generate Savings Account;2021-03-02;Fork;false;District Rhode Island Web;Executive;PLANIFIEE;NON_EFFICACE
+8;2021-03-02;China Station 24/7;scale Books methodologies;2021-03-02;Cayman Islands Dollar;true;Borders lime;Interactions copy Rubber;PLANIFIEE;NON_EFFICACE
+9;2021-03-02;programming Soap Health;Handmade Wooden Bacon;2021-03-02;Games zero defect;false;infomediaries grow Ergonomic;Principal infomediaries;EN_COURS;EFFICACE
+10;2021-03-02;policy;synergies Checking Account Home Loan Account;2021-03-02;COM;false;Steel withdrawal;infrastructures niches Lari;EN_COURS;A_EVALUER

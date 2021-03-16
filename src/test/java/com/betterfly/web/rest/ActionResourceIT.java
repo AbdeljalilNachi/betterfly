@@ -33,6 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.betterfly.domain.enumeration.Statut;
+import com.betterfly.domain.enumeration.Efficace;
 /**
  * Integration tests for the {@link ActionResource} REST controller.
  */
@@ -63,14 +64,14 @@ public class ActionResourceIT {
     private static final String DEFAULT_CRITERE_RESULTAT = "AAAAAAAAAA";
     private static final String UPDATED_CRITERE_RESULTAT = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_EFFICACE = false;
-    private static final Boolean UPDATED_EFFICACE = true;
-
     private static final String DEFAULT_RESSOURCES_NECESSAIRES = "AAAAAAAAAA";
     private static final String UPDATED_RESSOURCES_NECESSAIRES = "BBBBBBBBBB";
 
     private static final Statut DEFAULT_STATUT = Statut.EN_COURS;
     private static final Statut UPDATED_STATUT = Statut.PLANIFIEE;
+
+    private static final Efficace DEFAULT_EFFICACE = Efficace.EFFICACE;
+    private static final Efficace UPDATED_EFFICACE = Efficace.NON_EFFICACE;
 
     @Autowired
     private ActionRepository actionRepository;
@@ -106,9 +107,9 @@ public class ActionResourceIT {
             .avancement(DEFAULT_AVANCEMENT)
             .realisee(DEFAULT_REALISEE)
             .critereResultat(DEFAULT_CRITERE_RESULTAT)
-            .efficace(DEFAULT_EFFICACE)
             .ressourcesNecessaires(DEFAULT_RESSOURCES_NECESSAIRES)
-            .statut(DEFAULT_STATUT);
+            .statut(DEFAULT_STATUT)
+            .efficace(DEFAULT_EFFICACE);
         return action;
     }
     /**
@@ -126,9 +127,9 @@ public class ActionResourceIT {
             .avancement(UPDATED_AVANCEMENT)
             .realisee(UPDATED_REALISEE)
             .critereResultat(UPDATED_CRITERE_RESULTAT)
-            .efficace(UPDATED_EFFICACE)
             .ressourcesNecessaires(UPDATED_RESSOURCES_NECESSAIRES)
-            .statut(UPDATED_STATUT);
+            .statut(UPDATED_STATUT)
+            .efficace(UPDATED_EFFICACE);
         return action;
     }
 
@@ -158,9 +159,9 @@ public class ActionResourceIT {
         assertThat(testAction.getAvancement()).isEqualTo(DEFAULT_AVANCEMENT);
         assertThat(testAction.isRealisee()).isEqualTo(DEFAULT_REALISEE);
         assertThat(testAction.getCritereResultat()).isEqualTo(DEFAULT_CRITERE_RESULTAT);
-        assertThat(testAction.isEfficace()).isEqualTo(DEFAULT_EFFICACE);
         assertThat(testAction.getRessourcesNecessaires()).isEqualTo(DEFAULT_RESSOURCES_NECESSAIRES);
         assertThat(testAction.getStatut()).isEqualTo(DEFAULT_STATUT);
+        assertThat(testAction.getEfficace()).isEqualTo(DEFAULT_EFFICACE);
 
         // Validate the Action in Elasticsearch
         verify(mockActionSearchRepository, times(1)).save(testAction);
@@ -207,9 +208,9 @@ public class ActionResourceIT {
             .andExpect(jsonPath("$.[*].avancement").value(hasItem(DEFAULT_AVANCEMENT)))
             .andExpect(jsonPath("$.[*].realisee").value(hasItem(DEFAULT_REALISEE.booleanValue())))
             .andExpect(jsonPath("$.[*].critereResultat").value(hasItem(DEFAULT_CRITERE_RESULTAT)))
-            .andExpect(jsonPath("$.[*].efficace").value(hasItem(DEFAULT_EFFICACE.booleanValue())))
             .andExpect(jsonPath("$.[*].ressourcesNecessaires").value(hasItem(DEFAULT_RESSOURCES_NECESSAIRES)))
-            .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())));
+            .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())))
+            .andExpect(jsonPath("$.[*].efficace").value(hasItem(DEFAULT_EFFICACE.toString())));
     }
     
     @Test
@@ -230,9 +231,9 @@ public class ActionResourceIT {
             .andExpect(jsonPath("$.avancement").value(DEFAULT_AVANCEMENT))
             .andExpect(jsonPath("$.realisee").value(DEFAULT_REALISEE.booleanValue()))
             .andExpect(jsonPath("$.critereResultat").value(DEFAULT_CRITERE_RESULTAT))
-            .andExpect(jsonPath("$.efficace").value(DEFAULT_EFFICACE.booleanValue()))
             .andExpect(jsonPath("$.ressourcesNecessaires").value(DEFAULT_RESSOURCES_NECESSAIRES))
-            .andExpect(jsonPath("$.statut").value(DEFAULT_STATUT.toString()));
+            .andExpect(jsonPath("$.statut").value(DEFAULT_STATUT.toString()))
+            .andExpect(jsonPath("$.efficace").value(DEFAULT_EFFICACE.toString()));
     }
     @Test
     @Transactional
@@ -262,9 +263,9 @@ public class ActionResourceIT {
             .avancement(UPDATED_AVANCEMENT)
             .realisee(UPDATED_REALISEE)
             .critereResultat(UPDATED_CRITERE_RESULTAT)
-            .efficace(UPDATED_EFFICACE)
             .ressourcesNecessaires(UPDATED_RESSOURCES_NECESSAIRES)
-            .statut(UPDATED_STATUT);
+            .statut(UPDATED_STATUT)
+            .efficace(UPDATED_EFFICACE);
 
         restActionMockMvc.perform(put("/api/actions")
             .contentType(MediaType.APPLICATION_JSON)
@@ -282,9 +283,9 @@ public class ActionResourceIT {
         assertThat(testAction.getAvancement()).isEqualTo(UPDATED_AVANCEMENT);
         assertThat(testAction.isRealisee()).isEqualTo(UPDATED_REALISEE);
         assertThat(testAction.getCritereResultat()).isEqualTo(UPDATED_CRITERE_RESULTAT);
-        assertThat(testAction.isEfficace()).isEqualTo(UPDATED_EFFICACE);
         assertThat(testAction.getRessourcesNecessaires()).isEqualTo(UPDATED_RESSOURCES_NECESSAIRES);
         assertThat(testAction.getStatut()).isEqualTo(UPDATED_STATUT);
+        assertThat(testAction.getEfficace()).isEqualTo(UPDATED_EFFICACE);
 
         // Validate the Action in Elasticsearch
         verify(mockActionSearchRepository, times(1)).save(testAction);
@@ -351,8 +352,8 @@ public class ActionResourceIT {
             .andExpect(jsonPath("$.[*].avancement").value(hasItem(DEFAULT_AVANCEMENT)))
             .andExpect(jsonPath("$.[*].realisee").value(hasItem(DEFAULT_REALISEE.booleanValue())))
             .andExpect(jsonPath("$.[*].critereResultat").value(hasItem(DEFAULT_CRITERE_RESULTAT)))
-            .andExpect(jsonPath("$.[*].efficace").value(hasItem(DEFAULT_EFFICACE.booleanValue())))
             .andExpect(jsonPath("$.[*].ressourcesNecessaires").value(hasItem(DEFAULT_RESSOURCES_NECESSAIRES)))
-            .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())));
+            .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT.toString())))
+            .andExpect(jsonPath("$.[*].efficace").value(hasItem(DEFAULT_EFFICACE.toString())));
     }
 }
