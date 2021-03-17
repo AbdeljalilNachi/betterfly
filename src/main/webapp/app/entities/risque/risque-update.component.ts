@@ -134,7 +134,5 @@ export class RisqueUpdateComponent implements OnInit {
     this.pros = pros;
   }
 
-  private onSuccessActions(actions: String[] | null): void {
-    this.actions = actions;
-  }
+ 
 }

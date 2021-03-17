@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { VERSION } from 'app/app.constants';
@@ -18,14 +18,20 @@ export class NavbarComponent implements OnInit {
   swaggerEnabled?: boolean;
   version: string;
 
+  @Input() leftMenuHidden: boolean;
+  @Output() toggleBtnLeftMenuEvent= new EventEmitter<boolean>();
+
   constructor(
     private loginService: LoginService,
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     private router: Router
+  
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
+    this.leftMenuHidden = true  ;
+    this.toggleBtnLeftMenuEvent = new EventEmitter<boolean>() ;
   }
 
   ngOnInit(): void {
@@ -34,6 +40,12 @@ export class NavbarComponent implements OnInit {
       this.swaggerEnabled = profileInfo.swaggerEnabled;
     });
   }
+
+
+  toggleLeftMenu() {
+    this.leftMenuHidden = !this.leftMenuHidden;
+    this.toggleBtnLeftMenuEvent.emit(this.leftMenuHidden);
+}
 
   collapseNavbar(): void {
     this.isNavbarCollapsed = true;

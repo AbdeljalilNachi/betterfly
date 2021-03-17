@@ -13,6 +13,7 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
+import { LeftSideMenuComponent } from './layouts/left-side-menu/left-side-menu.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     BetterFlyEntityModule,
     BetterFlyAppRoutingModule,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, LeftSideMenuComponent],
   bootstrap: [MainComponent],
 })
 export class BetterFlyAppModule {}
