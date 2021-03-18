@@ -95,6 +95,14 @@
                   
                   
                     <li>
+                        <a class="dropdown-item" routerLink="action/stats" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Statistiques</span>
+                        </a>
+                    </li>
+
+
+                    <li>
                         <a class="dropdown-item" routerLink="risque" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>Risque</span>

@@ -11,6 +11,7 @@ import { ActionService } from './action.service';
 import { ActionComponent } from './action.component';
 import { ActionDetailComponent } from './action-detail.component';
 import { ActionUpdateComponent } from './action-update.component';
+import { ActionStatsComponent } from './action-stats.component';
 
 @Injectable({ providedIn: 'root' })
 export class ActionResolve implements Resolve<IAction> {
@@ -42,6 +43,18 @@ export const actionRoute: Routes = [
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
       pageTitle: 'Actions',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'stats',
+    component: ActionStatsComponent,
+    resolve: {
+      action: ActionResolve,
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'Actions Statistiques',
     },
     canActivate: [UserRouteAccessService],
   },
