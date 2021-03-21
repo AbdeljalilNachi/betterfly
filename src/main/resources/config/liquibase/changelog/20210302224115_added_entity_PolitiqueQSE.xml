@@ -15,9 +15,6 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="processus" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="date" type="date">
                 <constraints nullable="true" />
             </column>
@@ -30,7 +27,10 @@
             <column name="vigueur" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="indicateur" type="varchar(255)">
+            <column name="processus_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="indicateur_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -56,12 +56,10 @@
                   separator=";"
                   tableName="politique_qse">
             <column name="id" type="numeric"/>
-            <column name="processus" type="string"/>
             <column name="date" type="date"/>
             <column name="axe_politique_qse" type="string"/>
             <column name="objectif_qse" type="string"/>
             <column name="vigueur" type="boolean"/>
-            <column name="indicateur" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

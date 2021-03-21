@@ -134,7 +134,7 @@ public class ConstatResource {
         constatRepository.deleteById(id);
         constatSearchRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
-    } 
+    }
 
     /**
      * {@code SEARCH  /_search/constats?query=:query} : search for the constat corresponding

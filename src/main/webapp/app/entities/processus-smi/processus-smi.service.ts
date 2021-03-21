@@ -15,7 +15,6 @@ type EntityArrayResponseType = HttpResponse<IProcessusSMI[]>;
 @Injectable({ providedIn: 'root' })
 export class ProcessusSMIService {
   public resourceUrl = SERVER_API_URL + 'api/processus-smis';
-  public resourceUrlNames = SERVER_API_URL + 'api/processus-names';
   public resourceSearchUrl = SERVER_API_URL + 'api/_search/processus-smis';
 
   constructor(protected http: HttpClient) {}
@@ -46,12 +45,6 @@ export class ProcessusSMIService {
       .get<IProcessusSMI[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
-
-  getProcs(): Observable<String[]> {
-    
-    return this.http.get< String[]>(`${this.resourceUrlNames}`);
-  }
-
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });

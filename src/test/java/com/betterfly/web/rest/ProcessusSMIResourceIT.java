@@ -23,7 +23,6 @@ import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,9 +52,6 @@ public class ProcessusSMIResourceIT {
     private static final Integer DEFAULT_VERSION = 1;
     private static final Integer UPDATED_VERSION = 2;
 
-    private static final String DEFAULT_PILOTE = "AAAAAAAAAA";
-    private static final String UPDATED_PILOTE = "BBBBBBBBBB";
-
     private static final String DEFAULT_FINALITE = "AAAAAAAAAA";
     private static final String UPDATED_FINALITE = "BBBBBBBBBB";
 
@@ -72,9 +68,6 @@ public class ProcessusSMIResourceIT {
 
     @Autowired
     private ProcessusSMIRepository processusSMIRepository;
-
-    @Mock
-    private ProcessusSMIRepository processusSMIRepositoryMock;
 
     /**
      * This repository is mocked in the com.betterfly.repository.search test package.
@@ -103,7 +96,6 @@ public class ProcessusSMIResourceIT {
             .processus(DEFAULT_PROCESSUS)
             .date(DEFAULT_DATE)
             .version(DEFAULT_VERSION)
-            .pilote(DEFAULT_PILOTE)
             .finalite(DEFAULT_FINALITE)
             .ficheProcessus(DEFAULT_FICHE_PROCESSUS)
             .ficheProcessusContentType(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE)
@@ -122,7 +114,6 @@ public class ProcessusSMIResourceIT {
             .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .version(UPDATED_VERSION)
-            .pilote(UPDATED_PILOTE)
             .finalite(UPDATED_FINALITE)
             .ficheProcessus(UPDATED_FICHE_PROCESSUS)
             .ficheProcessusContentType(UPDATED_FICHE_PROCESSUS_CONTENT_TYPE)
@@ -153,7 +144,6 @@ public class ProcessusSMIResourceIT {
         assertThat(testProcessusSMI.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testProcessusSMI.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testProcessusSMI.getVersion()).isEqualTo(DEFAULT_VERSION);
-        assertThat(testProcessusSMI.getPilote()).isEqualTo(DEFAULT_PILOTE);
         assertThat(testProcessusSMI.getFinalite()).isEqualTo(DEFAULT_FINALITE);
         assertThat(testProcessusSMI.getFicheProcessus()).isEqualTo(DEFAULT_FICHE_PROCESSUS);
         assertThat(testProcessusSMI.getFicheProcessusContentType()).isEqualTo(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE);
@@ -201,7 +191,6 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION)))
-            .andExpect(jsonPath("$.[*].pilote").value(hasItem(DEFAULT_PILOTE)))
             .andExpect(jsonPath("$.[*].finalite").value(hasItem(DEFAULT_FINALITE)))
             .andExpect(jsonPath("$.[*].ficheProcessusContentType").value(hasItem(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].ficheProcessus").value(hasItem(Base64Utils.encodeToString(DEFAULT_FICHE_PROCESSUS))))
@@ -209,26 +198,6 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllProcessusSMISWithEagerRelationshipsIsEnabled() throws Exception {
-        when(processusSMIRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProcessusSMIMockMvc.perform(get("/api/processus-smis?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(processusSMIRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllProcessusSMISWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(processusSMIRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProcessusSMIMockMvc.perform(get("/api/processus-smis?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(processusSMIRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getProcessusSMI() throws Exception {
@@ -243,7 +212,6 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.version").value(DEFAULT_VERSION))
-            .andExpect(jsonPath("$.pilote").value(DEFAULT_PILOTE))
             .andExpect(jsonPath("$.finalite").value(DEFAULT_FINALITE))
             .andExpect(jsonPath("$.ficheProcessusContentType").value(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE))
             .andExpect(jsonPath("$.ficheProcessus").value(Base64Utils.encodeToString(DEFAULT_FICHE_PROCESSUS)))
@@ -274,7 +242,6 @@ public class ProcessusSMIResourceIT {
             .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .version(UPDATED_VERSION)
-            .pilote(UPDATED_PILOTE)
             .finalite(UPDATED_FINALITE)
             .ficheProcessus(UPDATED_FICHE_PROCESSUS)
             .ficheProcessusContentType(UPDATED_FICHE_PROCESSUS_CONTENT_TYPE)
@@ -293,7 +260,6 @@ public class ProcessusSMIResourceIT {
         assertThat(testProcessusSMI.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testProcessusSMI.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testProcessusSMI.getVersion()).isEqualTo(UPDATED_VERSION);
-        assertThat(testProcessusSMI.getPilote()).isEqualTo(UPDATED_PILOTE);
         assertThat(testProcessusSMI.getFinalite()).isEqualTo(UPDATED_FINALITE);
         assertThat(testProcessusSMI.getFicheProcessus()).isEqualTo(UPDATED_FICHE_PROCESSUS);
         assertThat(testProcessusSMI.getFicheProcessusContentType()).isEqualTo(UPDATED_FICHE_PROCESSUS_CONTENT_TYPE);
@@ -361,7 +327,6 @@ public class ProcessusSMIResourceIT {
             .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION)))
-            .andExpect(jsonPath("$.[*].pilote").value(hasItem(DEFAULT_PILOTE)))
             .andExpect(jsonPath("$.[*].finalite").value(hasItem(DEFAULT_FINALITE)))
             .andExpect(jsonPath("$.[*].ficheProcessusContentType").value(hasItem(DEFAULT_FICHE_PROCESSUS_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].ficheProcessus").value(hasItem(Base64Utils.encodeToString(DEFAULT_FICHE_PROCESSUS))))

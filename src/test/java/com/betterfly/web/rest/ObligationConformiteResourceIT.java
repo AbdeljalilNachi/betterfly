@@ -69,11 +69,8 @@ public class ObligationConformiteResourceIT {
     private static final String DEFAULT_OBSERVATION = "AAAAAAAAAA";
     private static final String UPDATED_OBSERVATION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
-    private static final String DEFAULT_O_RIGINE = "AAAAAAAAAA";
-    private static final String UPDATED_O_RIGINE = "BBBBBBBBBB";
+    private static final String DEFAULT_ORIGINE = "AAAAAAAAAA";
+    private static final String UPDATED_ORIGINE = "BBBBBBBBBB";
 
     @Autowired
     private ObligationConformiteRepository obligationConformiteRepository;
@@ -111,8 +108,7 @@ public class ObligationConformiteResourceIT {
             .conforme(DEFAULT_CONFORME)
             .statut(DEFAULT_STATUT)
             .observation(DEFAULT_OBSERVATION)
-            .processus(DEFAULT_PROCESSUS)
-            .oRIGINE(DEFAULT_O_RIGINE);
+            .origine(DEFAULT_ORIGINE);
         return obligationConformite;
     }
     /**
@@ -132,8 +128,7 @@ public class ObligationConformiteResourceIT {
             .conforme(UPDATED_CONFORME)
             .statut(UPDATED_STATUT)
             .observation(UPDATED_OBSERVATION)
-            .processus(UPDATED_PROCESSUS)
-            .oRIGINE(UPDATED_O_RIGINE);
+            .origine(UPDATED_ORIGINE);
         return obligationConformite;
     }
 
@@ -165,8 +160,7 @@ public class ObligationConformiteResourceIT {
         assertThat(testObligationConformite.isConforme()).isEqualTo(DEFAULT_CONFORME);
         assertThat(testObligationConformite.getStatut()).isEqualTo(DEFAULT_STATUT);
         assertThat(testObligationConformite.getObservation()).isEqualTo(DEFAULT_OBSERVATION);
-        assertThat(testObligationConformite.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
-        assertThat(testObligationConformite.getoRIGINE()).isEqualTo(DEFAULT_O_RIGINE);
+        assertThat(testObligationConformite.getOrigine()).isEqualTo(DEFAULT_ORIGINE);
 
         // Validate the ObligationConformite in Elasticsearch
         verify(mockObligationConformiteSearchRepository, times(1)).save(testObligationConformite);
@@ -215,8 +209,7 @@ public class ObligationConformiteResourceIT {
             .andExpect(jsonPath("$.[*].conforme").value(hasItem(DEFAULT_CONFORME.booleanValue())))
             .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT)))
             .andExpect(jsonPath("$.[*].observation").value(hasItem(DEFAULT_OBSERVATION)))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
-            .andExpect(jsonPath("$.[*].oRIGINE").value(hasItem(DEFAULT_O_RIGINE)));
+            .andExpect(jsonPath("$.[*].origine").value(hasItem(DEFAULT_ORIGINE)));
     }
     
     @Test
@@ -239,8 +232,7 @@ public class ObligationConformiteResourceIT {
             .andExpect(jsonPath("$.conforme").value(DEFAULT_CONFORME.booleanValue()))
             .andExpect(jsonPath("$.statut").value(DEFAULT_STATUT))
             .andExpect(jsonPath("$.observation").value(DEFAULT_OBSERVATION))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
-            .andExpect(jsonPath("$.oRIGINE").value(DEFAULT_O_RIGINE));
+            .andExpect(jsonPath("$.origine").value(DEFAULT_ORIGINE));
     }
     @Test
     @Transactional
@@ -272,8 +264,7 @@ public class ObligationConformiteResourceIT {
             .conforme(UPDATED_CONFORME)
             .statut(UPDATED_STATUT)
             .observation(UPDATED_OBSERVATION)
-            .processus(UPDATED_PROCESSUS)
-            .oRIGINE(UPDATED_O_RIGINE);
+            .origine(UPDATED_ORIGINE);
 
         restObligationConformiteMockMvc.perform(put("/api/obligation-conformites")
             .contentType(MediaType.APPLICATION_JSON)
@@ -293,8 +284,7 @@ public class ObligationConformiteResourceIT {
         assertThat(testObligationConformite.isConforme()).isEqualTo(UPDATED_CONFORME);
         assertThat(testObligationConformite.getStatut()).isEqualTo(UPDATED_STATUT);
         assertThat(testObligationConformite.getObservation()).isEqualTo(UPDATED_OBSERVATION);
-        assertThat(testObligationConformite.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
-        assertThat(testObligationConformite.getoRIGINE()).isEqualTo(UPDATED_O_RIGINE);
+        assertThat(testObligationConformite.getOrigine()).isEqualTo(UPDATED_ORIGINE);
 
         // Validate the ObligationConformite in Elasticsearch
         verify(mockObligationConformiteSearchRepository, times(1)).save(testObligationConformite);
@@ -363,7 +353,6 @@ public class ObligationConformiteResourceIT {
             .andExpect(jsonPath("$.[*].conforme").value(hasItem(DEFAULT_CONFORME.booleanValue())))
             .andExpect(jsonPath("$.[*].statut").value(hasItem(DEFAULT_STATUT)))
             .andExpect(jsonPath("$.[*].observation").value(hasItem(DEFAULT_OBSERVATION)))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
-            .andExpect(jsonPath("$.[*].oRIGINE").value(hasItem(DEFAULT_O_RIGINE)));
+            .andExpect(jsonPath("$.[*].origine").value(hasItem(DEFAULT_ORIGINE)));
     }
 }

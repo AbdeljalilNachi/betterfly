@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-result-indicateurs-heading">Create or edit a Result Indicateurs</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_annee">Annee</label>
+                    <input type="number" class="form-control" name="annee" id="field_annee"
+                           formControlName="annee"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_observation">Observation</label>
+                    <input type="text" class="form-control" name="observation" id="field_observation"
+                           formControlName="observation"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_indicateur">Indicateur</label>
+                    <select class="form-control" id="field_indicateur" name="indicateur" formControlName="indicateur">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="indicateurSMIOption.id === editForm.get('indicateur')!.value?.id ? editForm.get('indicateur')!.value : indicateurSMIOption" *ngFor="let indicateurSMIOption of indicateursmis; trackBy: trackById">{{ indicateurSMIOption.indicateur }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

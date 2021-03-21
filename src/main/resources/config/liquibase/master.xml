@@ -30,8 +30,31 @@
     <include file="config/liquibase/changelog/20210302225215_added_entity_ProcessusSMI.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210302225315_added_entity_ResultatIndicateur.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210302225415_added_entity_IndicateurSMI.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318142217_added_entity_ResultIndicateurs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318142917_added_entity_Audit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318143017_added_entity_ConstatAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318143117_added_entity_PlanificationRDD.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318143217_added_entity_Document.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210302223915_added_entity_constraints_AnalyseSWOT.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224015_added_entity_constraints_BesoinPI.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224115_added_entity_constraints_PolitiqueQSE.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224215_added_entity_constraints_Risque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224315_added_entity_constraints_AnalyseSST.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224415_added_entity_constraints_Constat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224615_added_entity_constraints_NonConformite.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224715_added_entity_constraints_Objectif.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224815_added_entity_constraints_Reclamation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302224915_added_entity_constraints_ObligationConformite.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225015_added_entity_constraints_AnalyseEnvirommentale.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225115_added_entity_constraints_AutreAction.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210302225215_added_entity_constraints_ProcessusSMI.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225315_added_entity_constraints_ResultatIndicateur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210302225415_added_entity_constraints_IndicateurSMI.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318142217_added_entity_constraints_ResultIndicateurs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318142917_added_entity_constraints_Audit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318143017_added_entity_constraints_ConstatAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210318143217_added_entity_constraints_Document.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

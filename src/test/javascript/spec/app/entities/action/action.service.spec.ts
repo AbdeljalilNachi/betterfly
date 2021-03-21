@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { ActionService } from 'app/entities/action/action.service';
 import { IAction, Action } from 'app/shared/model/action.model';
+import { TypeAction } from 'app/shared/model/enumerations/type-action.model';
 import { Statut } from 'app/shared/model/enumerations/statut.model';
 import { Efficace } from 'app/shared/model/enumerations/efficace.model';
 
@@ -30,7 +31,7 @@ describe('Service Tests', () => {
         0,
         currentDate,
         'AAAAAAA',
-        'AAAAAAA',
+        TypeAction.ACTION_FACE_AU_RISQUE,
         currentDate,
         'AAAAAAA',
         false,

@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IConstat, Constat } from 'app/shared/model/constat.model';
 import { ConstatService } from './constat.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
-
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
 
 @Component({
   selector: 'jhi-constat-update',
@@ -16,7 +16,8 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class ConstatUpdateComponent implements OnInit {
   isSaving = false;
-  pros: String[] | null = null;
+  actions: IAction[] = [];
+
   editForm = this.fb.group({
     id: [],
     processus: [],
@@ -24,16 +25,21 @@ export class ConstatUpdateComponent implements OnInit {
     constat: [],
     type: [],
     origine: [],
+    action: [],
   });
 
-  constructor(protected constatService: ConstatService, 
-    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected constatService: ConstatService,
+    protected actionService: ActionService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ constat }) => {
       this.updateForm(constat);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
     });
   }
 
@@ -45,6 +51,7 @@ export class ConstatUpdateComponent implements OnInit {
       constat: constat.constat,
       type: constat.type,
       origine: constat.origine,
+      action: constat.action,
     });
   }
 
@@ -71,6 +78,7 @@ export class ConstatUpdateComponent implements OnInit {
       constat: this.editForm.get(['constat'])!.value,
       type: this.editForm.get(['type'])!.value,
       origine: this.editForm.get(['origine'])!.value,
+      action: this.editForm.get(['action'])!.value,
     };
   }
 
@@ -90,13 +98,7 @@ export class ConstatUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: IAction): any {
+    return item.id;
   }
 }

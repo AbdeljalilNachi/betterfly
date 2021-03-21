@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ besoinPI.processus }}</span>
-                </dd>
                 <dt><span>Date Identification</span></dt>
                 <dd>
                     <span>{{ besoinPI.dateIdentification }}</span>
@@ -32,18 +28,24 @@
                 <dd>
                     <span>{{ besoinPI.afficher }}</span>
                 </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="besoinPI.processus">
+                        <a [routerLink]="['/processus-smi', besoinPI.processus?.id, 'view']">{{ besoinPI.processus?.processus }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/besoin-pi', besoinPI.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

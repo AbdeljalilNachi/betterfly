@@ -2,10 +2,6 @@
   "name": "BesoinPI",
   "fields": [
     {
-      "fieldName": "processus",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "dateIdentification",
       "fieldType": "LocalDate"
     },
@@ -26,7 +22,15 @@
       "fieldType": "Boolean"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "processusSMI",
+      "otherEntityRelationshipName": "besoinPI",
+      "relationshipName": "processus",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210302224015",
   "entityTableName": "besoin_pi",
   "dto": "no",
@@ -37,5 +41,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
 }

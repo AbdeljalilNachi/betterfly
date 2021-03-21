@@ -39,9 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class AutreActionResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final String DEFAULT_ORIGINE_ACTION = "AAAAAAAAAA";
     private static final String UPDATED_ORIGINE_ACTION = "BBBBBBBBBB";
 
@@ -75,7 +72,6 @@ public class AutreActionResourceIT {
      */
     public static AutreAction createEntity(EntityManager em) {
         AutreAction autreAction = new AutreAction()
-            .processus(DEFAULT_PROCESSUS)
             .origineAction(DEFAULT_ORIGINE_ACTION)
             .origine(DEFAULT_ORIGINE);
         return autreAction;
@@ -88,7 +84,6 @@ public class AutreActionResourceIT {
      */
     public static AutreAction createUpdatedEntity(EntityManager em) {
         AutreAction autreAction = new AutreAction()
-            .processus(UPDATED_PROCESSUS)
             .origineAction(UPDATED_ORIGINE_ACTION)
             .origine(UPDATED_ORIGINE);
         return autreAction;
@@ -113,7 +108,6 @@ public class AutreActionResourceIT {
         List<AutreAction> autreActionList = autreActionRepository.findAll();
         assertThat(autreActionList).hasSize(databaseSizeBeforeCreate + 1);
         AutreAction testAutreAction = autreActionList.get(autreActionList.size() - 1);
-        assertThat(testAutreAction.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testAutreAction.getOrigineAction()).isEqualTo(DEFAULT_ORIGINE_ACTION);
         assertThat(testAutreAction.getOrigine()).isEqualTo(DEFAULT_ORIGINE);
 
@@ -155,7 +149,6 @@ public class AutreActionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(autreAction.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].origineAction").value(hasItem(DEFAULT_ORIGINE_ACTION)))
             .andExpect(jsonPath("$.[*].origine").value(hasItem(DEFAULT_ORIGINE)));
     }
@@ -171,7 +164,6 @@ public class AutreActionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(autreAction.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.origineAction").value(DEFAULT_ORIGINE_ACTION))
             .andExpect(jsonPath("$.origine").value(DEFAULT_ORIGINE));
     }
@@ -196,7 +188,6 @@ public class AutreActionResourceIT {
         // Disconnect from session so that the updates on updatedAutreAction are not directly saved in db
         em.detach(updatedAutreAction);
         updatedAutreAction
-            .processus(UPDATED_PROCESSUS)
             .origineAction(UPDATED_ORIGINE_ACTION)
             .origine(UPDATED_ORIGINE);
 
@@ -209,7 +200,6 @@ public class AutreActionResourceIT {
         List<AutreAction> autreActionList = autreActionRepository.findAll();
         assertThat(autreActionList).hasSize(databaseSizeBeforeUpdate);
         AutreAction testAutreAction = autreActionList.get(autreActionList.size() - 1);
-        assertThat(testAutreAction.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testAutreAction.getOrigineAction()).isEqualTo(UPDATED_ORIGINE_ACTION);
         assertThat(testAutreAction.getOrigine()).isEqualTo(UPDATED_ORIGINE);
 
@@ -271,7 +261,6 @@ public class AutreActionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(autreAction.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].origineAction").value(hasItem(DEFAULT_ORIGINE_ACTION)))
             .andExpect(jsonPath("$.[*].origine").value(hasItem(DEFAULT_ORIGINE)));
     }

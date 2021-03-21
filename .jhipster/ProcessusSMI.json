@@ -14,10 +14,6 @@
       "fieldType": "Integer"
     },
     {
-      "fieldName": "pilote",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "finalite",
       "fieldType": "String"
     },
@@ -38,12 +34,18 @@
   ],
   "relationships": [
     {
-      "relationshipName": "indicateurs",
-      "otherEntityName": "indicateurSMI",
-      "relationshipType": "many-to-many",
-      "otherEntityField": "indicateur",
-      "ownerSide": true,
-      "otherEntityRelationshipName": "processusSMI"
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "processusSMI",
+      "relationshipName": "pilote",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "audit",
+      "otherEntityRelationshipName": "procs",
+      "relationshipName": "audit",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20210302225215",
@@ -56,7 +58,7 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*",
+  "applications": ["betterFly"],
   "searchEngine": "elasticsearch",
   "databaseType": "sql"
 }

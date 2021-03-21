@@ -11,7 +11,8 @@
     },
     {
       "fieldName": "type",
-      "fieldType": "String"
+      "fieldType": "TypeAction",
+      "fieldValues": "ACTION_FACE_AU_RISQUE,ACTION_CORRECTIVE,TRAITEMENT_RAPIDE,ACTION_POUR_ATTEINDRE_OBJECTIF,AMELIORATION,PROGRAMME_ENVIRONNEMENTAL,PROGRAMME_SST,PROJET_ENTITE,AUTRES"
     },
     {
       "fieldName": "delai",
@@ -36,7 +37,7 @@
     {
       "fieldName": "statut",
       "fieldType": "Statut",
-      "fieldValues": "EN_COURS,PLANIFIEE"
+      "fieldValues": "EN_COURS,PLANIFIEE,RETARD,REALISEE_EFFICACE,REALISEE_NON_EFFICACE,REALISEE_A_EVALUER"
     },
     {
       "fieldName": "efficace",
@@ -55,7 +56,7 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*",
+  "applications": ["betterFly"],
   "searchEngine": "elasticsearch",
   "databaseType": "sql"
 }

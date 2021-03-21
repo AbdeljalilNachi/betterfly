@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Resultats d'Indicateurs</span>
+        <span>Resultat Indicateurs</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-resultat-indicateur" [routerLink]="['/resultat-indicateur/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Resultat Indicateur
+            Créer un nouveau Resultat Indicateur
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="resultatIndicateurs?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun resultatIndicateur trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="resultatIndicateurs && resultatIndicateurs.length > 0">
@@ -44,7 +44,7 @@
                     <th scope="col"  jhiSortBy="mois"><span>Mois</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="cible"><span>Cible</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="resultat"><span>Resultat</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="indicateur"><span>Indicateur</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="resultIndicateurs.id"><span>Result Indicateurs</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -54,7 +54,11 @@
                     <td>{{ resultatIndicateur.mois }}</td>
                     <td>{{ resultatIndicateur.cible }}</td>
                     <td>{{ resultatIndicateur.resultat }}</td>
-                    <td>{{ resultatIndicateur.indicateur }}</td>
+                    <td>
+                        <div *ngIf="resultatIndicateur.resultIndicateurs">
+                            <a [routerLink]="['/result-indicateurs', resultatIndicateur.resultIndicateurs?.id, 'view']" >{{ resultatIndicateur.resultIndicateurs?.id }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

@@ -13,13 +13,17 @@
     {
       "fieldName": "resultat",
       "fieldType": "Float"
-    },
-    {
-      "fieldName": "indicateur",
-      "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "resultIndicateurs",
+      "otherEntityRelationshipName": "resultats",
+      "relationshipName": "resultIndicateurs",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210302225315",
   "entityTableName": "resultat_indicateur",
   "dto": "no",
@@ -30,5 +34,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
 }

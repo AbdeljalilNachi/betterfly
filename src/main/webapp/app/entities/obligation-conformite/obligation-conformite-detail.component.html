@@ -44,26 +44,38 @@
                 <dd>
                     <span>{{ obligationConformite.observation }}</span>
                 </dd>
+                <dt><span>Origine</span></dt>
+                <dd>
+                    <span>{{ obligationConformite.origine }}</span>
+                </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="obligationConformite.action">
+                        <a [routerLink]="['/action', obligationConformite.action?.id, 'view']">{{ obligationConformite.action?.action }}</a>
+                    </div>
+                </dd>
+                <dt><span>Delegue</span></dt>
+                <dd>
+                    {{ obligationConformite.delegue?.login }}
+                </dd>
                 <dt><span>Processus</span></dt>
                 <dd>
-                    <span>{{ obligationConformite.processus }}</span>
-                </dd>
-                <dt><span>O RIGINE</span></dt>
-                <dd>
-                    <span>{{ obligationConformite.oRIGINE }}</span>
+                    <div *ngIf="obligationConformite.processus">
+                        <a [routerLink]="['/processus-smi', obligationConformite.processus?.id, 'view']">{{ obligationConformite.processus?.processus }}</a>
+                    </div>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/obligation-conformite', obligationConformite.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

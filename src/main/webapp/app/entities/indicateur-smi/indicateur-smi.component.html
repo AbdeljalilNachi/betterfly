@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Indicateurs SMI</span>
+        <span>Indicateur SMIS</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-indicateur-smi" [routerLink]="['/indicateur-smi/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Indicateur SMI
+            Créer un nouveau Indicateur SMI
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="indicateurSMIS?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun indicateurSMIS found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="indicateurSMIS && indicateurSMIS.length > 0">
@@ -41,7 +41,6 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateIdentification"><span>Date Identification</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="indicateur"><span>Indicateur</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="formuleCalcul"><span>Formule Calcul</span> <fa-icon icon="sort"></fa-icon></th>
@@ -51,13 +50,14 @@
                     <th scope="col"  jhiSortBy="periodicite"><span>Periodicite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="responsableCalcul"><span>Responsable Calcul</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="observations"><span>Observations</span> <fa-icon icon="sort"></fa-icon></th>
-                        <th scope="col"></th>
+                    <th scope="col"  jhiSortBy="vigueur"><span>Vigueur</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let indicateurSMI of indicateurSMIS ;trackBy: trackId">
                     <td><a [routerLink]="['/indicateur-smi', indicateurSMI.id, 'view']">{{ indicateurSMI.id }}</a></td>
-                    <td>{{ indicateurSMI.processus }}</td>
                     <td>{{ indicateurSMI.dateIdentification | date:'mediumDate' }}</td>
                     <td>{{ indicateurSMI.indicateur }}</td>
                     <td>{{ indicateurSMI.formuleCalcul }}</td>
@@ -67,8 +67,13 @@
                     <td>{{ indicateurSMI.periodicite }}</td>
                     <td>{{ indicateurSMI.responsableCalcul }}</td>
                     <td>{{ indicateurSMI.observations }}</td>
- 
-                  <td class="text-right">
+                    <td>{{ indicateurSMI.vigueur }}</td>
+                    <td>
+                        <div *ngIf="indicateurSMI.processus">
+                            <a [routerLink]="['/processus-smi', indicateurSMI.processus?.id, 'view']" >{{ indicateurSMI.processus?.processus }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
                                     [routerLink]="['/indicateur-smi', indicateurSMI.id, 'view']"

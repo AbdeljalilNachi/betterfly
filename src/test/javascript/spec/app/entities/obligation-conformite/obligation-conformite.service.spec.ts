@@ -36,7 +36,6 @@ describe('Service Tests', () => {
         false,
         0,
         'AAAAAAA',
-        'AAAAAAA',
         'AAAAAAA'
       );
     });
@@ -92,8 +91,7 @@ describe('Service Tests', () => {
             conforme: true,
             statut: 1,
             observation: 'BBBBBB',
-            processus: 'BBBBBB',
-            oRIGINE: 'BBBBBB',
+            origine: 'BBBBBB',
           },
           elemDefault
         );
@@ -124,8 +122,7 @@ describe('Service Tests', () => {
             conforme: true,
             statut: 1,
             observation: 'BBBBBB',
-            processus: 'BBBBBB',
-            oRIGINE: 'BBBBBB',
+            origine: 'BBBBBB',
           },
           elemDefault
         );

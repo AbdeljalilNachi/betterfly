@@ -5,7 +5,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-non-conformite" [routerLink]="['/non-conformite/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Non Conformite
+            Créer un nouveau Non Conformite
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="nonConformites?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun nonConformite trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="nonConformites && nonConformites.length > 0">
@@ -41,22 +41,36 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="causesPotentielles"><span>Causes Potentielles</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.id"><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="delegue.id"><span>Delegue</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let nonConformite of nonConformites ;trackBy: trackId">
                     <td><a [routerLink]="['/non-conformite', nonConformite.id, 'view']">{{ nonConformite.id }}</a></td>
-                    <td>{{ nonConformite.processus }}</td>
                     <td>{{ nonConformite.date | date:'mediumDate' }}</td>
                     <td>{{ nonConformite.description }}</td>
                     <td>{{ nonConformite.causesPotentielles }}</td>
                     <td>{{ nonConformite.origine }}</td>
+                    <td>
+                        <div *ngIf="nonConformite.action">
+                            <a [routerLink]="['/action', nonConformite.action?.id, 'view']" >{{ nonConformite.action?.action }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ nonConformite.delegue?.login }}
+                    </td>
+                    <td>
+                        <div *ngIf="nonConformite.processus">
+                            <a [routerLink]="['/processus-smi', nonConformite.processus?.id, 'view']" >{{ nonConformite.processus?.processus }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

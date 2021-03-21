@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ objectif.processus }}</span>
-                </dd>
                 <dt><span>Axedelapolitiqueqse</span></dt>
                 <dd>
                     <span>{{ objectif.axedelapolitiqueqse }}</span>
@@ -20,26 +16,44 @@
                 <dd>
                     <span>{{ objectif.objectifqse }}</span>
                 </dd>
-                <dt><span>Indicateur</span></dt>
-                <dd>
-                    <span>{{ objectif.indicateur }}</span>
-                </dd>
                 <dt><span>Origine</span></dt>
                 <dd>
                     <span>{{ objectif.origine }}</span>
+                </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="objectif.action">
+                        <a [routerLink]="['/action', objectif.action?.id, 'view']">{{ objectif.action?.action }}</a>
+                    </div>
+                </dd>
+                <dt><span>Delegue</span></dt>
+                <dd>
+                    {{ objectif.delegue?.login }}
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="objectif.processus">
+                        <a [routerLink]="['/processus-smi', objectif.processus?.id, 'view']">{{ objectif.processus?.processus }}</a>
+                    </div>
+                </dd>
+                <dt><span>Indicateur</span></dt>
+                <dd>
+                    <div *ngIf="objectif.indicateur">
+                        <a [routerLink]="['/indicateur-smi', objectif.indicateur?.id, 'view']">{{ objectif.indicateur?.indicateur }}</a>
+                    </div>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/objectif', objectif.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

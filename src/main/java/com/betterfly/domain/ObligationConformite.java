@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -52,11 +53,20 @@ public class ObligationConformite implements Serializable {
     @Column(name = "observation")
     private String observation;
 
-    @Column(name = "processus")
-    private String processus;
+    @Column(name = "origine")
+    private String origine;
 
-    @Column(name = "o_rigine")
-    private String oRIGINE;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "obligationConformites", allowSetters = true)
+    private Action action;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "obligationConformites", allowSetters = true)
+    private User delegue;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "obligationConformites", allowSetters = true)
+    private ProcessusSMI processus;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -184,30 +194,56 @@ public class ObligationConformite implements Serializable {
         this.observation = observation;
     }
 
-    public String getProcessus() {
+    public String getOrigine() {
+        return origine;
+    }
+
+    public ObligationConformite origine(String origine) {
+        this.origine = origine;
+        return this;
+    }
+
+    public void setOrigine(String origine) {
+        this.origine = origine;
+    }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public ObligationConformite action(Action action) {
+        this.action = action;
+        return this;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public User getDelegue() {
+        return delegue;
+    }
+
+    public ObligationConformite delegue(User user) {
+        this.delegue = user;
+        return this;
+    }
+
+    public void setDelegue(User user) {
+        this.delegue = user;
+    }
+
+    public ProcessusSMI getProcessus() {
         return processus;
     }
 
-    public ObligationConformite processus(String processus) {
-        this.processus = processus;
+    public ObligationConformite processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
         return this;
     }
 
-    public void setProcessus(String processus) {
-        this.processus = processus;
-    }
-
-    public String getoRIGINE() {
-        return oRIGINE;
-    }
-
-    public ObligationConformite oRIGINE(String oRIGINE) {
-        this.oRIGINE = oRIGINE;
-        return this;
-    }
-
-    public void setoRIGINE(String oRIGINE) {
-        this.oRIGINE = oRIGINE;
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -241,8 +277,7 @@ public class ObligationConformite implements Serializable {
             ", conforme='" + isConforme() + "'" +
             ", statut=" + getStatut() +
             ", observation='" + getObservation() + "'" +
-            ", processus='" + getProcessus() + "'" +
-            ", oRIGINE='" + getoRIGINE() + "'" +
+            ", origine='" + getOrigine() + "'" +
             "}";
     }
 }

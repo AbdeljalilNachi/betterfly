@@ -24,9 +24,6 @@
             <column name="version" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="pilote" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="finalite" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -42,23 +39,18 @@
             <column name="vigueur" type="boolean">
                 <constraints nullable="true" />
             </column>
+            <column name="pilote_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
 
     <changeSet id="20210302225215-1-relations" author="jhipster">
 
-        <createTable tableName="processus_smi_indicateurs">
-            <column name="indicateurs_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="processussmi_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="processussmi_id, indicateurs_id" tableName="processus_smi_indicateurs"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
@@ -79,7 +71,6 @@
             <column name="processus" type="string"/>
             <column name="date" type="date"/>
             <column name="version" type="numeric"/>
-            <column name="pilote" type="string"/>
             <column name="finalite" type="string"/>
             <column name="fiche_processus" type="blob"/>
             <column name="fiche_processus_content_type" type="string"/>

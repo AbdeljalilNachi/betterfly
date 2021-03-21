@@ -9,8 +9,14 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IReclamation, Reclamation } from 'app/shared/model/reclamation.model';
 import { ReclamationService } from './reclamation.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
+type SelectableEntity = IAction | IUser | IProcessusSMI;
 
 @Component({
   selector: 'jhi-reclamation-update',
@@ -18,11 +24,13 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class ReclamationUpdateComponent implements OnInit {
   isSaving = false;
+  actions: IAction[] = [];
+  users: IUser[] = [];
+  processussmis: IProcessusSMI[] = [];
   dateDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
-    processus: [],
     date: [],
     description: [],
     justifiee: [],
@@ -30,28 +38,37 @@ export class ReclamationUpdateComponent implements OnInit {
     piecejointe: [],
     piecejointeContentType: [],
     origine: [],
+    action: [],
+    delegue: [],
+    processus: [],
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected reclamationService: ReclamationService,
+    protected actionService: ActionService,
+    protected userService: UserService,
+    protected processusSMIService: ProcessusSMIService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-    ,
-    private processusSMIService : ProcessusSMIService ) {}
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ reclamation }) => {
       this.updateForm(reclamation);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
   updateForm(reclamation: IReclamation): void {
     this.editForm.patchValue({
       id: reclamation.id,
-      processus: reclamation.processus,
       date: reclamation.date,
       description: reclamation.description,
       justifiee: reclamation.justifiee,
@@ -59,6 +76,9 @@ export class ReclamationUpdateComponent implements OnInit {
       piecejointe: reclamation.piecejointe,
       piecejointeContentType: reclamation.piecejointeContentType,
       origine: reclamation.origine,
+      action: reclamation.action,
+      delegue: reclamation.delegue,
+      processus: reclamation.processus,
     });
   }
 
@@ -96,7 +116,6 @@ export class ReclamationUpdateComponent implements OnInit {
     return {
       ...new Reclamation(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       date: this.editForm.get(['date'])!.value,
       description: this.editForm.get(['description'])!.value,
       justifiee: this.editForm.get(['justifiee'])!.value,
@@ -104,6 +123,9 @@ export class ReclamationUpdateComponent implements OnInit {
       piecejointeContentType: this.editForm.get(['piecejointeContentType'])!.value,
       piecejointe: this.editForm.get(['piecejointe'])!.value,
       origine: this.editForm.get(['origine'])!.value,
+      action: this.editForm.get(['action'])!.value,
+      delegue: this.editForm.get(['delegue'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -123,13 +145,7 @@ export class ReclamationUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }

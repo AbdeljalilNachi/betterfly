@@ -7,9 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IBesoinPI, BesoinPI } from 'app/shared/model/besoin-pi.model';
 import { BesoinPIService } from './besoin-pi.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
-
-
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
 @Component({
   selector: 'jhi-besoin-pi-update',
@@ -17,38 +16,43 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class BesoinPIUpdateComponent implements OnInit {
   isSaving = false;
+  processussmis: IProcessusSMI[] = [];
   dateIdentificationDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
-    processus: [],
     dateIdentification: [],
     piPertinentes: [],
     pertinente: [],
     priseEnCharge: [],
     afficher: [],
+    processus: [],
   });
 
-  constructor(protected besoinPIService: BesoinPIService, 
-    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected besoinPIService: BesoinPIService,
+    protected processusSMIService: ProcessusSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ besoinPI }) => {
       this.updateForm(besoinPI);
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
   updateForm(besoinPI: IBesoinPI): void {
     this.editForm.patchValue({
       id: besoinPI.id,
-      processus: besoinPI.processus,
       dateIdentification: besoinPI.dateIdentification,
       piPertinentes: besoinPI.piPertinentes,
       pertinente: besoinPI.pertinente,
       priseEnCharge: besoinPI.priseEnCharge,
       afficher: besoinPI.afficher,
+      processus: besoinPI.processus,
     });
   }
 
@@ -70,12 +74,12 @@ export class BesoinPIUpdateComponent implements OnInit {
     return {
       ...new BesoinPI(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       dateIdentification: this.editForm.get(['dateIdentification'])!.value,
       piPertinentes: this.editForm.get(['piPertinentes'])!.value,
       pertinente: this.editForm.get(['pertinente'])!.value,
       priseEnCharge: this.editForm.get(['priseEnCharge'])!.value,
       afficher: this.editForm.get(['afficher'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -95,13 +99,7 @@ export class BesoinPIUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: IProcessusSMI): any {
+    return item.id;
   }
 }

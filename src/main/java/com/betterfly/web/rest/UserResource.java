@@ -167,15 +167,6 @@ public class UserResource {
     private boolean onlyContainsAllowedProperties(Pageable pageable) {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
-    
-    
-    @GetMapping("/users-logins")
-    public ResponseEntity<List<String>> getAllUsersLogins() {
-       final List<String> userLogins = userService.getAllManagedUsersLogins();
-        return new ResponseEntity<>(userLogins,  HttpStatus.OK);
-    }
-
-    
 
     /**
      * Gets a list of all roles.

@@ -28,18 +28,24 @@
                 <dd>
                     <span>{{ constat.origine }}</span>
                 </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="constat.action">
+                        <a [routerLink]="['/action', constat.action?.id, 'view']">{{ constat.action?.action }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/constat', constat.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-action-heading">Créer ou mettre à jour Action</h2>
+            <h2 id="jhi-action-heading">Create or edit a Action</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -29,25 +29,23 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
-                    <select class="form-control" name="type" formControlName="statut" id="field_type">
-                            <option value="ACTION FACE AU RISQUE">ACTION FACE AU RISQUE</option>
-                            <option value="ACTION CORRECTIVE">ACTION CORRECTIVE</option>
-                            <option value="TRAITEMENT RAPIDE">TRAITEMENT RAPIDE</option>
-                            <option value="ACTION POUR ATTEINDRE UN OBJECTIF">ACTION POUR ATTEINDRE UN OBJECTIF</option>
-                            <option value="AMÉLIORATION">AMÉLIORATION</option>
-                            <option value="PROGRAMME ENVIRONNEMENTALE">PROGRAMME ENVIRONNEMENTALE</option>
-                            <option value="PROGRAMME SST">PROGRAMME SST</option>
-                            <option value="PROJET D'ENTITÉ">PROJET D'ENTITÉ</option>
-                            <option value="AUTRES">AUTRES</option>
-
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="ACTION_FACE_AU_RISQUE">ACTION_FACE_AU_RISQUE</option>
+                        <option value="ACTION_CORRECTIVE">ACTION_CORRECTIVE</option>
+                        <option value="TRAITEMENT_RAPIDE">TRAITEMENT_RAPIDE</option>
+                        <option value="ACTION_POUR_ATTEINDRE_OBJECTIF">ACTION_POUR_ATTEINDRE_OBJECTIF</option>
+                        <option value="AMELIORATION">AMELIORATION</option>
+                        <option value="PROGRAMME_ENVIRONNEMENTAL">PROGRAMME_ENVIRONNEMENTAL</option>
+                        <option value="PROGRAMME_SST">PROGRAMME_SST</option>
+                        <option value="PROJET_ENTITE">PROJET_ENTITE</option>
+                        <option value="AUTRES">AUTRES</option>
                     </select>
-
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_delai">Delai</label>
                     <div class="input-group">
-                        <input required id="field_delai" type="text" class="form-control" name="delai" ngbDatepicker #delaiDp="ngbDatepicker" formControlName="delai"/>
+                        <input id="field_delai" type="text" class="form-control" name="delai" ngbDatepicker #delaiDp="ngbDatepicker" formControlName="delai"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="delaiDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -73,16 +71,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_efficace">Efficace</label>
-                    <select class="form-control" name="efficace" formControlName="efficace" id="field_efficace">
-                            <option value="EFFICACE">EFFICACE</option>
-                            <option value="NON_EFFICACE">NON_EFFICACE</option>
-                            <option value="A_EVALUER" selected="selected"> A_EVALUER</option>
-                    </select> 
-
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_ressourcesNecessaires">Ressources Necessaires</label>
                     <input type="text" class="form-control" name="ressourcesNecessaires" id="field_ressourcesNecessaires"
                            formControlName="ressourcesNecessaires"/>
@@ -90,16 +78,29 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_statut">Statut</label>
+                    <select class="form-control" name="statut" formControlName="statut" id="field_statut">
+                        <option value="EN_COURS">EN_COURS</option>
+                        <option value="PLANIFIEE">PLANIFIEE</option>
+                        <option value="RETARD">RETARD</option>
+                        <option value="REALISEE_EFFICACE">REALISEE_EFFICACE</option>
+                        <option value="REALISEE_NON_EFFICACE">REALISEE_NON_EFFICACE</option>
+                        <option value="REALISEE_A_EVALUER">REALISEE_A_EVALUER</option>
+                    </select>
+                </div>
 
-                    <input type="text" class="form-control" name="statut" id="field_statut"
-                           formControlName="statut" readonly/>
-
+                <div class="form-group">
+                    <label class="form-control-label" for="field_efficace">Efficace</label>
+                    <select class="form-control" name="efficace" formControlName="efficace" id="field_efficace">
+                        <option value="EFFICACE">EFFICACE</option>
+                        <option value="NON_EFFICACE">NON_EFFICACE</option>
+                        <option value="A_EVALUER">A_EVALUER</option>
+                    </select>
                 </div>
             </div>
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

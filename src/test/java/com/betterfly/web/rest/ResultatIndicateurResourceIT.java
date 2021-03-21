@@ -49,9 +49,6 @@ public class ResultatIndicateurResourceIT {
     private static final Float DEFAULT_RESULTAT = 1F;
     private static final Float UPDATED_RESULTAT = 2F;
 
-    private static final String DEFAULT_INDICATEUR = "AAAAAAAAAA";
-    private static final String UPDATED_INDICATEUR = "BBBBBBBBBB";
-
     @Autowired
     private ResultatIndicateurRepository resultatIndicateurRepository;
 
@@ -81,8 +78,7 @@ public class ResultatIndicateurResourceIT {
         ResultatIndicateur resultatIndicateur = new ResultatIndicateur()
             .mois(DEFAULT_MOIS)
             .cible(DEFAULT_CIBLE)
-            .resultat(DEFAULT_RESULTAT)
-            .indicateur(DEFAULT_INDICATEUR);
+            .resultat(DEFAULT_RESULTAT);
         return resultatIndicateur;
     }
     /**
@@ -95,8 +91,7 @@ public class ResultatIndicateurResourceIT {
         ResultatIndicateur resultatIndicateur = new ResultatIndicateur()
             .mois(UPDATED_MOIS)
             .cible(UPDATED_CIBLE)
-            .resultat(UPDATED_RESULTAT)
-            .indicateur(UPDATED_INDICATEUR);
+            .resultat(UPDATED_RESULTAT);
         return resultatIndicateur;
     }
 
@@ -122,7 +117,6 @@ public class ResultatIndicateurResourceIT {
         assertThat(testResultatIndicateur.getMois()).isEqualTo(DEFAULT_MOIS);
         assertThat(testResultatIndicateur.getCible()).isEqualTo(DEFAULT_CIBLE);
         assertThat(testResultatIndicateur.getResultat()).isEqualTo(DEFAULT_RESULTAT);
-        assertThat(testResultatIndicateur.getIndicateur()).isEqualTo(DEFAULT_INDICATEUR);
 
         // Validate the ResultatIndicateur in Elasticsearch
         verify(mockResultatIndicateurSearchRepository, times(1)).save(testResultatIndicateur);
@@ -164,8 +158,7 @@ public class ResultatIndicateurResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(resultatIndicateur.getId().intValue())))
             .andExpect(jsonPath("$.[*].mois").value(hasItem(DEFAULT_MOIS.toString())))
             .andExpect(jsonPath("$.[*].cible").value(hasItem(DEFAULT_CIBLE.doubleValue())))
-            .andExpect(jsonPath("$.[*].resultat").value(hasItem(DEFAULT_RESULTAT.doubleValue())))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)));
+            .andExpect(jsonPath("$.[*].resultat").value(hasItem(DEFAULT_RESULTAT.doubleValue())));
     }
     
     @Test
@@ -181,8 +174,7 @@ public class ResultatIndicateurResourceIT {
             .andExpect(jsonPath("$.id").value(resultatIndicateur.getId().intValue()))
             .andExpect(jsonPath("$.mois").value(DEFAULT_MOIS.toString()))
             .andExpect(jsonPath("$.cible").value(DEFAULT_CIBLE.doubleValue()))
-            .andExpect(jsonPath("$.resultat").value(DEFAULT_RESULTAT.doubleValue()))
-            .andExpect(jsonPath("$.indicateur").value(DEFAULT_INDICATEUR));
+            .andExpect(jsonPath("$.resultat").value(DEFAULT_RESULTAT.doubleValue()));
     }
     @Test
     @Transactional
@@ -207,8 +199,7 @@ public class ResultatIndicateurResourceIT {
         updatedResultatIndicateur
             .mois(UPDATED_MOIS)
             .cible(UPDATED_CIBLE)
-            .resultat(UPDATED_RESULTAT)
-            .indicateur(UPDATED_INDICATEUR);
+            .resultat(UPDATED_RESULTAT);
 
         restResultatIndicateurMockMvc.perform(put("/api/resultat-indicateurs")
             .contentType(MediaType.APPLICATION_JSON)
@@ -222,7 +213,6 @@ public class ResultatIndicateurResourceIT {
         assertThat(testResultatIndicateur.getMois()).isEqualTo(UPDATED_MOIS);
         assertThat(testResultatIndicateur.getCible()).isEqualTo(UPDATED_CIBLE);
         assertThat(testResultatIndicateur.getResultat()).isEqualTo(UPDATED_RESULTAT);
-        assertThat(testResultatIndicateur.getIndicateur()).isEqualTo(UPDATED_INDICATEUR);
 
         // Validate the ResultatIndicateur in Elasticsearch
         verify(mockResultatIndicateurSearchRepository, times(1)).save(testResultatIndicateur);
@@ -284,7 +274,6 @@ public class ResultatIndicateurResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(resultatIndicateur.getId().intValue())))
             .andExpect(jsonPath("$.[*].mois").value(hasItem(DEFAULT_MOIS.toString())))
             .andExpect(jsonPath("$.[*].cible").value(hasItem(DEFAULT_CIBLE.doubleValue())))
-            .andExpect(jsonPath("$.[*].resultat").value(hasItem(DEFAULT_RESULTAT.doubleValue())))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)));
+            .andExpect(jsonPath("$.[*].resultat").value(hasItem(DEFAULT_RESULTAT.doubleValue())));
     }
 }

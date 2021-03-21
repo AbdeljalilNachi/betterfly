@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ politiqueQSE.processus }}</span>
-                </dd>
                 <dt><span>Date</span></dt>
                 <dd>
                     <span>{{ politiqueQSE.date }}</span>
@@ -28,22 +24,30 @@
                 <dd>
                     <span>{{ politiqueQSE.vigueur }}</span>
                 </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="politiqueQSE.processus">
+                        <a [routerLink]="['/processus-smi', politiqueQSE.processus?.id, 'view']">{{ politiqueQSE.processus?.processus }}</a>
+                    </div>
+                </dd>
                 <dt><span>Indicateur</span></dt>
                 <dd>
-                    <span>{{ politiqueQSE.indicateur }}</span>
+                    <div *ngIf="politiqueQSE.indicateur">
+                        <a [routerLink]="['/indicateur-smi', politiqueQSE.indicateur?.id, 'view']">{{ politiqueQSE.indicateur?.indicateur }}</a>
+                    </div>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/politique-qse', politiqueQSE.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

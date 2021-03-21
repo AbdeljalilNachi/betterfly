@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-indicateur-smi-heading">Créer ou mettre à jour Indicateur SMI</h2>
+            <h2 id="jhi-indicateur-smi-heading">Create or edit a Indicateur SMI</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,16 +12,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_processus">Processus</label>
-                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
-                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_dateIdentification">Date Identification</label>
                     <div class="input-group">
-                        <input required id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
+                        <input id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateIdentificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -30,19 +23,19 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_indicateur">Indicateur</label>
-                    <input required type="text" class="form-control" name="indicateur" id="field_indicateur"
+                    <input type="text" class="form-control" name="indicateur" id="field_indicateur"
                            formControlName="indicateur"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_formuleCalcul">Formule Calcul</label>
-                    <input required type="text" class="form-control" name="formuleCalcul" id="field_formuleCalcul"
+                    <input type="text" class="form-control" name="formuleCalcul" id="field_formuleCalcul"
                            formControlName="formuleCalcul"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_cible">Cible</label>
-                    <input required type="number" class="form-control" name="cible" id="field_cible"
+                    <input type="number" class="form-control" name="cible" id="field_cible"
                            formControlName="cible"/>
                 </div>
 
@@ -54,50 +47,46 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_unite">Unite</label>
-                    <input required type="text" class="form-control" name="unite" id="field_unite"
+                    <input type="text" class="form-control" name="unite" id="field_unite"
                            formControlName="unite"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_periodicite">Periodicite</label>
-                    <input required type="text" class="form-control" name="periodicite" id="field_periodicite"
+                    <input type="text" class="form-control" name="periodicite" id="field_periodicite"
                            formControlName="periodicite"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_responsableCalcul">Responsable Calcul</label>
-                    <input required type="text" class="form-control" name="responsableCalcul" id="field_responsableCalcul"
+                    <input type="text" class="form-control" name="responsableCalcul" id="field_responsableCalcul"
                            formControlName="responsableCalcul"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_observations">Observations</label>
-                    <input  type="text" class="form-control" name="observations" id="field_observations"
+                    <input type="text" class="form-control" name="observations" id="field_observations"
                            formControlName="observations"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_vigueur">Vigueur</label>
-                    <input  type="checkbox" class="form-control" name="vigueur" id="field_vigueur"
+                    <input type="checkbox" class="form-control" name="vigueur" id="field_vigueur"
                            formControlName="vigueur"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_annee">Annee</label>
-                    <input  type="number" class="form-control" name="annee" id="field_annee"
-                           formControlName="annee"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_observation">Observation</label>
-                    <input type="text" class="form-control" name="observation" id="field_observation"
-                           formControlName="observation"/>
+                    <label class="form-control-label" for="field_processus">Processus</label>
+                    <select class="form-control" id="field_processus" name="processus" formControlName="processus">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="processusSMIOption.id === editForm.get('processus')!.value?.id ? editForm.get('processus')!.value : processusSMIOption" *ngFor="let processusSMIOption of processussmis; trackBy: trackById">{{ processusSMIOption.processus }}</option>
+                    </select>
                 </div>
             </div>
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

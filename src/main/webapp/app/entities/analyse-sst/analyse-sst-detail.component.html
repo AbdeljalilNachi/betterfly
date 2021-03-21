@@ -12,10 +12,6 @@
                 <dd>
                     <span>{{ analyseSST.date }}</span>
                 </dd>
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ analyseSST.processus }}</span>
-                </dd>
                 <dt><span>Buisness Unit</span></dt>
                 <dd>
                     <span>{{ analyseSST.buisnessUnit }}</span>
@@ -68,18 +64,34 @@
                 <dd>
                     <span>{{ analyseSST.origine }}</span>
                 </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="analyseSST.action">
+                        <a [routerLink]="['/action', analyseSST.action?.id, 'view']">{{ analyseSST.action?.action }}</a>
+                    </div>
+                </dd>
+                <dt><span>Delegue</span></dt>
+                <dd>
+                    {{ analyseSST.delegue?.login }}
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="analyseSST.processus">
+                        <a [routerLink]="['/processus-smi', analyseSST.processus?.id, 'view']">{{ analyseSST.processus?.processus }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/analyse-sst', analyseSST.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

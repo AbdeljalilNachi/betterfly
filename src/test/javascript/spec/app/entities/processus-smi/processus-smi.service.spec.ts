@@ -25,18 +25,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new ProcessusSMI(
-        0,
-        'AAAAAAA',
-        currentDate,
-        0,
-        'AAAAAAA',
-        'AAAAAAA',
-        'image/png',
-        'AAAAAAA',
-        TypeProcessus.MANAGEMENT,
-        false
-      );
+      elemDefault = new ProcessusSMI(0, 'AAAAAAA', currentDate, 0, 'AAAAAAA', 'image/png', 'AAAAAAA', TypeProcessus.MANAGEMENT, false);
     });
 
     describe('Service methods', () => {
@@ -84,7 +73,6 @@ describe('Service Tests', () => {
             processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             version: 1,
-            pilote: 'BBBBBB',
             finalite: 'BBBBBB',
             ficheProcessus: 'BBBBBB',
             type: 'BBBBBB',
@@ -113,7 +101,6 @@ describe('Service Tests', () => {
             processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             version: 1,
-            pilote: 'BBBBBB',
             finalite: 'BBBBBB',
             ficheProcessus: 'BBBBBB',
             type: 'BBBBBB',

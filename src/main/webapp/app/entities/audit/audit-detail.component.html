@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="audit">
+            <h2><span>Audit</span> {{ audit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date Audit</span></dt>
+                <dd>
+                    <span>{{ audit.dateAudit }}</span>
+                </dd>
+                <dt><span>Type Audit</span></dt>
+                <dd>
+                    <span>{{ audit.typeAudit }}</span>
+                </dd>
+                <dt><span>Auditeur</span></dt>
+                <dd>
+                    <span>{{ audit.auditeur }}</span>
+                </dd>
+                <dt><span>Standard</span></dt>
+                <dd>
+                    <span>{{ audit.standard }}</span>
+                </dd>
+                <dt><span>Statut</span></dt>
+                <dd>
+                    <span>{{ audit.statut }}</span>
+                </dd>
+                <dt><span>Conclusion</span></dt>
+                <dd>
+                    <span>{{ audit.conclusion }}</span>
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="audit.processus">
+                        <a [routerLink]="['/processus-smi', audit.processus?.id, 'view']">{{ audit.processus?.processus }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/audit', audit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

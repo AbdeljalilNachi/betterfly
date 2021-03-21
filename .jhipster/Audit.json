@@ -1,0 +1,59 @@
+{
+  "name": "Audit",
+  "fields": [
+    {
+      "fieldName": "dateAudit",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "typeAudit",
+      "fieldType": "TypeAudit",
+      "fieldValues": "Interne,Externe"
+    },
+    {
+      "fieldName": "auditeur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "standard",
+      "fieldType": "Standard",
+      "fieldValues": "ISO9001,ISO14001,ISO45001"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutAudit",
+      "fieldValues": "Retard,REALISE,PLANIFIE"
+    },
+    {
+      "fieldName": "conclusion",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "processusSMI",
+      "otherEntityRelationshipName": "audit",
+      "relationshipName": "procs"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "processusSMI",
+      "otherEntityRelationshipName": "audit",
+      "relationshipName": "processus",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210318142917",
+  "entityTableName": "audit",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
+}

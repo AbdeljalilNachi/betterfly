@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -27,9 +28,6 @@ public class Risque implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @Column(name = "processus")
-    private String processus;
 
     @Column(name = "date_identification")
     private LocalDate dateIdentification;
@@ -68,6 +66,18 @@ public class Risque implements Serializable {
     @Column(name = "origine")
     private String origine;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "risques", allowSetters = true)
+    private Action action;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "risques", allowSetters = true)
+    private User delegue;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "risques", allowSetters = true)
+    private ProcessusSMI processus;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -75,19 +85,6 @@ public class Risque implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public Risque processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public LocalDate getDateIdentification() {
@@ -232,6 +229,45 @@ public class Risque implements Serializable {
     public void setOrigine(String origine) {
         this.origine = origine;
     }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public Risque action(Action action) {
+        this.action = action;
+        return this;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public User getDelegue() {
+        return delegue;
+    }
+
+    public Risque delegue(User user) {
+        this.delegue = user;
+        return this;
+    }
+
+    public void setDelegue(User user) {
+        this.delegue = user;
+    }
+
+    public ProcessusSMI getProcessus() {
+        return processus;
+    }
+
+    public Risque processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+        return this;
+    }
+
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -255,7 +291,6 @@ public class Risque implements Serializable {
     public String toString() {
         return "Risque{" +
             "id=" + getId() +
-            ", processus='" + getProcessus() + "'" +
             ", dateIdentification='" + getDateIdentification() + "'" +
             ", description='" + getDescription() + "'" +
             ", causePotentielle='" + getCausePotentielle() + "'" +

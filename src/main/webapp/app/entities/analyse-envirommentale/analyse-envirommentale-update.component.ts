@@ -7,8 +7,14 @@ import { Observable } from 'rxjs';
 
 import { IAnalyseEnvirommentale, AnalyseEnvirommentale } from 'app/shared/model/analyse-envirommentale.model';
 import { AnalyseEnvirommentaleService } from './analyse-envirommentale.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
+type SelectableEntity = IAction | IUser | IProcessusSMI;
 
 @Component({
   selector: 'jhi-analyse-envirommentale-update',
@@ -16,12 +22,14 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
   isSaving = false;
+  actions: IAction[] = [];
+  users: IUser[] = [];
+  processussmis: IProcessusSMI[] = [];
   dateDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
     date: [],
-    processus: [],
     businessUnit: [],
     activite: [],
     aspectEnvironnemental: [],
@@ -35,19 +43,29 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
     criticite: [],
     maitriseExistante: [],
     origine: [],
+    action: [],
+    delegue: [],
+    processus: [],
   });
 
   constructor(
     protected analyseEnvirommentaleService: AnalyseEnvirommentaleService,
+    protected actionService: ActionService,
+    protected userService: UserService,
+    protected processusSMIService: ProcessusSMIService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-    ,
-    private processusSMIService : ProcessusSMIService ) {}
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ analyseEnvirommentale }) => {
       this.updateForm(analyseEnvirommentale);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
@@ -55,7 +73,6 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: analyseEnvirommentale.id,
       date: analyseEnvirommentale.date,
-      processus: analyseEnvirommentale.processus,
       businessUnit: analyseEnvirommentale.businessUnit,
       activite: analyseEnvirommentale.activite,
       aspectEnvironnemental: analyseEnvirommentale.aspectEnvironnemental,
@@ -67,9 +84,11 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
       coefficientMaitrise: analyseEnvirommentale.coefficientMaitrise,
       gravite: analyseEnvirommentale.gravite,
       criticite: analyseEnvirommentale.criticite,
-     //  criticite: 5,
       maitriseExistante: analyseEnvirommentale.maitriseExistante,
       origine: analyseEnvirommentale.origine,
+      action: analyseEnvirommentale.action,
+      delegue: analyseEnvirommentale.delegue,
+      processus: analyseEnvirommentale.processus,
     });
   }
 
@@ -92,7 +111,6 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
       ...new AnalyseEnvirommentale(),
       id: this.editForm.get(['id'])!.value,
       date: this.editForm.get(['date'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       businessUnit: this.editForm.get(['businessUnit'])!.value,
       activite: this.editForm.get(['activite'])!.value,
       aspectEnvironnemental: this.editForm.get(['aspectEnvironnemental'])!.value,
@@ -104,10 +122,11 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
       coefficientMaitrise: this.editForm.get(['coefficientMaitrise'])!.value,
       gravite: this.editForm.get(['gravite'])!.value,
       criticite: this.editForm.get(['criticite'])!.value,
-      // criticite: 5,
-
       maitriseExistante: this.editForm.get(['maitriseExistante'])!.value,
       origine: this.editForm.get(['origine'])!.value,
+      action: this.editForm.get(['action'])!.value,
+      delegue: this.editForm.get(['delegue'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -127,14 +146,7 @@ export class AnalyseEnvirommentaleUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
-  }
-
 }

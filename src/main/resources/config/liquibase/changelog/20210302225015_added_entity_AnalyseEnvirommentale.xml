@@ -18,9 +18,6 @@
             <column name="date" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="processus" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="business_unit" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -60,6 +57,15 @@
             <column name="origine" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="action_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="delegue_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="processus_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -84,7 +90,6 @@
                   tableName="analyse_envirommentale">
             <column name="id" type="numeric"/>
             <column name="date" type="date"/>
-            <column name="processus" type="string"/>
             <column name="business_unit" type="string"/>
             <column name="activite" type="string"/>
             <column name="aspect_environnemental" type="string"/>

@@ -10,8 +10,4 @@ export const enum Statut {
   REALISEE_NON_EFFICACE = 'REALISEE_NON_EFFICACE',
 
   REALISEE_A_EVALUER = 'REALISEE_A_EVALUER',
-
-
-
-
 }

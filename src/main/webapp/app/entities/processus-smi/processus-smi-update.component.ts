@@ -9,8 +9,12 @@ import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } 
 import { IProcessusSMI, ProcessusSMI } from 'app/shared/model/processus-smi.model';
 import { ProcessusSMIService } from './processus-smi.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { IAudit } from 'app/shared/model/audit.model';
+import { AuditService } from 'app/entities/audit/audit.service';
 
+type SelectableEntity = IUser | IAudit;
 
 @Component({
   selector: 'jhi-processus-smi-update',
@@ -18,38 +22,41 @@ import { UserService } from 'app/core/user/user.service';
 })
 export class ProcessusSMIUpdateComponent implements OnInit {
   isSaving = false;
+  users: IUser[] = [];
+  audits: IAudit[] = [];
   dateDp: any;
-  users: String[] | null = null;
-
-
 
   editForm = this.fb.group({
     id: [],
     processus: [],
     date: [],
     version: [],
-    pilote: [],
     finalite: [],
     ficheProcessus: [],
     ficheProcessusContentType: [],
     type: [],
     vigueur: [],
-  
+    pilote: [],
+    audit: [],
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected processusSMIService: ProcessusSMIService,
+    protected userService: UserService,
+    protected auditService: AuditService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
-    private userService: UserService
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.loadAll();
     this.activatedRoute.data.subscribe(({ processusSMI }) => {
       this.updateForm(processusSMI);
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.auditService.query().subscribe((res: HttpResponse<IAudit[]>) => (this.audits = res.body || []));
     });
   }
 
@@ -59,12 +66,13 @@ export class ProcessusSMIUpdateComponent implements OnInit {
       processus: processusSMI.processus,
       date: processusSMI.date,
       version: processusSMI.version,
-      pilote: processusSMI.pilote,
       finalite: processusSMI.finalite,
       ficheProcessus: processusSMI.ficheProcessus,
       ficheProcessusContentType: processusSMI.ficheProcessusContentType,
       type: processusSMI.type,
       vigueur: processusSMI.vigueur,
+      pilote: processusSMI.pilote,
+      audit: processusSMI.audit,
     });
   }
 
@@ -105,12 +113,13 @@ export class ProcessusSMIUpdateComponent implements OnInit {
       processus: this.editForm.get(['processus'])!.value,
       date: this.editForm.get(['date'])!.value,
       version: this.editForm.get(['version'])!.value,
-      pilote: this.editForm.get(['pilote'])!.value,
       finalite: this.editForm.get(['finalite'])!.value,
       ficheProcessusContentType: this.editForm.get(['ficheProcessusContentType'])!.value,
       ficheProcessus: this.editForm.get(['ficheProcessus'])!.value,
       type: this.editForm.get(['type'])!.value,
       vigueur: this.editForm.get(['vigueur'])!.value,
+      pilote: this.editForm.get(['pilote'])!.value,
+      audit: this.editForm.get(['audit'])!.value,
     };
   }
 
@@ -130,18 +139,7 @@ export class ProcessusSMIUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.userService .getLogins()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
-
-  private onSuccessLogins(users: String[] | null): void {
-    this.users = users;
-  }
-
-
-
-
-
 }

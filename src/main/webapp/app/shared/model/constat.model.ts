@@ -1,3 +1,5 @@
+import { IAction } from 'app/shared/model/action.model';
+
 export interface IConstat {
   id?: number;
   processus?: string;
@@ -5,6 +7,7 @@ export interface IConstat {
   constat?: string;
   type?: string;
   origine?: string;
+  action?: IAction;
 }
 
 export class Constat implements IConstat {
@@ -14,6 +17,7 @@ export class Constat implements IConstat {
     public audit?: string,
     public constat?: string,
     public type?: string,
-    public origine?: string
+    public origine?: string,
+    public action?: IAction
   ) {}
 }

@@ -7,8 +7,14 @@ import { Observable } from 'rxjs';
 
 import { IRisque, Risque } from 'app/shared/model/risque.model';
 import { RisqueService } from './risque.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
-// import { ActionService } from 'app/entities/action/action.service.ts';
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
+
+type SelectableEntity = IAction | IUser | IProcessusSMI;
 
 @Component({
   selector: 'jhi-risque-update',
@@ -16,14 +22,13 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class RisqueUpdateComponent implements OnInit {
   isSaving = false;
+  actions: IAction[] = [];
+  users: IUser[] = [];
+  processussmis: IProcessusSMI[] = [];
   dateIdentificationDp: any;
-  pros: String[] | null = null;
-  // actions: String[] | null = null;
-
 
   editForm = this.fb.group({
     id: [],
-    processus: [],
     dateIdentification: [],
     description: [],
     causePotentielle: [],
@@ -35,26 +40,35 @@ export class RisqueUpdateComponent implements OnInit {
     traitement: [],
     commentaire: [],
     origine: [],
-  //  action : [],
+    action: [],
+    delegue: [],
+    processus: [],
   });
 
-  constructor(protected risqueService: RisqueService, 
-    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService  , 
-  //  private actionService : ActionService  
-    ) {}
+  constructor(
+    protected risqueService: RisqueService,
+    protected actionService: ActionService,
+    protected userService: UserService,
+    protected processusSMIService: ProcessusSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ risque }) => {
       this.updateForm(risque);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
   updateForm(risque: IRisque): void {
     this.editForm.patchValue({
       id: risque.id,
-      processus: risque.processus,
       dateIdentification: risque.dateIdentification,
       description: risque.description,
       causePotentielle: risque.causePotentielle,
@@ -66,7 +80,9 @@ export class RisqueUpdateComponent implements OnInit {
       traitement: risque.traitement,
       commentaire: risque.commentaire,
       origine: risque.origine,
-  //    action :  risque.action 
+      action: risque.action,
+      delegue: risque.delegue,
+      processus: risque.processus,
     });
   }
 
@@ -88,7 +104,6 @@ export class RisqueUpdateComponent implements OnInit {
     return {
       ...new Risque(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       dateIdentification: this.editForm.get(['dateIdentification'])!.value,
       description: this.editForm.get(['description'])!.value,
       causePotentielle: this.editForm.get(['causePotentielle'])!.value,
@@ -100,8 +115,9 @@ export class RisqueUpdateComponent implements OnInit {
       traitement: this.editForm.get(['traitement'])!.value,
       commentaire: this.editForm.get(['commentaire'])!.value,
       origine: this.editForm.get(['origine'])!.value,
-
-   //   action: this.editForm.get(['action'])!.value,
+      action: this.editForm.get(['action'])!.value,
+      delegue: this.editForm.get(['delegue'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -121,18 +137,7 @@ export class RisqueUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  //  this.actionService .getActions()    .subscribe((res: String[]) => this.onSuccessActions(res));
-
-
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
-  }
-
- 
 }

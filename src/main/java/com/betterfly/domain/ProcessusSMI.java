@@ -1,13 +1,12 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.betterfly.domain.enumeration.TypeProcessus;
 
@@ -35,9 +34,6 @@ public class ProcessusSMI implements Serializable {
     @Column(name = "version")
     private Integer version;
 
-    @Column(name = "pilote")
-    private String pilote;
-
     @Column(name = "finalite")
     private String finalite;
 
@@ -55,11 +51,13 @@ public class ProcessusSMI implements Serializable {
     @Column(name = "vigueur")
     private Boolean vigueur;
 
-    @ManyToMany
-    @JoinTable(name = "processus_smi_indicateurs",
-               joinColumns = @JoinColumn(name = "processussmi_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "indicateurs_id", referencedColumnName = "id"))
-    private Set<IndicateurSMI> indicateurs = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = "processusSMIS", allowSetters = true)
+    private User pilote;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "procs", allowSetters = true)
+    private Audit audit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -107,19 +105,6 @@ public class ProcessusSMI implements Serializable {
 
     public void setVersion(Integer version) {
         this.version = version;
-    }
-
-    public String getPilote() {
-        return pilote;
-    }
-
-    public ProcessusSMI pilote(String pilote) {
-        this.pilote = pilote;
-        return this;
-    }
-
-    public void setPilote(String pilote) {
-        this.pilote = pilote;
     }
 
     public String getFinalite() {
@@ -187,29 +172,30 @@ public class ProcessusSMI implements Serializable {
         this.vigueur = vigueur;
     }
 
-    public Set<IndicateurSMI> getIndicateurs() {
-        return indicateurs;
+    public User getPilote() {
+        return pilote;
     }
 
-    public ProcessusSMI indicateurs(Set<IndicateurSMI> indicateurSMIS) {
-        this.indicateurs = indicateurSMIS;
+    public ProcessusSMI pilote(User user) {
+        this.pilote = user;
         return this;
     }
 
-    public ProcessusSMI addIndicateurs(IndicateurSMI indicateurSMI) {
-        this.indicateurs.add(indicateurSMI);
-    //    indicateurSMI.getProcessusSMIS().add(this);
+    public void setPilote(User user) {
+        this.pilote = user;
+    }
+
+    public Audit getAudit() {
+        return audit;
+    }
+
+    public ProcessusSMI audit(Audit audit) {
+        this.audit = audit;
         return this;
     }
 
-    public ProcessusSMI removeIndicateurs(IndicateurSMI indicateurSMI) {
-        this.indicateurs.remove(indicateurSMI);
-    //    indicateurSMI.getProcessusSMIS().remove(this);
-        return this;
-    }
-
-    public void setIndicateurs(Set<IndicateurSMI> indicateurSMIS) {
-        this.indicateurs = indicateurSMIS;
+    public void setAudit(Audit audit) {
+        this.audit = audit;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -237,7 +223,6 @@ public class ProcessusSMI implements Serializable {
             ", processus='" + getProcessus() + "'" +
             ", date='" + getDate() + "'" +
             ", version=" + getVersion() +
-            ", pilote='" + getPilote() + "'" +
             ", finalite='" + getFinalite() + "'" +
             ", ficheProcessus='" + getFicheProcessus() + "'" +
             ", ficheProcessusContentType='" + getFicheProcessusContentType() + "'" +

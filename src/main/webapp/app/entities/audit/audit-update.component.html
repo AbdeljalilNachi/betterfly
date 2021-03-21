@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-audit-heading">Create or edit a Audit</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateAudit">Date Audit</label>
+                    <div class="input-group">
+                        <input id="field_dateAudit" type="text" class="form-control" name="dateAudit" ngbDatepicker #dateAuditDp="ngbDatepicker" formControlName="dateAudit"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateAuditDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_typeAudit">Type Audit</label>
+                    <select class="form-control" name="typeAudit" formControlName="typeAudit" id="field_typeAudit">
+                        <option value="Interne">Interne</option>
+                        <option value="Externe">Externe</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_auditeur">Auditeur</label>
+                    <input type="text" class="form-control" name="auditeur" id="field_auditeur"
+                           formControlName="auditeur"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_standard">Standard</label>
+                    <select class="form-control" name="standard" formControlName="standard" id="field_standard">
+                        <option value="ISO9001">ISO9001</option>
+                        <option value="ISO14001">ISO14001</option>
+                        <option value="ISO45001">ISO45001</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_statut">Statut</label>
+                    <select class="form-control" name="statut" formControlName="statut" id="field_statut">
+                        <option value="Retard">Retard</option>
+                        <option value="REALISE">REALISE</option>
+                        <option value="PLANIFIE">PLANIFIE</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_conclusion">Conclusion</label>
+                    <input type="text" class="form-control" name="conclusion" id="field_conclusion"
+                           formControlName="conclusion"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_processus">Processus</label>
+                    <select class="form-control" id="field_processus" name="processus" formControlName="processus">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="processusSMIOption.id === editForm.get('processus')!.value?.id ? editForm.get('processus')!.value : processusSMIOption" *ngFor="let processusSMIOption of processussmis; trackBy: trackById">{{ processusSMIOption.processus }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -49,9 +49,6 @@ public class AnalyseEnvirommentaleResourceIT {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final String DEFAULT_BUSINESS_UNIT = "AAAAAAAAAA";
     private static final String UPDATED_BUSINESS_UNIT = "BBBBBBBBBB";
 
@@ -119,7 +116,6 @@ public class AnalyseEnvirommentaleResourceIT {
     public static AnalyseEnvirommentale createEntity(EntityManager em) {
         AnalyseEnvirommentale analyseEnvirommentale = new AnalyseEnvirommentale()
             .date(DEFAULT_DATE)
-            .processus(DEFAULT_PROCESSUS)
             .businessUnit(DEFAULT_BUSINESS_UNIT)
             .activite(DEFAULT_ACTIVITE)
             .aspectEnvironnemental(DEFAULT_ASPECT_ENVIRONNEMENTAL)
@@ -144,7 +140,6 @@ public class AnalyseEnvirommentaleResourceIT {
     public static AnalyseEnvirommentale createUpdatedEntity(EntityManager em) {
         AnalyseEnvirommentale analyseEnvirommentale = new AnalyseEnvirommentale()
             .date(UPDATED_DATE)
-            .processus(UPDATED_PROCESSUS)
             .businessUnit(UPDATED_BUSINESS_UNIT)
             .activite(UPDATED_ACTIVITE)
             .aspectEnvironnemental(UPDATED_ASPECT_ENVIRONNEMENTAL)
@@ -181,7 +176,6 @@ public class AnalyseEnvirommentaleResourceIT {
         assertThat(analyseEnvirommentaleList).hasSize(databaseSizeBeforeCreate + 1);
         AnalyseEnvirommentale testAnalyseEnvirommentale = analyseEnvirommentaleList.get(analyseEnvirommentaleList.size() - 1);
         assertThat(testAnalyseEnvirommentale.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testAnalyseEnvirommentale.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testAnalyseEnvirommentale.getBusinessUnit()).isEqualTo(DEFAULT_BUSINESS_UNIT);
         assertThat(testAnalyseEnvirommentale.getActivite()).isEqualTo(DEFAULT_ACTIVITE);
         assertThat(testAnalyseEnvirommentale.getAspectEnvironnemental()).isEqualTo(DEFAULT_ASPECT_ENVIRONNEMENTAL);
@@ -235,7 +229,6 @@ public class AnalyseEnvirommentaleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(analyseEnvirommentale.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].businessUnit").value(hasItem(DEFAULT_BUSINESS_UNIT)))
             .andExpect(jsonPath("$.[*].activite").value(hasItem(DEFAULT_ACTIVITE)))
             .andExpect(jsonPath("$.[*].aspectEnvironnemental").value(hasItem(DEFAULT_ASPECT_ENVIRONNEMENTAL)))
@@ -263,7 +256,6 @@ public class AnalyseEnvirommentaleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(analyseEnvirommentale.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.businessUnit").value(DEFAULT_BUSINESS_UNIT))
             .andExpect(jsonPath("$.activite").value(DEFAULT_ACTIVITE))
             .andExpect(jsonPath("$.aspectEnvironnemental").value(DEFAULT_ASPECT_ENVIRONNEMENTAL))
@@ -300,7 +292,6 @@ public class AnalyseEnvirommentaleResourceIT {
         em.detach(updatedAnalyseEnvirommentale);
         updatedAnalyseEnvirommentale
             .date(UPDATED_DATE)
-            .processus(UPDATED_PROCESSUS)
             .businessUnit(UPDATED_BUSINESS_UNIT)
             .activite(UPDATED_ACTIVITE)
             .aspectEnvironnemental(UPDATED_ASPECT_ENVIRONNEMENTAL)
@@ -325,7 +316,6 @@ public class AnalyseEnvirommentaleResourceIT {
         assertThat(analyseEnvirommentaleList).hasSize(databaseSizeBeforeUpdate);
         AnalyseEnvirommentale testAnalyseEnvirommentale = analyseEnvirommentaleList.get(analyseEnvirommentaleList.size() - 1);
         assertThat(testAnalyseEnvirommentale.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testAnalyseEnvirommentale.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testAnalyseEnvirommentale.getBusinessUnit()).isEqualTo(UPDATED_BUSINESS_UNIT);
         assertThat(testAnalyseEnvirommentale.getActivite()).isEqualTo(UPDATED_ACTIVITE);
         assertThat(testAnalyseEnvirommentale.getAspectEnvironnemental()).isEqualTo(UPDATED_ASPECT_ENVIRONNEMENTAL);
@@ -399,7 +389,6 @@ public class AnalyseEnvirommentaleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(analyseEnvirommentale.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].businessUnit").value(hasItem(DEFAULT_BUSINESS_UNIT)))
             .andExpect(jsonPath("$.[*].activite").value(hasItem(DEFAULT_ACTIVITE)))
             .andExpect(jsonPath("$.[*].aspectEnvironnemental").value(hasItem(DEFAULT_ASPECT_ENVIRONNEMENTAL)))

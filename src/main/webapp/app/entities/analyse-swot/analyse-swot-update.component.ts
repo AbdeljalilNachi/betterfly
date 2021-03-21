@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IAnalyseSWOT, AnalyseSWOT } from 'app/shared/model/analyse-swot.model';
 import { AnalyseSWOTService } from './analyse-swot.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
 @Component({
   selector: 'jhi-analyse-swot-update',
@@ -15,12 +16,11 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class AnalyseSWOTUpdateComponent implements OnInit {
   isSaving = false;
+  processussmis: IProcessusSMI[] = [];
   dateIdentificationDp: any;
-  pros: String[] | null = null;
 
   editForm = this.fb.group({
     id: [],
-    processus: [],
     dateIdentification: [],
     description: [],
     pilote: [],
@@ -28,23 +28,27 @@ export class AnalyseSWOTUpdateComponent implements OnInit {
     bu: [],
     commentaire: [],
     afficher: [],
+    processus: [],
   });
 
-  constructor(protected analyseSWOTService: AnalyseSWOTService, 
-    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected analyseSWOTService: AnalyseSWOTService,
+    protected processusSMIService: ProcessusSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ analyseSWOT }) => {
       this.updateForm(analyseSWOT);
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
   updateForm(analyseSWOT: IAnalyseSWOT): void {
     this.editForm.patchValue({
       id: analyseSWOT.id,
-      processus: analyseSWOT.processus,
       dateIdentification: analyseSWOT.dateIdentification,
       description: analyseSWOT.description,
       pilote: analyseSWOT.pilote,
@@ -52,6 +56,7 @@ export class AnalyseSWOTUpdateComponent implements OnInit {
       bu: analyseSWOT.bu,
       commentaire: analyseSWOT.commentaire,
       afficher: analyseSWOT.afficher,
+      processus: analyseSWOT.processus,
     });
   }
 
@@ -73,7 +78,6 @@ export class AnalyseSWOTUpdateComponent implements OnInit {
     return {
       ...new AnalyseSWOT(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       dateIdentification: this.editForm.get(['dateIdentification'])!.value,
       description: this.editForm.get(['description'])!.value,
       pilote: this.editForm.get(['pilote'])!.value,
@@ -81,6 +85,7 @@ export class AnalyseSWOTUpdateComponent implements OnInit {
       bu: this.editForm.get(['bu'])!.value,
       commentaire: this.editForm.get(['commentaire'])!.value,
       afficher: this.editForm.get(['afficher'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -94,21 +99,13 @@ export class AnalyseSWOTUpdateComponent implements OnInit {
   protected onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();
-  } 
+  }
 
   protected onSaveError(): void {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
+  trackById(index: number, item: IProcessusSMI): any {
+    return item.id;
   }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
-  }
-
-
 }

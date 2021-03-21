@@ -39,17 +39,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ObjectifResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final String DEFAULT_AXEDELAPOLITIQUEQSE = "AAAAAAAAAA";
     private static final String UPDATED_AXEDELAPOLITIQUEQSE = "BBBBBBBBBB";
 
     private static final String DEFAULT_OBJECTIFQSE = "AAAAAAAAAA";
     private static final String UPDATED_OBJECTIFQSE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_INDICATEUR = "AAAAAAAAAA";
-    private static final String UPDATED_INDICATEUR = "BBBBBBBBBB";
 
     private static final String DEFAULT_ORIGINE = "AAAAAAAAAA";
     private static final String UPDATED_ORIGINE = "BBBBBBBBBB";
@@ -81,10 +75,8 @@ public class ObjectifResourceIT {
      */
     public static Objectif createEntity(EntityManager em) {
         Objectif objectif = new Objectif()
-            .processus(DEFAULT_PROCESSUS)
             .axedelapolitiqueqse(DEFAULT_AXEDELAPOLITIQUEQSE)
             .objectifqse(DEFAULT_OBJECTIFQSE)
-            .indicateur(DEFAULT_INDICATEUR)
             .origine(DEFAULT_ORIGINE);
         return objectif;
     }
@@ -96,10 +88,8 @@ public class ObjectifResourceIT {
      */
     public static Objectif createUpdatedEntity(EntityManager em) {
         Objectif objectif = new Objectif()
-            .processus(UPDATED_PROCESSUS)
             .axedelapolitiqueqse(UPDATED_AXEDELAPOLITIQUEQSE)
             .objectifqse(UPDATED_OBJECTIFQSE)
-            .indicateur(UPDATED_INDICATEUR)
             .origine(UPDATED_ORIGINE);
         return objectif;
     }
@@ -123,10 +113,8 @@ public class ObjectifResourceIT {
         List<Objectif> objectifList = objectifRepository.findAll();
         assertThat(objectifList).hasSize(databaseSizeBeforeCreate + 1);
         Objectif testObjectif = objectifList.get(objectifList.size() - 1);
-        assertThat(testObjectif.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testObjectif.getAxedelapolitiqueqse()).isEqualTo(DEFAULT_AXEDELAPOLITIQUEQSE);
         assertThat(testObjectif.getObjectifqse()).isEqualTo(DEFAULT_OBJECTIFQSE);
-        assertThat(testObjectif.getIndicateur()).isEqualTo(DEFAULT_INDICATEUR);
         assertThat(testObjectif.getOrigine()).isEqualTo(DEFAULT_ORIGINE);
 
         // Validate the Objectif in Elasticsearch
@@ -167,10 +155,8 @@ public class ObjectifResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(objectif.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].axedelapolitiqueqse").value(hasItem(DEFAULT_AXEDELAPOLITIQUEQSE)))
             .andExpect(jsonPath("$.[*].objectifqse").value(hasItem(DEFAULT_OBJECTIFQSE)))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)))
             .andExpect(jsonPath("$.[*].origine").value(hasItem(DEFAULT_ORIGINE)));
     }
     
@@ -185,10 +171,8 @@ public class ObjectifResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(objectif.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.axedelapolitiqueqse").value(DEFAULT_AXEDELAPOLITIQUEQSE))
             .andExpect(jsonPath("$.objectifqse").value(DEFAULT_OBJECTIFQSE))
-            .andExpect(jsonPath("$.indicateur").value(DEFAULT_INDICATEUR))
             .andExpect(jsonPath("$.origine").value(DEFAULT_ORIGINE));
     }
     @Test
@@ -212,10 +196,8 @@ public class ObjectifResourceIT {
         // Disconnect from session so that the updates on updatedObjectif are not directly saved in db
         em.detach(updatedObjectif);
         updatedObjectif
-            .processus(UPDATED_PROCESSUS)
             .axedelapolitiqueqse(UPDATED_AXEDELAPOLITIQUEQSE)
             .objectifqse(UPDATED_OBJECTIFQSE)
-            .indicateur(UPDATED_INDICATEUR)
             .origine(UPDATED_ORIGINE);
 
         restObjectifMockMvc.perform(put("/api/objectifs")
@@ -227,10 +209,8 @@ public class ObjectifResourceIT {
         List<Objectif> objectifList = objectifRepository.findAll();
         assertThat(objectifList).hasSize(databaseSizeBeforeUpdate);
         Objectif testObjectif = objectifList.get(objectifList.size() - 1);
-        assertThat(testObjectif.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testObjectif.getAxedelapolitiqueqse()).isEqualTo(UPDATED_AXEDELAPOLITIQUEQSE);
         assertThat(testObjectif.getObjectifqse()).isEqualTo(UPDATED_OBJECTIFQSE);
-        assertThat(testObjectif.getIndicateur()).isEqualTo(UPDATED_INDICATEUR);
         assertThat(testObjectif.getOrigine()).isEqualTo(UPDATED_ORIGINE);
 
         // Validate the Objectif in Elasticsearch
@@ -291,10 +271,8 @@ public class ObjectifResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(objectif.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].axedelapolitiqueqse").value(hasItem(DEFAULT_AXEDELAPOLITIQUEQSE)))
             .andExpect(jsonPath("$.[*].objectifqse").value(hasItem(DEFAULT_OBJECTIFQSE)))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)))
             .andExpect(jsonPath("$.[*].origine").value(hasItem(DEFAULT_ORIGINE)));
     }
 }

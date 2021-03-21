@@ -15,8 +15,6 @@ type EntityArrayResponseType = HttpResponse<IIndicateurSMI[]>;
 @Injectable({ providedIn: 'root' })
 export class IndicateurSMIService {
   public resourceUrl = SERVER_API_URL + 'api/indicateur-smis';
-  public resourceUrlNames = SERVER_API_URL + 'api/indicateur-names';
-
   public resourceSearchUrl = SERVER_API_URL + 'api/_search/indicateur-smis';
 
   constructor(protected http: HttpClient) {}
@@ -47,7 +45,6 @@ export class IndicateurSMIService {
       .get<IIndicateurSMI[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
-
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });

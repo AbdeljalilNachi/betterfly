@@ -5,7 +5,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-risque" [routerLink]="['/risque/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Risque
+            Créer un nouveau Risque
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="risques?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun risque trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="risques && risques.length > 0">
@@ -41,7 +41,6 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateIdentification"><span>Date Identification</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="causePotentielle"><span>Cause Potentielle</span> <fa-icon icon="sort"></fa-icon></th>
@@ -51,13 +50,17 @@
                     <th scope="col"  jhiSortBy="probabilite"><span>Probabilite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="criticite"><span>Criticite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="traitement"><span>Traitement</span> <fa-icon icon="sort"></fa-icon></th>
-                            <th scope="col"></th>
+                    <th scope="col"  jhiSortBy="commentaire"><span>Commentaire</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.id"><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="delegue.id"><span>Delegue</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let risque of risques ;trackBy: trackId">
                     <td><a [routerLink]="['/risque', risque.id, 'view']">{{ risque.id }}</a></td>
-                    <td>{{ risque.processus }}</td>
                     <td>{{ risque.dateIdentification | date:'mediumDate' }}</td>
                     <td>{{ risque.description }}</td>
                     <td>{{ risque.causePotentielle }}</td>
@@ -67,7 +70,22 @@
                     <td>{{ risque.probabilite }}</td>
                     <td>{{ risque.criticite }}</td>
                     <td>{{ risque.traitement }}</td>
-                   <td class="text-right">
+                    <td>{{ risque.commentaire }}</td>
+                    <td>{{ risque.origine }}</td>
+                    <td>
+                        <div *ngIf="risque.action">
+                            <a [routerLink]="['/action', risque.action?.id, 'view']" >{{ risque.action?.action }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ risque.delegue?.login }}
+                    </td>
+                    <td>
+                        <div *ngIf="risque.processus">
+                            <a [routerLink]="['/processus-smi', risque.processus?.id, 'view']" >{{ risque.processus?.processus }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
                                     [routerLink]="['/risque', risque.id, 'view']"

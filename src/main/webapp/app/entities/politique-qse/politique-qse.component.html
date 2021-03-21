@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Politiques QSE</span>
+        <span>Politique QSES</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-politique-qse" [routerLink]="['/politique-qse/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Politique QSE
+            Créer un nouveau Politique QSE
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="politiqueQSES?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun politiqueQSES found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="politiqueQSES && politiqueQSES.length > 0">
@@ -41,24 +41,32 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="axePolitiqueQSE"><span>Axe Politique QSE</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="objectifQSE"><span>Objectif QSE</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="vigueur"><span>Vigueur</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="indicateur"><span>Indicateur</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="indicateur.id"><span>Indicateur</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let politiqueQSE of politiqueQSES ;trackBy: trackId">
                     <td><a [routerLink]="['/politique-qse', politiqueQSE.id, 'view']">{{ politiqueQSE.id }}</a></td>
-                    <td>{{ politiqueQSE.processus }}</td>
                     <td>{{ politiqueQSE.date | date:'mediumDate' }}</td>
                     <td>{{ politiqueQSE.axePolitiqueQSE }}</td>
                     <td>{{ politiqueQSE.objectifQSE }}</td>
                     <td>{{ politiqueQSE.vigueur }}</td>
-                    <td>{{ politiqueQSE.indicateur }}</td>
+                    <td>
+                        <div *ngIf="politiqueQSE.processus">
+                            <a [routerLink]="['/processus-smi', politiqueQSE.processus?.id, 'view']" >{{ politiqueQSE.processus?.processus }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="politiqueQSE.indicateur">
+                            <a [routerLink]="['/indicateur-smi', politiqueQSE.indicateur?.id, 'view']" >{{ politiqueQSE.indicateur?.indicateur }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

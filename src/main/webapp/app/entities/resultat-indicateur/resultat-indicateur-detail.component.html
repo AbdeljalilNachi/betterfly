@@ -20,22 +20,24 @@
                 <dd>
                     <span>{{ resultatIndicateur.resultat }}</span>
                 </dd>
-                <dt><span>Indicateur</span></dt>
+                <dt><span>Result Indicateurs</span></dt>
                 <dd>
-                    <span>{{ resultatIndicateur.indicateur }}</span>
+                    <div *ngIf="resultatIndicateur.resultIndicateurs">
+                        <a [routerLink]="['/result-indicateurs', resultatIndicateur.resultIndicateurs?.id, 'view']">{{ resultatIndicateur.resultIndicateurs?.id }}</a>
+                    </div>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/resultat-indicateur', resultatIndicateur.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

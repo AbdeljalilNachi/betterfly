@@ -5,7 +5,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-action" [routerLink]="['/action/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Action
+            Créer un nouveau Action
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="actions?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun action trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="actions && actions.length > 0">
@@ -48,9 +48,9 @@
                     <th scope="col"  jhiSortBy="avancement"><span>Avancement</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="realisee"><span>Realisee</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="critereResultat"><span>Critere Resultat</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="efficace"><span>Efficace</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="ressourcesNecessaires"><span>Ressources Necessaires</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="statut"><span>Statut</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="efficace"><span>Efficace</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -64,9 +64,9 @@
                     <td>{{ action.avancement }}</td>
                     <td>{{ action.realisee }}</td>
                     <td>{{ action.critereResultat }}</td>
-                    <td>{{ action.efficace }}</td>
                     <td>{{ action.ressourcesNecessaires }}</td>
                     <td>{{ action.statut }}</td>
+                    <td>{{ action.efficace }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

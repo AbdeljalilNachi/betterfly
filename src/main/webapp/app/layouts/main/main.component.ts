@@ -9,17 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
   templateUrl: './main.component.html',
 })
 export class MainComponent implements OnInit {
-
-  leftMenuHidden = false;
-
   constructor(private accountService: AccountService, private titleService: Title, private router: Router) {}
-
-
-  toggleBtnLeftMenuEvent(event: any) {
-    this.leftMenuHidden = event;
-}
-
- 
 
   ngOnInit(): void {
     // try to log in automatically

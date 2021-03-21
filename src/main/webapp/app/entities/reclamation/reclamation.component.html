@@ -5,7 +5,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-reclamation" [routerLink]="['/reclamation/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Reclamation
+            Créer un nouveau Reclamation
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="reclamations?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun reclamation trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="reclamations && reclamations.length > 0">
@@ -41,20 +41,21 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="justifiee"><span>Justifiee</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="client"><span>Client</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="piecejointe"><span>Piecejointe</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.id"><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="delegue.id"><span>Delegue</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let reclamation of reclamations ;trackBy: trackId">
                     <td><a [routerLink]="['/reclamation', reclamation.id, 'view']">{{ reclamation.id }}</a></td>
-                    <td>{{ reclamation.processus }}</td>
                     <td>{{ reclamation.date | date:'mediumDate' }}</td>
                     <td>{{ reclamation.description }}</td>
                     <td>{{ reclamation.justifiee }}</td>
@@ -64,6 +65,19 @@
                         <span *ngIf="reclamation.piecejointe">{{ reclamation.piecejointeContentType }}, {{ byteSize(reclamation.piecejointe) }}</span>
                     </td>
                     <td>{{ reclamation.origine }}</td>
+                    <td>
+                        <div *ngIf="reclamation.action">
+                            <a [routerLink]="['/action', reclamation.action?.id, 'view']" >{{ reclamation.action?.action }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ reclamation.delegue?.login }}
+                    </td>
+                    <td>
+                        <div *ngIf="reclamation.processus">
+                            <a [routerLink]="['/processus-smi', reclamation.processus?.id, 'view']" >{{ reclamation.processus?.processus }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

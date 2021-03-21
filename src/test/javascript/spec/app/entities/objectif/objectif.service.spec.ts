@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(ObjectifService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Objectif(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Objectif(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -54,10 +54,8 @@ describe('Service Tests', () => {
       it('should update a Objectif', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             axedelapolitiqueqse: 'BBBBBB',
             objectifqse: 'BBBBBB',
-            indicateur: 'BBBBBB',
             origine: 'BBBBBB',
           },
           elemDefault
@@ -75,10 +73,8 @@ describe('Service Tests', () => {
       it('should return a list of Objectif', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             axedelapolitiqueqse: 'BBBBBB',
             objectifqse: 'BBBBBB',
-            indicateur: 'BBBBBB',
             origine: 'BBBBBB',
           },
           elemDefault

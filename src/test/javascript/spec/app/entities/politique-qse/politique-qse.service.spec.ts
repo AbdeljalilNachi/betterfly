@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new PolitiqueQSE(0, 'AAAAAAA', currentDate, 'AAAAAAA', 'AAAAAAA', false, 'AAAAAAA');
+      elemDefault = new PolitiqueQSE(0, currentDate, 'AAAAAAA', 'AAAAAAA', false);
     });
 
     describe('Service methods', () => {
@@ -69,12 +69,10 @@ describe('Service Tests', () => {
       it('should update a PolitiqueQSE', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             axePolitiqueQSE: 'BBBBBB',
             objectifQSE: 'BBBBBB',
             vigueur: true,
-            indicateur: 'BBBBBB',
           },
           elemDefault
         );
@@ -96,12 +94,10 @@ describe('Service Tests', () => {
       it('should return a list of PolitiqueQSE', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             axePolitiqueQSE: 'BBBBBB',
             objectifQSE: 'BBBBBB',
             vigueur: true,
-            indicateur: 'BBBBBB',
           },
           elemDefault
         );

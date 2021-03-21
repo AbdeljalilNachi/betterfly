@@ -8,11 +8,7 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ analyseSWOT.processus }}</span>
-                </dd>
-                <dt><span>Date d'identification</span></dt>
+                <dt><span>Date Identification</span></dt>
                 <dd>
                     <span>{{ analyseSWOT.dateIdentification }}</span>
                 </dd>
@@ -20,13 +16,10 @@
                 <dd>
                     <span>{{ analyseSWOT.description }}</span>
                 </dd>
-
-            <!--
                 <dt><span>Pilote</span></dt>
                 <dd>
                     <span>{{ analyseSWOT.pilote }}</span>
                 </dd>
-             -->   
                 <dt><span>Type</span></dt>
                 <dd>
                     <span>{{ analyseSWOT.type }}</span>
@@ -43,18 +36,24 @@
                 <dd>
                     <span>{{ analyseSWOT.afficher }}</span>
                 </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="analyseSWOT.processus">
+                        <a [routerLink]="['/processus-smi', analyseSWOT.processus?.id, 'view']">{{ analyseSWOT.processus?.processus }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/analyse-swot', analyseSWOT.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

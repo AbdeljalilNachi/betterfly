@@ -41,9 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class PolitiqueQSEResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -55,9 +52,6 @@ public class PolitiqueQSEResourceIT {
 
     private static final Boolean DEFAULT_VIGUEUR = false;
     private static final Boolean UPDATED_VIGUEUR = true;
-
-    private static final String DEFAULT_INDICATEUR = "AAAAAAAAAA";
-    private static final String UPDATED_INDICATEUR = "BBBBBBBBBB";
 
     @Autowired
     private PolitiqueQSERepository politiqueQSERepository;
@@ -86,12 +80,10 @@ public class PolitiqueQSEResourceIT {
      */
     public static PolitiqueQSE createEntity(EntityManager em) {
         PolitiqueQSE politiqueQSE = new PolitiqueQSE()
-            .processus(DEFAULT_PROCESSUS)
             .date(DEFAULT_DATE)
             .axePolitiqueQSE(DEFAULT_AXE_POLITIQUE_QSE)
             .objectifQSE(DEFAULT_OBJECTIF_QSE)
-            .vigueur(DEFAULT_VIGUEUR)
-            .indicateur(DEFAULT_INDICATEUR);
+            .vigueur(DEFAULT_VIGUEUR);
         return politiqueQSE;
     }
     /**
@@ -102,12 +94,10 @@ public class PolitiqueQSEResourceIT {
      */
     public static PolitiqueQSE createUpdatedEntity(EntityManager em) {
         PolitiqueQSE politiqueQSE = new PolitiqueQSE()
-            .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .axePolitiqueQSE(UPDATED_AXE_POLITIQUE_QSE)
             .objectifQSE(UPDATED_OBJECTIF_QSE)
-            .vigueur(UPDATED_VIGUEUR)
-            .indicateur(UPDATED_INDICATEUR);
+            .vigueur(UPDATED_VIGUEUR);
         return politiqueQSE;
     }
 
@@ -130,12 +120,10 @@ public class PolitiqueQSEResourceIT {
         List<PolitiqueQSE> politiqueQSEList = politiqueQSERepository.findAll();
         assertThat(politiqueQSEList).hasSize(databaseSizeBeforeCreate + 1);
         PolitiqueQSE testPolitiqueQSE = politiqueQSEList.get(politiqueQSEList.size() - 1);
-        assertThat(testPolitiqueQSE.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testPolitiqueQSE.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testPolitiqueQSE.getAxePolitiqueQSE()).isEqualTo(DEFAULT_AXE_POLITIQUE_QSE);
         assertThat(testPolitiqueQSE.getObjectifQSE()).isEqualTo(DEFAULT_OBJECTIF_QSE);
         assertThat(testPolitiqueQSE.isVigueur()).isEqualTo(DEFAULT_VIGUEUR);
-        assertThat(testPolitiqueQSE.getIndicateur()).isEqualTo(DEFAULT_INDICATEUR);
 
         // Validate the PolitiqueQSE in Elasticsearch
         verify(mockPolitiqueQSESearchRepository, times(1)).save(testPolitiqueQSE);
@@ -175,12 +163,10 @@ public class PolitiqueQSEResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(politiqueQSE.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].axePolitiqueQSE").value(hasItem(DEFAULT_AXE_POLITIQUE_QSE)))
             .andExpect(jsonPath("$.[*].objectifQSE").value(hasItem(DEFAULT_OBJECTIF_QSE)))
-            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)));
+            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
     
     @Test
@@ -194,12 +180,10 @@ public class PolitiqueQSEResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(politiqueQSE.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.axePolitiqueQSE").value(DEFAULT_AXE_POLITIQUE_QSE))
             .andExpect(jsonPath("$.objectifQSE").value(DEFAULT_OBJECTIF_QSE))
-            .andExpect(jsonPath("$.vigueur").value(DEFAULT_VIGUEUR.booleanValue()))
-            .andExpect(jsonPath("$.indicateur").value(DEFAULT_INDICATEUR));
+            .andExpect(jsonPath("$.vigueur").value(DEFAULT_VIGUEUR.booleanValue()));
     }
     @Test
     @Transactional
@@ -222,12 +206,10 @@ public class PolitiqueQSEResourceIT {
         // Disconnect from session so that the updates on updatedPolitiqueQSE are not directly saved in db
         em.detach(updatedPolitiqueQSE);
         updatedPolitiqueQSE
-            .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .axePolitiqueQSE(UPDATED_AXE_POLITIQUE_QSE)
             .objectifQSE(UPDATED_OBJECTIF_QSE)
-            .vigueur(UPDATED_VIGUEUR)
-            .indicateur(UPDATED_INDICATEUR);
+            .vigueur(UPDATED_VIGUEUR);
 
         restPolitiqueQSEMockMvc.perform(put("/api/politique-qses")
             .contentType(MediaType.APPLICATION_JSON)
@@ -238,12 +220,10 @@ public class PolitiqueQSEResourceIT {
         List<PolitiqueQSE> politiqueQSEList = politiqueQSERepository.findAll();
         assertThat(politiqueQSEList).hasSize(databaseSizeBeforeUpdate);
         PolitiqueQSE testPolitiqueQSE = politiqueQSEList.get(politiqueQSEList.size() - 1);
-        assertThat(testPolitiqueQSE.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testPolitiqueQSE.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testPolitiqueQSE.getAxePolitiqueQSE()).isEqualTo(UPDATED_AXE_POLITIQUE_QSE);
         assertThat(testPolitiqueQSE.getObjectifQSE()).isEqualTo(UPDATED_OBJECTIF_QSE);
         assertThat(testPolitiqueQSE.isVigueur()).isEqualTo(UPDATED_VIGUEUR);
-        assertThat(testPolitiqueQSE.getIndicateur()).isEqualTo(UPDATED_INDICATEUR);
 
         // Validate the PolitiqueQSE in Elasticsearch
         verify(mockPolitiqueQSESearchRepository, times(1)).save(testPolitiqueQSE);
@@ -303,11 +283,9 @@ public class PolitiqueQSEResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(politiqueQSE.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].axePolitiqueQSE").value(hasItem(DEFAULT_AXE_POLITIQUE_QSE)))
             .andExpect(jsonPath("$.[*].objectifQSE").value(hasItem(DEFAULT_OBJECTIF_QSE)))
-            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())))
-            .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)));
+            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
 }

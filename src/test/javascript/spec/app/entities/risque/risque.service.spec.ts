@@ -29,7 +29,6 @@ describe('Service Tests', () => {
 
       elemDefault = new Risque(
         0,
-        'AAAAAAA',
         currentDate,
         'AAAAAAA',
         'AAAAAAA',
@@ -86,7 +85,6 @@ describe('Service Tests', () => {
       it('should update a Risque', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             causePotentielle: 'BBBBBB',
@@ -119,7 +117,6 @@ describe('Service Tests', () => {
       it('should return a list of Risque', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             causePotentielle: 'BBBBBB',

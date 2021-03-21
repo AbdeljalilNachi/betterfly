@@ -6,10 +6,6 @@
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "processus",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "buisnessUnit",
       "fieldType": "String"
     },
@@ -67,7 +63,29 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "action",
+      "otherEntityRelationshipName": "analyseSST",
+      "relationshipName": "action",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "analyseSST",
+      "relationshipName": "delegue",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "processusSMI",
+      "otherEntityRelationshipName": "analyseSST",
+      "relationshipName": "processus",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210302224315",
   "entityTableName": "analyse_sst",
   "dto": "no",
@@ -78,5 +96,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
 }

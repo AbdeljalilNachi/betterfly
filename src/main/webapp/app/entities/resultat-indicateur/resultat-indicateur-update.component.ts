@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IResultatIndicateur, ResultatIndicateur } from 'app/shared/model/resultat-indicateur.model';
 import { ResultatIndicateurService } from './resultat-indicateur.service';
+import { IResultIndicateurs } from 'app/shared/model/result-indicateurs.model';
+import { ResultIndicateursService } from 'app/entities/result-indicateurs/result-indicateurs.service';
 
 @Component({
   selector: 'jhi-resultat-indicateur-update',
@@ -14,17 +16,19 @@ import { ResultatIndicateurService } from './resultat-indicateur.service';
 })
 export class ResultatIndicateurUpdateComponent implements OnInit {
   isSaving = false;
+  resultindicateurs: IResultIndicateurs[] = [];
 
   editForm = this.fb.group({
     id: [],
     mois: [],
     cible: [],
     resultat: [],
-    indicateur: [],
+    resultIndicateurs: [],
   });
 
   constructor(
     protected resultatIndicateurService: ResultatIndicateurService,
+    protected resultIndicateursService: ResultIndicateursService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -32,6 +36,10 @@ export class ResultatIndicateurUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ resultatIndicateur }) => {
       this.updateForm(resultatIndicateur);
+
+      this.resultIndicateursService
+        .query()
+        .subscribe((res: HttpResponse<IResultIndicateurs[]>) => (this.resultindicateurs = res.body || []));
     });
   }
 
@@ -41,7 +49,7 @@ export class ResultatIndicateurUpdateComponent implements OnInit {
       mois: resultatIndicateur.mois,
       cible: resultatIndicateur.cible,
       resultat: resultatIndicateur.resultat,
-      indicateur: resultatIndicateur.indicateur,
+      resultIndicateurs: resultatIndicateur.resultIndicateurs,
     });
   }
 
@@ -66,7 +74,7 @@ export class ResultatIndicateurUpdateComponent implements OnInit {
       mois: this.editForm.get(['mois'])!.value,
       cible: this.editForm.get(['cible'])!.value,
       resultat: this.editForm.get(['resultat'])!.value,
-      indicateur: this.editForm.get(['indicateur'])!.value,
+      resultIndicateurs: this.editForm.get(['resultIndicateurs'])!.value,
     };
   }
 
@@ -84,5 +92,9 @@ export class ResultatIndicateurUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IResultIndicateurs): any {
+    return item.id;
   }
 }

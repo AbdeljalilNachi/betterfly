@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -28,9 +29,6 @@ public class AnalyseSST implements Serializable {
 
     @Column(name = "date")
     private LocalDate date;
-
-    @Column(name = "processus")
-    private String processus;
 
     @Column(name = "buisness_unit")
     private String buisnessUnit;
@@ -76,6 +74,18 @@ public class AnalyseSST implements Serializable {
     @Column(name = "origine")
     private String origine;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "analyseSSTS", allowSetters = true)
+    private Action action;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "analyseSSTS", allowSetters = true)
+    private User delegue;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "analyseSSTS", allowSetters = true)
+    private ProcessusSMI processus;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -96,19 +106,6 @@ public class AnalyseSST implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public AnalyseSST processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public String getBuisnessUnit() {
@@ -279,6 +276,45 @@ public class AnalyseSST implements Serializable {
     public void setOrigine(String origine) {
         this.origine = origine;
     }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public AnalyseSST action(Action action) {
+        this.action = action;
+        return this;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public User getDelegue() {
+        return delegue;
+    }
+
+    public AnalyseSST delegue(User user) {
+        this.delegue = user;
+        return this;
+    }
+
+    public void setDelegue(User user) {
+        this.delegue = user;
+    }
+
+    public ProcessusSMI getProcessus() {
+        return processus;
+    }
+
+    public AnalyseSST processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+        return this;
+    }
+
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -303,7 +339,6 @@ public class AnalyseSST implements Serializable {
         return "AnalyseSST{" +
             "id=" + getId() +
             ", date='" + getDate() + "'" +
-            ", processus='" + getProcessus() + "'" +
             ", buisnessUnit='" + getBuisnessUnit() + "'" +
             ", uniteTravail='" + getUniteTravail() + "'" +
             ", danger='" + getDanger() + "'" +

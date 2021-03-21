@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -21,9 +22,6 @@ public class Reclamation implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @Column(name = "processus")
-    private String processus;
 
     @Column(name = "date")
     private LocalDate date;
@@ -47,6 +45,18 @@ public class Reclamation implements Serializable {
     @Column(name = "origine")
     private String origine;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "reclamations", allowSetters = true)
+    private Action action;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "reclamations", allowSetters = true)
+    private User delegue;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "reclamations", allowSetters = true)
+    private ProcessusSMI processus;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -54,19 +64,6 @@ public class Reclamation implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public Reclamation processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public LocalDate getDate() {
@@ -159,6 +156,45 @@ public class Reclamation implements Serializable {
     public void setOrigine(String origine) {
         this.origine = origine;
     }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public Reclamation action(Action action) {
+        this.action = action;
+        return this;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public User getDelegue() {
+        return delegue;
+    }
+
+    public Reclamation delegue(User user) {
+        this.delegue = user;
+        return this;
+    }
+
+    public void setDelegue(User user) {
+        this.delegue = user;
+    }
+
+    public ProcessusSMI getProcessus() {
+        return processus;
+    }
+
+    public Reclamation processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+        return this;
+    }
+
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -182,7 +218,6 @@ public class Reclamation implements Serializable {
     public String toString() {
         return "Reclamation{" +
             "id=" + getId() +
-            ", processus='" + getProcessus() + "'" +
             ", date='" + getDate() + "'" +
             ", description='" + getDescription() + "'" +
             ", justifiee='" + isJustifiee() + "'" +

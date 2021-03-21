@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
 
 export interface IIndicateurSMI {
   id?: number;
-  processus?: string;
   dateIdentification?: Moment;
   indicateur?: string;
   formuleCalcul?: string;
@@ -13,14 +13,12 @@ export interface IIndicateurSMI {
   responsableCalcul?: string;
   observations?: string;
   vigueur?: boolean;
-  annee?: number;
-  observation?: string;
+  processus?: IProcessusSMI;
 }
 
 export class IndicateurSMI implements IIndicateurSMI {
   constructor(
     public id?: number,
-    public processus?: string,
     public dateIdentification?: Moment,
     public indicateur?: string,
     public formuleCalcul?: string,
@@ -31,8 +29,7 @@ export class IndicateurSMI implements IIndicateurSMI {
     public responsableCalcul?: string,
     public observations?: string,
     public vigueur?: boolean,
-    public annee?: number,
-    public observation?: string
+    public processus?: IProcessusSMI
   ) {
     this.vigueur = this.vigueur || false;
   }

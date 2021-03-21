@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-analyse-swot-heading">Créer ou mettre à jour Analyse SWOT</h2>
+            <h2 id="jhi-analyse-swot-heading">Create or edit a Analyse SWOT</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,17 +12,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_processus">Processus</label>
-                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
-                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_dateIdentification">Date d'identification</label>
+                    <label class="form-control-label" for="field_dateIdentification">Date Identification</label>
                     <div class="input-group">
-                        <input required id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
+                        <input id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateIdentificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -31,21 +23,19 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
-                    <input required type="text" class="form-control" name="description" id="field_description"
+                    <input type="text" class="form-control" name="description" id="field_description"
                            formControlName="description"/>
                 </div>
 
-      <!--          
                 <div class="form-group">
                     <label class="form-control-label" for="field_pilote">Pilote</label>
                     <input type="text" class="form-control" name="pilote" id="field_pilote"
                            formControlName="pilote"/>
                 </div>
--->
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_type">Type</label>
-                    <select required class="form-control" name="type" formControlName="type" id="field_type">
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
                         <option value="FORCE">FORCE</option>
                         <option value="FAIBLESSE">FAIBLESSE</option>
                         <option value="MENACE">MENACE</option>
@@ -70,11 +60,19 @@
                     <input type="checkbox" class="form-control" name="afficher" id="field_afficher"
                            formControlName="afficher"/>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_processus">Processus</label>
+                    <select class="form-control" id="field_processus" name="processus" formControlName="processus">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="processusSMIOption.id === editForm.get('processus')!.value?.id ? editForm.get('processus')!.value : processusSMIOption" *ngFor="let processusSMIOption of processussmis; trackBy: trackById">{{ processusSMIOption.processus }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

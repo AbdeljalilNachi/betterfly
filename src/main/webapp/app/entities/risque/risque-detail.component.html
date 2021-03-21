@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ risque.processus }}</span>
-                </dd>
                 <dt><span>Date Identification</span></dt>
                 <dd>
                     <span>{{ risque.dateIdentification }}</span>
@@ -56,18 +52,34 @@
                 <dd>
                     <span>{{ risque.origine }}</span>
                 </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="risque.action">
+                        <a [routerLink]="['/action', risque.action?.id, 'view']">{{ risque.action?.action }}</a>
+                    </div>
+                </dd>
+                <dt><span>Delegue</span></dt>
+                <dd>
+                    {{ risque.delegue?.login }}
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="risque.processus">
+                        <a [routerLink]="['/processus-smi', risque.processus?.id, 'view']">{{ risque.processus?.processus }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/risque', risque.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

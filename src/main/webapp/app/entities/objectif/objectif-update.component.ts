@@ -7,8 +7,16 @@ import { Observable } from 'rxjs';
 
 import { IObjectif, Objectif } from 'app/shared/model/objectif.model';
 import { ObjectifService } from './objectif.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
+import { IIndicateurSMI } from 'app/shared/model/indicateur-smi.model';
+import { IndicateurSMIService } from 'app/entities/indicateur-smi/indicateur-smi.service';
 
+type SelectableEntity = IAction | IUser | IProcessusSMI | IIndicateurSMI;
 
 @Component({
   selector: 'jhi-objectif-update',
@@ -16,35 +24,56 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class ObjectifUpdateComponent implements OnInit {
   isSaving = false;
-  pros: String[] | null = null;
+  actions: IAction[] = [];
+  users: IUser[] = [];
+  processussmis: IProcessusSMI[] = [];
+  indicateursmis: IIndicateurSMI[] = [];
+
   editForm = this.fb.group({
     id: [],
-    processus: [],
     axedelapolitiqueqse: [],
     objectifqse: [],
-    indicateur: [],
     origine: [],
+    action: [],
+    delegue: [],
+    processus: [],
+    indicateur: [],
   });
 
-  constructor(protected objectifService: ObjectifService,
-     protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-     private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected objectifService: ObjectifService,
+    protected actionService: ActionService,
+    protected userService: UserService,
+    protected processusSMIService: ProcessusSMIService,
+    protected indicateurSMIService: IndicateurSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ objectif }) => {
       this.updateForm(objectif);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
+
+      this.indicateurSMIService.query().subscribe((res: HttpResponse<IIndicateurSMI[]>) => (this.indicateursmis = res.body || []));
     });
   }
 
   updateForm(objectif: IObjectif): void {
     this.editForm.patchValue({
       id: objectif.id,
-      processus: objectif.processus,
       axedelapolitiqueqse: objectif.axedelapolitiqueqse,
       objectifqse: objectif.objectifqse,
-      indicateur: objectif.indicateur,
       origine: objectif.origine,
+      action: objectif.action,
+      delegue: objectif.delegue,
+      processus: objectif.processus,
+      indicateur: objectif.indicateur,
     });
   }
 
@@ -66,11 +95,13 @@ export class ObjectifUpdateComponent implements OnInit {
     return {
       ...new Objectif(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       axedelapolitiqueqse: this.editForm.get(['axedelapolitiqueqse'])!.value,
       objectifqse: this.editForm.get(['objectifqse'])!.value,
-      indicateur: this.editForm.get(['indicateur'])!.value,
       origine: this.editForm.get(['origine'])!.value,
+      action: this.editForm.get(['action'])!.value,
+      delegue: this.editForm.get(['delegue'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
+      indicateur: this.editForm.get(['indicateur'])!.value,
     };
   }
 
@@ -90,13 +121,7 @@ export class ObjectifUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }

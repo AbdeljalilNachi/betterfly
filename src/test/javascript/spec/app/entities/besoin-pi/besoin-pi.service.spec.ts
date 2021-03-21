@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new BesoinPI(0, 'AAAAAAA', currentDate, 'AAAAAAA', false, false, false);
+      elemDefault = new BesoinPI(0, currentDate, 'AAAAAAA', false, false, false);
     });
 
     describe('Service methods', () => {
@@ -69,7 +69,6 @@ describe('Service Tests', () => {
       it('should update a BesoinPI', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             piPertinentes: 'BBBBBB',
             pertinente: true,
@@ -96,7 +95,6 @@ describe('Service Tests', () => {
       it('should return a list of BesoinPI', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             piPertinentes: 'BBBBBB',
             pertinente: true,

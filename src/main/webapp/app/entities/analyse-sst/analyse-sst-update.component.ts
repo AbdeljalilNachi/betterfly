@@ -7,8 +7,14 @@ import { Observable } from 'rxjs';
 
 import { IAnalyseSST, AnalyseSST } from 'app/shared/model/analyse-sst.model';
 import { AnalyseSSTService } from './analyse-sst.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
+type SelectableEntity = IAction | IUser | IProcessusSMI;
 
 @Component({
   selector: 'jhi-analyse-sst-update',
@@ -16,12 +22,14 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class AnalyseSSTUpdateComponent implements OnInit {
   isSaving = false;
+  actions: IAction[] = [];
+  users: IUser[] = [];
+  processussmis: IProcessusSMI[] = [];
   dateDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
     date: [],
-    processus: [],
     buisnessUnit: [],
     uniteTravail: [],
     danger: [],
@@ -35,15 +43,29 @@ export class AnalyseSSTUpdateComponent implements OnInit {
     criticite: [],
     maitriseExistante: [],
     origine: [],
+    action: [],
+    delegue: [],
+    processus: [],
   });
 
-  constructor(protected analyseSSTService: AnalyseSSTService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected analyseSSTService: AnalyseSSTService,
+    protected actionService: ActionService,
+    protected userService: UserService,
+    protected processusSMIService: ProcessusSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ analyseSST }) => {
       this.updateForm(analyseSST);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
@@ -51,7 +73,6 @@ export class AnalyseSSTUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: analyseSST.id,
       date: analyseSST.date,
-      processus: analyseSST.processus,
       buisnessUnit: analyseSST.buisnessUnit,
       uniteTravail: analyseSST.uniteTravail,
       danger: analyseSST.danger,
@@ -65,6 +86,9 @@ export class AnalyseSSTUpdateComponent implements OnInit {
       criticite: analyseSST.criticite,
       maitriseExistante: analyseSST.maitriseExistante,
       origine: analyseSST.origine,
+      action: analyseSST.action,
+      delegue: analyseSST.delegue,
+      processus: analyseSST.processus,
     });
   }
 
@@ -87,7 +111,6 @@ export class AnalyseSSTUpdateComponent implements OnInit {
       ...new AnalyseSST(),
       id: this.editForm.get(['id'])!.value,
       date: this.editForm.get(['date'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       buisnessUnit: this.editForm.get(['buisnessUnit'])!.value,
       uniteTravail: this.editForm.get(['uniteTravail'])!.value,
       danger: this.editForm.get(['danger'])!.value,
@@ -101,6 +124,9 @@ export class AnalyseSSTUpdateComponent implements OnInit {
       criticite: this.editForm.get(['criticite'])!.value,
       maitriseExistante: this.editForm.get(['maitriseExistante'])!.value,
       origine: this.editForm.get(['origine'])!.value,
+      action: this.editForm.get(['action'])!.value,
+      delegue: this.editForm.get(['delegue'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -120,13 +146,7 @@ export class AnalyseSSTUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }

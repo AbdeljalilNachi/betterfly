@@ -1,0 +1,461 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName betterFly
+    blueprints []
+    buildTool maven
+    cacheProvider ehcache
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme materia
+    clientThemeVariant primary
+    creationTimestamp 1614690084920
+    databaseType sql
+    devDatabaseType postgresql
+    dtoSuffix DTO
+    embeddableLaunchScript false
+    enableHibernateCache false
+    enableSwaggerCodegen false
+    enableTranslation false
+    jhiPrefix jhi
+    jhipsterVersion "6.10.5"
+    jwtSecretKey "M2E2ZmQwZDRiZTQyMDFhMGQ5MjJmMGQ2ZTU5MjBkZDI3OTllOWM3MjE3N2RhOTdiODgwOGJiZDE5YTQzNjk0MTE0ODA5MTE4ODBjYmE3NzYxNDdhY2U0ZWIwZTg4MzNiNWU2NDM3NGFlZDkzMDIxNWNlMDlmMTRkZjBlOGU0NmI="
+    languages [en, fr]
+    messageBroker false
+    nativeLanguage en
+    otherModules []
+    packageName com.betterfly
+    prodDatabaseType postgresql
+    searchEngine elasticsearch
+    serverPort 8080
+    serviceDiscoveryType false
+    skipClient false
+    skipServer false
+    skipUserManagement false
+    testFrameworks []
+    useSass true
+    websocket false
+  }
+
+  entities 
+  Action , AnalyseEnvirommentale , AnalyseSST , AnalyseSWOT , AutreAction , BesoinPI , IndicateurSMI , ResultIndicateurs, ResultatIndicateur ,
+NonConformite , Objectif, ObligationConformite, PolitiqueQSE, ProcessusSMI, Reclamation, Risque ,  Audit, ConstatAudit, PlanificationRDD, Document
+
+}
+
+
+entity ProcessusSMI {
+  processus String ,
+  date LocalDate,
+  version Integer,
+  finalite String,
+  ficheProcessus AnyBlob,
+  type TypeProcessus,
+  vigueur Boolean
+}
+
+entity Risque {
+  dateIdentification LocalDate,
+  description String,
+  causePotentielle String,
+  effetPotentiel String,
+  type TypeRisque,
+  gravite EnumFive,
+  probabilite EnumFive,
+  criticite Integer,
+  traitement Traitement,
+  commentaire String,
+  origine String
+}
+
+
+entity Action {
+  datePlanification LocalDate,
+  action String,
+  type TypeAction,
+  delai LocalDate,
+  avancement String,
+  realisee Boolean,
+  critereResultat String,
+  ressourcesNecessaires String,
+  statut Statut,
+  efficace Efficace
+}
+
+
+entity AnalyseEnvirommentale {
+  date LocalDate,
+  businessUnit String,
+  activite String,
+  aspectEnvironnemental String,
+  impactEnvironnemental String,
+  competencesRequises String,
+  situation Situation,
+  frequence EnumFive,
+  sensibiliteMilieu EnumFive,
+  coefficientMaitrise EnumFive,
+  gravite EnumFive,
+  criticite Integer,
+  maitriseExistante String,
+  origine String
+}
+
+
+
+entity AnalyseSST {
+  date LocalDate,
+  buisnessUnit String,
+  uniteTravail String,
+  danger String,
+  risque String,
+  competence String,
+  situation Situation,
+  frequence EnumFive,
+  dureeExposition EnumFive,
+  coefficientMaitrise EnumFive,
+  gravite EnumFive,
+  criticite Integer,
+  maitriseExistante String,
+  origine String
+}
+
+
+entity AnalyseSWOT {
+
+  dateIdentification LocalDate,
+  description String,
+  pilote String,
+  type TypeAnalyseSWOT,
+  bu String,
+  commentaire String,
+  afficher Boolean
+}
+
+
+entity AutreAction {
+
+  origineAction String,
+  origine String
+}
+entity BesoinPI {
+
+  dateIdentification LocalDate,
+  piPertinentes String,
+  pertinente Boolean,
+  priseEnCharge Boolean,
+  afficher Boolean
+}
+
+
+entity IndicateurSMI {
+  dateIdentification LocalDate,
+  indicateur String,
+  formuleCalcul String,
+  cible Float,
+  seuilTolerance Float,
+  unite String,
+  periodicite String,
+  responsableCalcul String,
+  observations String,
+  vigueur Boolean,
+
+}
+
+entity ResultIndicateurs
+{
+  annee Integer,
+  observation String
+
+}
+entity ResultatIndicateur {
+  mois Mois,
+  cible Float,
+  resultat Float,
+}
+
+entity NonConformite {
+  date LocalDate,
+  description String,
+  causesPotentielles String,
+  origine String
+}
+entity Objectif {
+
+  axedelapolitiqueqse String,
+  objectifqse String,
+  origine String
+}
+entity ObligationConformite {
+  date LocalDate,
+  rubrique Rubrique,
+  reference String,
+  num Integer,
+  exigence String,
+  applicable Boolean,
+  conforme Boolean,
+  statut Integer,
+  observation String,
+  origine String
+}
+
+
+
+entity PolitiqueQSE {
+  date LocalDate,
+  axePolitiqueQSE String,
+  objectifQSE String,
+  vigueur Boolean
+}
+
+entity Reclamation {
+  date LocalDate,
+  description String,
+  justifiee Boolean,
+  client String,
+  piecejointe AnyBlob,
+  origine String
+}
+
+ 
+
+
+
+
+
+
+entity Audit {
+dateAudit 	LocalDate ,
+typeAudit	TypeAudit , 
+Auditeur 	String , 
+Standard	Standard ,
+ID	String   , 
+Statut	StatutAudit  , 
+conclusion String 
+}
+
+
+entity ConstatAudit {
+type 	TypeConstatAudit ,
+constat	String  ,
+origine String
+
+}
+
+
+entity PlanificationRDD {
+nRdd	Integer , 
+date  	LocalDate  ,
+realisee	Boolean , 
+presentation AnyBlob ,
+standard	Standard
+
+}
+
+
+entity Document {
+date	LocalDate,
+intitule	String ,
+code	String ,
+version	Integer ,
+type	TypeDocument ,
+pieceJointe	AnyBlob ,
+enApplication Boolean ,
+appouve Boolean 
+
+}
+enum TypeDocument {
+PROECDURE, INSTRUCTION, ENREGISTREMENT, MANUEL, POLITIQUE, AUTRES
+}
+
+enum StatutAudit {
+Retard ,
+REALISE,
+PLANIFIE
+}
+
+enum Standard {
+ISO9001, ISO14001, ISO45001
+}
+enum TypeAudit {
+Interne, Externe
+}
+
+
+enum TypeConstatAudit {
+PF ,
+RA , 
+PS ,
+NC , 
+NC 
+}
+
+
+
+enum Statut {
+  EN_COURS,
+  PLANIFIEE,
+  RETARD,
+  REALISEE_EFFICACE,
+  REALISEE_NON_EFFICACE,
+  REALISEE_A_EVALUER
+}
+enum Efficace {
+  EFFICACE,
+  NON_EFFICACE,
+  A_EVALUER
+}
+enum Situation {
+  Normale,
+  Anormale,
+  Urgence
+}
+enum EnumFive {
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE
+}
+enum TypeAnalyseSWOT {
+  FORCE,
+  FAIBLESSE,
+  MENACE,
+  OPPORTUNITE
+}
+enum Rubrique {
+  RUBRIQUE,
+  NETTOYAGE,
+  EVACUATION_EAUX,
+  SANITAIRES,
+  REFECTOIRES_HEBERGEMENT,
+  DISPOSITIONS_DIVERSES,
+  AMENAGEMENT_LOCAUX,
+  AMBIANCES,
+  ORGANISATION_RH,
+  CHS,
+  CONVENTION119,
+  PROTECTION_MACHINES,
+  DISPOSITIFS_PROTECTION,
+  CONFORMITE,
+  APPAREILS_LEVAGE,
+  CABINES_MOYENS_ACCES,
+  INSTALLATIONS_ELECTRIQUES,
+  ECLAIRAGE_SECOURS,
+  CABINE_PEINTURE_PULVIRISEE,
+  AT,
+  PRODUIT_CHIMIQUES,
+  SERVICE_MEDICAL,
+  DISPOSITIONS_COMMUNES,
+  PREVENTION_CONTRE_INCENDIE,
+  COVID,
+  ENVIRONNEMENT,
+  CODE_TRAVAIL
+}
+enum TypeProcessus {
+  MANAGEMENT,
+  REALISATION,
+  SUPPORT
+}
+enum Mois {
+  JAN,
+  FEV,
+  MAR,
+  AVR,
+  MAI,
+  JUN,
+  JUL,
+  AUT,
+  SEP,
+  OCT,
+  NOV,
+  DEC
+}
+enum TypeRisque {
+  MENACE,
+  OPPORTUNITE
+}
+enum Traitement {
+  ACCEPTE,
+  REFUSE,
+  A_TRAITER,
+  A_TRANSFERER
+}
+enum TypeAction {
+ACTION_FACE_AU_RISQUE,
+ACTION_CORRECTIVE, 
+TRAITEMENT_RAPIDE, 
+ACTION_POUR_ATTEINDRE_OBJECTIF, 
+AMELIORATION,
+PROGRAMME_ENVIRONNEMENTAL,
+PROGRAMME_SST, 
+PROJET_ENTITE,
+AUTRES
+}
+
+
+relationship OneToMany {
+
+ Audit{procs} to  ProcessusSMI ,
+ResultIndicateurs{resultats} to ResultatIndicateur ,
+}
+/**
+ PlanificationRDD{users} to User,
+Document {acces} to User,
+ */
+
+
+
+relationship ManyToOne {
+  Risque{action} to Action ,
+  AnalyseEnvirommentale{action} to Action ,
+  AnalyseSST{action} to Action ,
+  AutreAction{action} to Action ,
+  NonConformite{action} to Action ,
+  Objectif{action} to Action ,
+    ObligationConformite{action} to Action ,
+  Reclamation{action} to Action ,
+      ConstatAudit{action} to Action ,
+  
+    Risque{delegue} to User ,
+  AnalyseEnvirommentale{delegue} to User ,
+  AnalyseSST{delegue} to User ,
+  AutreAction{delegue} to User ,
+  NonConformite{delegue} to User ,
+  Objectif{delegue} to User ,
+    ObligationConformite{delegue} to User ,
+  Reclamation{delegue} to User ,
+      ConstatAudit{delegue} to User ,
+    ProcessusSMI{pilote} to User ,
+  
+      Document{processus} to ProcessusSMI ,
+    Risque{processus} to ProcessusSMI ,
+  AnalyseEnvirommentale{processus} to ProcessusSMI ,
+  AnalyseSST{processus} to ProcessusSMI ,
+  AutreAction{processus} to ProcessusSMI ,
+  NonConformite{processus} to ProcessusSMI ,
+  Objectif{processus} to ProcessusSMI ,
+    ObligationConformite{processus} to ProcessusSMI ,
+  Reclamation{processus} to ProcessusSMI ,
+    AnalyseSWOT{processus} to ProcessusSMI ,
+    BesoinPI{processus} to ProcessusSMI ,
+  PolitiqueQSE{processus} to ProcessusSMI ,
+    IndicateurSMI{processus} to ProcessusSMI ,
+  PolitiqueQSE{indicateur} to IndicateurSMI ,
+  
+      Audit{processus} to ProcessusSMI ,
+  ConstatAudit{processus} to ProcessusSMI ,
+    ConstatAudit{audit} to Audit ,
+  
+Objectif{indicateur} to IndicateurSMI ,
+ResultIndicateurs{indicateur} to IndicateurSMI ,
+
+}
+
+
+paginate Action , AnalyseEnvirommentale , AnalyseSST , AnalyseSWOT , AutreAction , BesoinPI , IndicateurSMI , ResultIndicateurs, ResultatIndicateur,
+NonConformite , Objectif, ObligationConformite, PolitiqueQSE, ProcessusSMI, Reclamation, Risque ,  Audit, ConstatAudit, PlanificationRDD, Document
+ with pagination
+search  Action , AnalyseEnvirommentale , AnalyseSST , AnalyseSWOT , AutreAction , BesoinPI , IndicateurSMI , ResultIndicateurs, ResultatIndicateur,
+NonConformite , Objectif, ObligationConformite, PolitiqueQSE, ProcessusSMI, Reclamation, Risque ,  Audit, ConstatAudit, PlanificationRDD, Document
+ with elasticsearch

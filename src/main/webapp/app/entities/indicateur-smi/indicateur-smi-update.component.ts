@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IIndicateurSMI, IndicateurSMI } from 'app/shared/model/indicateur-smi.model';
 import { IndicateurSMIService } from './indicateur-smi.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
-
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
 @Component({
   selector: 'jhi-indicateur-smi-update',
@@ -16,11 +16,11 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class IndicateurSMIUpdateComponent implements OnInit {
   isSaving = false;
+  processussmis: IProcessusSMI[] = [];
   dateIdentificationDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
-    processus: [],
     dateIdentification: [],
     indicateur: [],
     formuleCalcul: [],
@@ -31,25 +31,27 @@ export class IndicateurSMIUpdateComponent implements OnInit {
     responsableCalcul: [],
     observations: [],
     vigueur: [],
-    annee: [],
-    observation: [],
+    processus: [],
   });
 
-  constructor(protected indicateurSMIService: IndicateurSMIService,
-     protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-     private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected indicateurSMIService: IndicateurSMIService,
+    protected processusSMIService: ProcessusSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ indicateurSMI }) => {
       this.updateForm(indicateurSMI);
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
   updateForm(indicateurSMI: IIndicateurSMI): void {
     this.editForm.patchValue({
       id: indicateurSMI.id,
-      processus: indicateurSMI.processus,
       dateIdentification: indicateurSMI.dateIdentification,
       indicateur: indicateurSMI.indicateur,
       formuleCalcul: indicateurSMI.formuleCalcul,
@@ -60,8 +62,7 @@ export class IndicateurSMIUpdateComponent implements OnInit {
       responsableCalcul: indicateurSMI.responsableCalcul,
       observations: indicateurSMI.observations,
       vigueur: indicateurSMI.vigueur,
-      annee: indicateurSMI.annee,
-      observation: indicateurSMI.observation,
+      processus: indicateurSMI.processus,
     });
   }
 
@@ -83,7 +84,6 @@ export class IndicateurSMIUpdateComponent implements OnInit {
     return {
       ...new IndicateurSMI(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       dateIdentification: this.editForm.get(['dateIdentification'])!.value,
       indicateur: this.editForm.get(['indicateur'])!.value,
       formuleCalcul: this.editForm.get(['formuleCalcul'])!.value,
@@ -94,8 +94,7 @@ export class IndicateurSMIUpdateComponent implements OnInit {
       responsableCalcul: this.editForm.get(['responsableCalcul'])!.value,
       observations: this.editForm.get(['observations'])!.value,
       vigueur: this.editForm.get(['vigueur'])!.value,
-      annee: this.editForm.get(['annee'])!.value,
-      observation: this.editForm.get(['observation'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -115,13 +114,7 @@ export class IndicateurSMIUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: IProcessusSMI): any {
+    return item.id;
   }
 }

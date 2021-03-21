@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -22,9 +23,6 @@ public class PolitiqueQSE implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "processus")
-    private String processus;
-
     @Column(name = "date")
     private LocalDate date;
 
@@ -37,8 +35,13 @@ public class PolitiqueQSE implements Serializable {
     @Column(name = "vigueur")
     private Boolean vigueur;
 
-    @Column(name = "indicateur")
-    private String indicateur;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "politiqueQSES", allowSetters = true)
+    private ProcessusSMI processus;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "politiqueQSES", allowSetters = true)
+    private IndicateurSMI indicateur;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -47,19 +50,6 @@ public class PolitiqueQSE implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public PolitiqueQSE processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public LocalDate getDate() {
@@ -114,17 +104,30 @@ public class PolitiqueQSE implements Serializable {
         this.vigueur = vigueur;
     }
 
-    public String getIndicateur() {
-        return indicateur;
+    public ProcessusSMI getProcessus() {
+        return processus;
     }
 
-    public PolitiqueQSE indicateur(String indicateur) {
-        this.indicateur = indicateur;
+    public PolitiqueQSE processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
         return this;
     }
 
-    public void setIndicateur(String indicateur) {
-        this.indicateur = indicateur;
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+    }
+
+    public IndicateurSMI getIndicateur() {
+        return indicateur;
+    }
+
+    public PolitiqueQSE indicateur(IndicateurSMI indicateurSMI) {
+        this.indicateur = indicateurSMI;
+        return this;
+    }
+
+    public void setIndicateur(IndicateurSMI indicateurSMI) {
+        this.indicateur = indicateurSMI;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -149,12 +152,10 @@ public class PolitiqueQSE implements Serializable {
     public String toString() {
         return "PolitiqueQSE{" +
             "id=" + getId() +
-            ", processus='" + getProcessus() + "'" +
             ", date='" + getDate() + "'" +
             ", axePolitiqueQSE='" + getAxePolitiqueQSE() + "'" +
             ", objectifQSE='" + getObjectifQSE() + "'" +
             ", vigueur='" + isVigueur() + "'" +
-            ", indicateur='" + getIndicateur() + "'" +
             "}";
     }
 }

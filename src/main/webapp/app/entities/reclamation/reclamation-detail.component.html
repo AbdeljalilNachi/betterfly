@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ reclamation.processus }}</span>
-                </dd>
                 <dt><span>Date</span></dt>
                 <dd>
                     <span>{{ reclamation.date }}</span>
@@ -39,18 +35,34 @@
                 <dd>
                     <span>{{ reclamation.origine }}</span>
                 </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="reclamation.action">
+                        <a [routerLink]="['/action', reclamation.action?.id, 'view']">{{ reclamation.action?.action }}</a>
+                    </div>
+                </dd>
+                <dt><span>Delegue</span></dt>
+                <dd>
+                    {{ reclamation.delegue?.login }}
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="reclamation.processus">
+                        <a [routerLink]="['/processus-smi', reclamation.processus?.id, 'view']">{{ reclamation.processus?.processus }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/reclamation', reclamation.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

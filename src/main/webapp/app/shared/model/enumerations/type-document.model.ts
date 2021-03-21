@@ -1,0 +1,13 @@
+export const enum TypeDocument {
+  PROECDURE = 'PROECDURE',
+
+  INSTRUCTION = 'INSTRUCTION',
+
+  ENREGISTREMENT = 'ENREGISTREMENT',
+
+  MANUEL = 'MANUEL',
+
+  POLITIQUE = 'POLITIQUE',
+
+  AUTRES = 'AUTRES',
+}

@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Reclamation(0, 'AAAAAAA', currentDate, 'AAAAAAA', false, 'AAAAAAA', 'image/png', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Reclamation(0, currentDate, 'AAAAAAA', false, 'AAAAAAA', 'image/png', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -69,7 +69,6 @@ describe('Service Tests', () => {
       it('should update a Reclamation', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             justifiee: true,
@@ -97,7 +96,6 @@ describe('Service Tests', () => {
       it('should return a list of Reclamation', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             justifiee: true,

@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -22,9 +23,6 @@ public class NonConformite implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "processus")
-    private String processus;
-
     @Column(name = "date")
     private LocalDate date;
 
@@ -37,6 +35,18 @@ public class NonConformite implements Serializable {
     @Column(name = "origine")
     private String origine;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "nonConformites", allowSetters = true)
+    private Action action;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "nonConformites", allowSetters = true)
+    private User delegue;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "nonConformites", allowSetters = true)
+    private ProcessusSMI processus;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -44,19 +54,6 @@ public class NonConformite implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public NonConformite processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public LocalDate getDate() {
@@ -110,6 +107,45 @@ public class NonConformite implements Serializable {
     public void setOrigine(String origine) {
         this.origine = origine;
     }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public NonConformite action(Action action) {
+        this.action = action;
+        return this;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public User getDelegue() {
+        return delegue;
+    }
+
+    public NonConformite delegue(User user) {
+        this.delegue = user;
+        return this;
+    }
+
+    public void setDelegue(User user) {
+        this.delegue = user;
+    }
+
+    public ProcessusSMI getProcessus() {
+        return processus;
+    }
+
+    public NonConformite processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+        return this;
+    }
+
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -133,7 +169,6 @@ public class NonConformite implements Serializable {
     public String toString() {
         return "NonConformite{" +
             "id=" + getId() +
-            ", processus='" + getProcessus() + "'" +
             ", date='" + getDate() + "'" +
             ", description='" + getDescription() + "'" +
             ", causesPotentielles='" + getCausesPotentielles() + "'" +

@@ -34,7 +34,6 @@ describe('Service Tests', () => {
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
-        'AAAAAAA',
         Situation.Normale,
         EnumFive.ONE,
         EnumFive.ONE,
@@ -89,7 +88,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             date: currentDate.format(DATE_FORMAT),
-            processus: 'BBBBBB',
             buisnessUnit: 'BBBBBB',
             uniteTravail: 'BBBBBB',
             danger: 'BBBBBB',
@@ -125,7 +123,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             date: currentDate.format(DATE_FORMAT),
-            processus: 'BBBBBB',
             buisnessUnit: 'BBBBBB',
             uniteTravail: 'BBBBBB',
             danger: 'BBBBBB',

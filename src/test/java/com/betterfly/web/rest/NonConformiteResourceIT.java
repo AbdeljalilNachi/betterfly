@@ -41,9 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class NonConformiteResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -83,7 +80,6 @@ public class NonConformiteResourceIT {
      */
     public static NonConformite createEntity(EntityManager em) {
         NonConformite nonConformite = new NonConformite()
-            .processus(DEFAULT_PROCESSUS)
             .date(DEFAULT_DATE)
             .description(DEFAULT_DESCRIPTION)
             .causesPotentielles(DEFAULT_CAUSES_POTENTIELLES)
@@ -98,7 +94,6 @@ public class NonConformiteResourceIT {
      */
     public static NonConformite createUpdatedEntity(EntityManager em) {
         NonConformite nonConformite = new NonConformite()
-            .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .description(UPDATED_DESCRIPTION)
             .causesPotentielles(UPDATED_CAUSES_POTENTIELLES)
@@ -125,7 +120,6 @@ public class NonConformiteResourceIT {
         List<NonConformite> nonConformiteList = nonConformiteRepository.findAll();
         assertThat(nonConformiteList).hasSize(databaseSizeBeforeCreate + 1);
         NonConformite testNonConformite = nonConformiteList.get(nonConformiteList.size() - 1);
-        assertThat(testNonConformite.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testNonConformite.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testNonConformite.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testNonConformite.getCausesPotentielles()).isEqualTo(DEFAULT_CAUSES_POTENTIELLES);
@@ -169,7 +163,6 @@ public class NonConformiteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(nonConformite.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].causesPotentielles").value(hasItem(DEFAULT_CAUSES_POTENTIELLES)))
@@ -187,7 +180,6 @@ public class NonConformiteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(nonConformite.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.causesPotentielles").value(DEFAULT_CAUSES_POTENTIELLES))
@@ -214,7 +206,6 @@ public class NonConformiteResourceIT {
         // Disconnect from session so that the updates on updatedNonConformite are not directly saved in db
         em.detach(updatedNonConformite);
         updatedNonConformite
-            .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .description(UPDATED_DESCRIPTION)
             .causesPotentielles(UPDATED_CAUSES_POTENTIELLES)
@@ -229,7 +220,6 @@ public class NonConformiteResourceIT {
         List<NonConformite> nonConformiteList = nonConformiteRepository.findAll();
         assertThat(nonConformiteList).hasSize(databaseSizeBeforeUpdate);
         NonConformite testNonConformite = nonConformiteList.get(nonConformiteList.size() - 1);
-        assertThat(testNonConformite.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testNonConformite.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testNonConformite.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testNonConformite.getCausesPotentielles()).isEqualTo(UPDATED_CAUSES_POTENTIELLES);
@@ -293,7 +283,6 @@ public class NonConformiteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(nonConformite.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].causesPotentielles").value(hasItem(DEFAULT_CAUSES_POTENTIELLES)))

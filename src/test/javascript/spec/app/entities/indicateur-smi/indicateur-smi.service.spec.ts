@@ -24,22 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new IndicateurSMI(
-        0,
-        'AAAAAAA',
-        currentDate,
-        'AAAAAAA',
-        'AAAAAAA',
-        0,
-        0,
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        false,
-        0,
-        'AAAAAAA'
-      );
+      elemDefault = new IndicateurSMI(0, currentDate, 'AAAAAAA', 'AAAAAAA', 0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false);
     });
 
     describe('Service methods', () => {
@@ -84,7 +69,6 @@ describe('Service Tests', () => {
       it('should update a IndicateurSMI', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             indicateur: 'BBBBBB',
             formuleCalcul: 'BBBBBB',
@@ -95,8 +79,6 @@ describe('Service Tests', () => {
             responsableCalcul: 'BBBBBB',
             observations: 'BBBBBB',
             vigueur: true,
-            annee: 1,
-            observation: 'BBBBBB',
           },
           elemDefault
         );
@@ -118,7 +100,6 @@ describe('Service Tests', () => {
       it('should return a list of IndicateurSMI', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             indicateur: 'BBBBBB',
             formuleCalcul: 'BBBBBB',
@@ -129,8 +110,6 @@ describe('Service Tests', () => {
             responsableCalcul: 'BBBBBB',
             observations: 'BBBBBB',
             vigueur: true,
-            annee: 1,
-            observation: 'BBBBBB',
           },
           elemDefault
         );

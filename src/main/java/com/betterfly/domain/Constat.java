@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -35,6 +36,10 @@ public class Constat implements Serializable {
 
     @Column(name = "origine")
     private String origine;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "constats", allowSetters = true)
+    private Action action;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -108,6 +113,19 @@ public class Constat implements Serializable {
 
     public void setOrigine(String origine) {
         this.origine = origine;
+    }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public Constat action(Action action) {
+        this.action = action;
+        return this;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

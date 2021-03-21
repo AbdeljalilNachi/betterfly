@@ -25,7 +25,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new AnalyseSWOT(0, 'AAAAAAA', currentDate, 'AAAAAAA', 'AAAAAAA', TypeAnalyseSWOT.FORCE, 'AAAAAAA', 'AAAAAAA', false);
+      elemDefault = new AnalyseSWOT(0, currentDate, 'AAAAAAA', 'AAAAAAA', TypeAnalyseSWOT.FORCE, 'AAAAAAA', 'AAAAAAA', false);
     });
 
     describe('Service methods', () => {
@@ -70,7 +70,6 @@ describe('Service Tests', () => {
       it('should update a AnalyseSWOT', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             pilote: 'BBBBBB',
@@ -99,7 +98,6 @@ describe('Service Tests', () => {
       it('should return a list of AnalyseSWOT', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             dateIdentification: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             pilote: 'BBBBBB',

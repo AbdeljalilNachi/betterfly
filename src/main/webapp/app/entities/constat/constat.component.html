@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Constats d'audits</span>
+        <span>Constats</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-constat" [routerLink]="['/constat/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Constat d'audit
+            Créer un nouveau Constat
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="constats?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun constat trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="constats && constats.length > 0">
@@ -46,6 +46,7 @@
                     <th scope="col"  jhiSortBy="constat"><span>Constat</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="type"><span>Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.id"><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -57,6 +58,11 @@
                     <td>{{ constat.constat }}</td>
                     <td>{{ constat.type }}</td>
                     <td>{{ constat.origine }}</td>
+                    <td>
+                        <div *ngIf="constat.action">
+                            <a [routerLink]="['/action', constat.action?.id, 'view']" >{{ constat.action?.action }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

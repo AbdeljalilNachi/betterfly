@@ -1,12 +1,10 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -24,9 +22,6 @@ public class IndicateurSMI implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @Column(name = "processus")
-    private String processus;
 
     @Column(name = "date_identification")
     private LocalDate dateIdentification;
@@ -58,16 +53,9 @@ public class IndicateurSMI implements Serializable {
     @Column(name = "vigueur")
     private Boolean vigueur;
 
-    @Column(name = "annee")
-    private Integer annee;
-
-    @Column(name = "observation")
-    private String observation;
-    
-    /*
-    @ManyToMany(mappedBy = "tasks")
-    @JsonIgnore
-    private Set<Job> jobs = new HashSet<>();  */
+    @ManyToOne
+    @JsonIgnoreProperties(value = "indicateurSMIS", allowSetters = true)
+    private ProcessusSMI processus;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -76,19 +64,6 @@ public class IndicateurSMI implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public IndicateurSMI processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public LocalDate getDateIdentification() {
@@ -221,30 +196,17 @@ public class IndicateurSMI implements Serializable {
         this.vigueur = vigueur;
     }
 
-    public Integer getAnnee() {
-        return annee;
+    public ProcessusSMI getProcessus() {
+        return processus;
     }
 
-    public IndicateurSMI annee(Integer annee) {
-        this.annee = annee;
+    public IndicateurSMI processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
         return this;
     }
 
-    public void setAnnee(Integer annee) {
-        this.annee = annee;
-    }
-
-    public String getObservation() {
-        return observation;
-    }
-
-    public IndicateurSMI observation(String observation) {
-        this.observation = observation;
-        return this;
-    }
-
-    public void setObservation(String observation) {
-        this.observation = observation;
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -269,7 +231,6 @@ public class IndicateurSMI implements Serializable {
     public String toString() {
         return "IndicateurSMI{" +
             "id=" + getId() +
-            ", processus='" + getProcessus() + "'" +
             ", dateIdentification='" + getDateIdentification() + "'" +
             ", indicateur='" + getIndicateur() + "'" +
             ", formuleCalcul='" + getFormuleCalcul() + "'" +
@@ -280,8 +241,6 @@ public class IndicateurSMI implements Serializable {
             ", responsableCalcul='" + getResponsableCalcul() + "'" +
             ", observations='" + getObservations() + "'" +
             ", vigueur='" + isVigueur() + "'" +
-            ", annee=" + getAnnee() +
-            ", observation='" + getObservation() + "'" +
             "}";
     }
 }

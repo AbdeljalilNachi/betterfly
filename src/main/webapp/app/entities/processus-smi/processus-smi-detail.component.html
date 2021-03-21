@@ -20,11 +20,7 @@
                 <dd>
                     <span>{{ processusSMI.version }}</span>
                 </dd>
-                <dt><span>Pilote</span></dt>
-                <dd>
-                    <span>{{ processusSMI.pilote }}</span>
-                </dd>
-                <dt><span>Finalité</span></dt>
+                <dt><span>Finalite</span></dt>
                 <dd>
                     <span>{{ processusSMI.finalite }}</span>
                 </dd>
@@ -43,18 +39,28 @@
                 <dd>
                     <span>{{ processusSMI.vigueur }}</span>
                 </dd>
+                <dt><span>Pilote</span></dt>
+                <dd>
+                    {{ processusSMI.pilote?.login }}
+                </dd>
+                <dt><span>Audit</span></dt>
+                <dd>
+                    <div *ngIf="processusSMI.audit">
+                        <a [routerLink]="['/audit', processusSMI.audit?.id, 'view']">{{ processusSMI.audit?.id }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/processus-smi', processusSMI.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

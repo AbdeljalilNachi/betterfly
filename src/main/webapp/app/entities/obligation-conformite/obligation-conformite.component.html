@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Obligations de Conformité</span>
+        <span>Obligation Conformites</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-obligation-conformite" [routerLink]="['/obligation-conformite/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Obligation Conformite
+            Créer un nouveau Obligation Conformite
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="obligationConformites?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun obligationConformite trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="obligationConformites && obligationConformites.length > 0">
@@ -48,8 +48,12 @@
                     <th scope="col"  jhiSortBy="exigence"><span>Exigence</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="applicable"><span>Applicable</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="conforme"><span>Conforme</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="statut"><span>Statut</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="observation"><span>Observation</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.id"><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="delegue.id"><span>Delegue</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -63,8 +67,22 @@
                     <td>{{ obligationConformite.exigence }}</td>
                     <td>{{ obligationConformite.applicable }}</td>
                     <td>{{ obligationConformite.conforme }}</td>
+                    <td>{{ obligationConformite.statut }}</td>
                     <td>{{ obligationConformite.observation }}</td>
-                    <td>{{ obligationConformite.processus }}</td>
+                    <td>{{ obligationConformite.origine }}</td>
+                    <td>
+                        <div *ngIf="obligationConformite.action">
+                            <a [routerLink]="['/action', obligationConformite.action?.id, 'view']" >{{ obligationConformite.action?.action }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ obligationConformite.delegue?.login }}
+                    </td>
+                    <td>
+                        <div *ngIf="obligationConformite.processus">
+                            <a [routerLink]="['/processus-smi', obligationConformite.processus?.id, 'view']" >{{ obligationConformite.processus?.processus }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

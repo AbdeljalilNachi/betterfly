@@ -49,9 +49,6 @@ public class AnalyseSSTResourceIT {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final String DEFAULT_BUISNESS_UNIT = "AAAAAAAAAA";
     private static final String UPDATED_BUISNESS_UNIT = "BBBBBBBBBB";
 
@@ -119,7 +116,6 @@ public class AnalyseSSTResourceIT {
     public static AnalyseSST createEntity(EntityManager em) {
         AnalyseSST analyseSST = new AnalyseSST()
             .date(DEFAULT_DATE)
-            .processus(DEFAULT_PROCESSUS)
             .buisnessUnit(DEFAULT_BUISNESS_UNIT)
             .uniteTravail(DEFAULT_UNITE_TRAVAIL)
             .danger(DEFAULT_DANGER)
@@ -144,7 +140,6 @@ public class AnalyseSSTResourceIT {
     public static AnalyseSST createUpdatedEntity(EntityManager em) {
         AnalyseSST analyseSST = new AnalyseSST()
             .date(UPDATED_DATE)
-            .processus(UPDATED_PROCESSUS)
             .buisnessUnit(UPDATED_BUISNESS_UNIT)
             .uniteTravail(UPDATED_UNITE_TRAVAIL)
             .danger(UPDATED_DANGER)
@@ -181,7 +176,6 @@ public class AnalyseSSTResourceIT {
         assertThat(analyseSSTList).hasSize(databaseSizeBeforeCreate + 1);
         AnalyseSST testAnalyseSST = analyseSSTList.get(analyseSSTList.size() - 1);
         assertThat(testAnalyseSST.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testAnalyseSST.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testAnalyseSST.getBuisnessUnit()).isEqualTo(DEFAULT_BUISNESS_UNIT);
         assertThat(testAnalyseSST.getUniteTravail()).isEqualTo(DEFAULT_UNITE_TRAVAIL);
         assertThat(testAnalyseSST.getDanger()).isEqualTo(DEFAULT_DANGER);
@@ -235,7 +229,6 @@ public class AnalyseSSTResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(analyseSST.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].buisnessUnit").value(hasItem(DEFAULT_BUISNESS_UNIT)))
             .andExpect(jsonPath("$.[*].uniteTravail").value(hasItem(DEFAULT_UNITE_TRAVAIL)))
             .andExpect(jsonPath("$.[*].danger").value(hasItem(DEFAULT_DANGER)))
@@ -263,7 +256,6 @@ public class AnalyseSSTResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(analyseSST.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.buisnessUnit").value(DEFAULT_BUISNESS_UNIT))
             .andExpect(jsonPath("$.uniteTravail").value(DEFAULT_UNITE_TRAVAIL))
             .andExpect(jsonPath("$.danger").value(DEFAULT_DANGER))
@@ -300,7 +292,6 @@ public class AnalyseSSTResourceIT {
         em.detach(updatedAnalyseSST);
         updatedAnalyseSST
             .date(UPDATED_DATE)
-            .processus(UPDATED_PROCESSUS)
             .buisnessUnit(UPDATED_BUISNESS_UNIT)
             .uniteTravail(UPDATED_UNITE_TRAVAIL)
             .danger(UPDATED_DANGER)
@@ -325,7 +316,6 @@ public class AnalyseSSTResourceIT {
         assertThat(analyseSSTList).hasSize(databaseSizeBeforeUpdate);
         AnalyseSST testAnalyseSST = analyseSSTList.get(analyseSSTList.size() - 1);
         assertThat(testAnalyseSST.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testAnalyseSST.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testAnalyseSST.getBuisnessUnit()).isEqualTo(UPDATED_BUISNESS_UNIT);
         assertThat(testAnalyseSST.getUniteTravail()).isEqualTo(UPDATED_UNITE_TRAVAIL);
         assertThat(testAnalyseSST.getDanger()).isEqualTo(UPDATED_DANGER);
@@ -399,7 +389,6 @@ public class AnalyseSSTResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(analyseSST.getId().intValue())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].buisnessUnit").value(hasItem(DEFAULT_BUISNESS_UNIT)))
             .andExpect(jsonPath("$.[*].uniteTravail").value(hasItem(DEFAULT_UNITE_TRAVAIL)))
             .andExpect(jsonPath("$.[*].danger").value(hasItem(DEFAULT_DANGER)))

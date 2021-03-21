@@ -6,12 +6,6 @@
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
     </a>
-
-    <a class="btn-left-menu-toggle float-left" href="javascript:void(0);" (click)="toggleLeftMenu()">
-        <i class="fa fa-bars"></i>
-    </a>
-
-    
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -22,86 +16,44 @@
                     </span>
                 </a>
             </li>
-            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here 
- -->
-            <div *jhiHasAnyAuthority="[ 'ROLE_ADMIN' , 'PILOTAGE'  , 'QUALITÉ, SÉCURITÉ, ENVIRONNEMENT' ]" > 
-            <li   *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" 
-            display="dynamic" routerLinkActive="active"               [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                    <span>
-                        <fa-icon icon="th-list"></fa-icon>
-                        <span> 
-                            Processus
-                        </span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                  
-                    <li>
-                        <a class="dropdown-item" routerLink="processus-smi" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span>Processus SMI</span>
-                        </a>
-                    </li>   
-                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                </ul>
-            </li>
-
-          </div>  
-
+            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
                         <span>
-                            Contexte
+                            Entities
                         </span>
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                  
-                    <li>
-                        <a class="dropdown-item" routerLink="analyse-swot" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span>Analyse SWOT</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="besoin-pi" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span>Besoin PI</span>
-                        </a>
-                    </li>
-                    <li *jhiHasAnyAuthority="[ 'ROLE_ADMIN' , 'PILOTAGE'  , 'QUALITÉ, SÉCURITÉ, ENVIRONNEMENT' ]">
-                        <a class="dropdown-item" routerLink="politique-qse" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span>Politique QSE</span>
-                        </a>
-                    </li>
-                   
-                    </ul>
-            </li>
-
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                    <span>
-                        <fa-icon icon="th-list"></fa-icon>
-                        <span>
-                            Actions
-                        </span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                  
-                  
-                    <li>
+                    
+                    
+                     <li>
                         <a class="dropdown-item" routerLink="action/stats" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>Statistiques</span>
                         </a>
                     </li>
-
-
+                    
+                    <li>
+                        <a class="dropdown-item" routerLink="analyse-swot" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Analyse Swot</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="besoin-pi" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Besoin Pi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="politique-qse" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Politique Qse</span>
+                        </a>
+                    </li>
                     <li>
                         <a class="dropdown-item" routerLink="risque" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
@@ -114,10 +66,10 @@
                             <span>Analyse Sst</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="[ 'ROLE_ADMIN' , 'PILOTAGE'  , 'QUALITÉ, SÉCURITÉ, ENVIRONNEMENT' ]">
+                    <li>
                         <a class="dropdown-item" routerLink="constat" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span>Constats d'audits</span>
+                            <span>Constat</span>
                         </a>
                     </li>
                     <li>
@@ -132,19 +84,19 @@
                             <span>Non Conformite</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="[ 'ROLE_ADMIN' , 'PILOTAGE'  , 'QUALITÉ, SÉCURITÉ, ENVIRONNEMENT' ]">
+                    <li>
                         <a class="dropdown-item" routerLink="objectif" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span>Objectifs et indicateurs</span>
+                            <span>Objectif</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="[ 'ROLE_ADMIN' , 'PILOTAGE'  , 'QUALITÉ, SÉCURITÉ, ENVIRONNEMENT' , 'GESTION COMMERCIALE']">
+                    <li>
                         <a class="dropdown-item" routerLink="reclamation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>Reclamation</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="[ 'VRAC & DIVERS'  ]">
+                    <li>
                         <a class="dropdown-item" routerLink="obligation-conformite" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>Obligation Conformite</span>
@@ -162,43 +114,57 @@
                             <span>Autre Action</span>
                         </a>
                     </li>
-                   
-                   
-                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                </ul>
-            </li>
-
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                    <span>
-                        <fa-icon icon="th-list"></fa-icon>
-                        <span>
-                            Indicateur 
-                        </span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                  
-                    <li *jhiHasAnyAuthority="[ 'ROLE_ADMIN' , 'PILOTAGE'  , 'QUALITÉ, SÉCURITÉ, ENVIRONNEMENT' ]">
-                        <a class="dropdown-item" routerLink="indicateur-smi" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li>
+                        <a class="dropdown-item" routerLink="processus-smi" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span>Indicateur Smi</span>
+                            <span>Processus Smi</span>
                         </a>
                     </li>
-
                     <li>
                         <a class="dropdown-item" routerLink="resultat-indicateur" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span>Resultat Indicateur</span>
                         </a>
                     </li>
-                    
-                   
+                    <li>
+                        <a class="dropdown-item" routerLink="indicateur-smi" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Indicateur Smi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="result-indicateurs" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Result Indicateurs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="audit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Audit</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="constat-audit" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Constat Audit</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="planification-rdd" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Planification Rdd</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="document" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span>Document</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
-
-
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
@@ -250,12 +216,6 @@
                         </a>
                     </li>
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                    <li *ngIf="!inProduction">
-                        <a class="dropdown-item" href='./h2-console' target="_tab" (click)="collapseNavbar()">
-                            <fa-icon icon="hdd" [fixedWidth]="true"></fa-icon>
-                            <span>Database</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">

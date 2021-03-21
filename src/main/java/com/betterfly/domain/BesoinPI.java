@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -22,9 +23,6 @@ public class BesoinPI implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "processus")
-    private String processus;
-
     @Column(name = "date_identification")
     private LocalDate dateIdentification;
 
@@ -40,6 +38,10 @@ public class BesoinPI implements Serializable {
     @Column(name = "afficher")
     private Boolean afficher;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "besoinPIS", allowSetters = true)
+    private ProcessusSMI processus;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -47,19 +49,6 @@ public class BesoinPI implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public BesoinPI processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public LocalDate getDateIdentification() {
@@ -126,6 +115,19 @@ public class BesoinPI implements Serializable {
     public void setAfficher(Boolean afficher) {
         this.afficher = afficher;
     }
+
+    public ProcessusSMI getProcessus() {
+        return processus;
+    }
+
+    public BesoinPI processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+        return this;
+    }
+
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -149,7 +151,6 @@ public class BesoinPI implements Serializable {
     public String toString() {
         return "BesoinPI{" +
             "id=" + getId() +
-            ", processus='" + getProcessus() + "'" +
             ", dateIdentification='" + getDateIdentification() + "'" +
             ", piPertinentes='" + getPiPertinentes() + "'" +
             ", pertinente='" + isPertinente() + "'" +

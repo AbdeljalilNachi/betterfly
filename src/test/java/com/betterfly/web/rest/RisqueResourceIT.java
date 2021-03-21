@@ -45,9 +45,6 @@ import com.betterfly.domain.enumeration.Traitement;
 @WithMockUser
 public class RisqueResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATE_IDENTIFICATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_IDENTIFICATION = LocalDate.now(ZoneId.systemDefault());
 
@@ -108,7 +105,6 @@ public class RisqueResourceIT {
      */
     public static Risque createEntity(EntityManager em) {
         Risque risque = new Risque()
-            .processus(DEFAULT_PROCESSUS)
             .dateIdentification(DEFAULT_DATE_IDENTIFICATION)
             .description(DEFAULT_DESCRIPTION)
             .causePotentielle(DEFAULT_CAUSE_POTENTIELLE)
@@ -130,7 +126,6 @@ public class RisqueResourceIT {
      */
     public static Risque createUpdatedEntity(EntityManager em) {
         Risque risque = new Risque()
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .description(UPDATED_DESCRIPTION)
             .causePotentielle(UPDATED_CAUSE_POTENTIELLE)
@@ -164,7 +159,6 @@ public class RisqueResourceIT {
         List<Risque> risqueList = risqueRepository.findAll();
         assertThat(risqueList).hasSize(databaseSizeBeforeCreate + 1);
         Risque testRisque = risqueList.get(risqueList.size() - 1);
-        assertThat(testRisque.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testRisque.getDateIdentification()).isEqualTo(DEFAULT_DATE_IDENTIFICATION);
         assertThat(testRisque.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testRisque.getCausePotentielle()).isEqualTo(DEFAULT_CAUSE_POTENTIELLE);
@@ -215,7 +209,6 @@ public class RisqueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(risque.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].causePotentielle").value(hasItem(DEFAULT_CAUSE_POTENTIELLE)))
@@ -240,7 +233,6 @@ public class RisqueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(risque.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.dateIdentification").value(DEFAULT_DATE_IDENTIFICATION.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.causePotentielle").value(DEFAULT_CAUSE_POTENTIELLE))
@@ -274,7 +266,6 @@ public class RisqueResourceIT {
         // Disconnect from session so that the updates on updatedRisque are not directly saved in db
         em.detach(updatedRisque);
         updatedRisque
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .description(UPDATED_DESCRIPTION)
             .causePotentielle(UPDATED_CAUSE_POTENTIELLE)
@@ -296,7 +287,6 @@ public class RisqueResourceIT {
         List<Risque> risqueList = risqueRepository.findAll();
         assertThat(risqueList).hasSize(databaseSizeBeforeUpdate);
         Risque testRisque = risqueList.get(risqueList.size() - 1);
-        assertThat(testRisque.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testRisque.getDateIdentification()).isEqualTo(UPDATED_DATE_IDENTIFICATION);
         assertThat(testRisque.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testRisque.getCausePotentielle()).isEqualTo(UPDATED_CAUSE_POTENTIELLE);
@@ -367,7 +357,6 @@ public class RisqueResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(risque.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].causePotentielle").value(hasItem(DEFAULT_CAUSE_POTENTIELLE)))

@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-reclamation-heading">Créer ou mettre à jour Reclamation</h2>
+            <h2 id="jhi-reclamation-heading">Create or edit a Reclamation</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,16 +12,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_processus">Processus</label>
-                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
-                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_date">Date</label>
                     <div class="input-group">
-                        <input required id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
+                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -30,7 +23,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_description">Description</label>
-                    <input required type="text" class="form-control" name="description" id="field_description"
+                    <input type="text" class="form-control" name="description" id="field_description"
                            formControlName="description"/>
                 </div>
 
@@ -42,7 +35,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_client">Client</label>
-                    <input required type="text" class="form-control" name="client" id="field_client"
+                    <input type="text" class="form-control" name="client" id="field_client"
                            formControlName="client"/>
                 </div>
 
@@ -67,14 +60,38 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_origine">Origine</label>
-                    <input  type="text" class="form-control" name="origine" id="field_origine"
-                           formControlName="origine" value="RECLAMATION"/>
+                    <input type="text" class="form-control" name="origine" id="field_origine"
+                           formControlName="origine"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_action">Action</label>
+                    <select class="form-control" id="field_action" name="action" formControlName="action">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="actionOption.id === editForm.get('action')!.value?.id ? editForm.get('action')!.value : actionOption" *ngFor="let actionOption of actions; trackBy: trackById">{{ actionOption.action }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_delegue">Delegue</label>
+                    <select class="form-control" id="field_delegue" name="delegue" formControlName="delegue">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('delegue')!.value?.id ? editForm.get('delegue')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_processus">Processus</label>
+                    <select class="form-control" id="field_processus" name="processus" formControlName="processus">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="processusSMIOption.id === editForm.get('processus')!.value?.id ? editForm.get('processus')!.value : processusSMIOption" *ngFor="let processusSMIOption of processussmis; trackBy: trackById">{{ processusSMIOption.processus }}</option>
+                    </select>
                 </div>
             </div>
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

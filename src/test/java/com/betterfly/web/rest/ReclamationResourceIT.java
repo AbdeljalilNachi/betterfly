@@ -42,9 +42,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ReclamationResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -92,7 +89,6 @@ public class ReclamationResourceIT {
      */
     public static Reclamation createEntity(EntityManager em) {
         Reclamation reclamation = new Reclamation()
-            .processus(DEFAULT_PROCESSUS)
             .date(DEFAULT_DATE)
             .description(DEFAULT_DESCRIPTION)
             .justifiee(DEFAULT_JUSTIFIEE)
@@ -110,7 +106,6 @@ public class ReclamationResourceIT {
      */
     public static Reclamation createUpdatedEntity(EntityManager em) {
         Reclamation reclamation = new Reclamation()
-            .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .description(UPDATED_DESCRIPTION)
             .justifiee(UPDATED_JUSTIFIEE)
@@ -140,7 +135,6 @@ public class ReclamationResourceIT {
         List<Reclamation> reclamationList = reclamationRepository.findAll();
         assertThat(reclamationList).hasSize(databaseSizeBeforeCreate + 1);
         Reclamation testReclamation = reclamationList.get(reclamationList.size() - 1);
-        assertThat(testReclamation.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testReclamation.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testReclamation.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testReclamation.isJustifiee()).isEqualTo(DEFAULT_JUSTIFIEE);
@@ -187,7 +181,6 @@ public class ReclamationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reclamation.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].justifiee").value(hasItem(DEFAULT_JUSTIFIEE.booleanValue())))
@@ -208,7 +201,6 @@ public class ReclamationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(reclamation.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.justifiee").value(DEFAULT_JUSTIFIEE.booleanValue()))
@@ -238,7 +230,6 @@ public class ReclamationResourceIT {
         // Disconnect from session so that the updates on updatedReclamation are not directly saved in db
         em.detach(updatedReclamation);
         updatedReclamation
-            .processus(UPDATED_PROCESSUS)
             .date(UPDATED_DATE)
             .description(UPDATED_DESCRIPTION)
             .justifiee(UPDATED_JUSTIFIEE)
@@ -256,7 +247,6 @@ public class ReclamationResourceIT {
         List<Reclamation> reclamationList = reclamationRepository.findAll();
         assertThat(reclamationList).hasSize(databaseSizeBeforeUpdate);
         Reclamation testReclamation = reclamationList.get(reclamationList.size() - 1);
-        assertThat(testReclamation.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testReclamation.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testReclamation.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testReclamation.isJustifiee()).isEqualTo(UPDATED_JUSTIFIEE);
@@ -323,7 +313,6 @@ public class ReclamationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reclamation.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].justifiee").value(hasItem(DEFAULT_JUSTIFIEE.booleanValue())))

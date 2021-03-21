@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-politique-qse-heading">Créer ou mettre à jour Politique QSE</h2>
+            <h2 id="jhi-politique-qse-heading">Create or edit a Politique QSE</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,16 +12,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_processus">Processus</label>
-                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
-                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_date">Date</label>
                     <div class="input-group">
-                        <input required id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
+                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker #dateDp="ngbDatepicker" formControlName="date"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -30,13 +23,13 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_axePolitiqueQSE">Axe Politique QSE</label>
-                    <input required type="text" class="form-control" name="axePolitiqueQSE" id="field_axePolitiqueQSE"
+                    <input type="text" class="form-control" name="axePolitiqueQSE" id="field_axePolitiqueQSE"
                            formControlName="axePolitiqueQSE"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_objectifQSE">Objectif QSE</label>
-                    <input required type="text" class="form-control" name="objectifQSE" id="field_objectifQSE"
+                    <input type="text" class="form-control" name="objectifQSE" id="field_objectifQSE"
                            formControlName="objectifQSE"/>
                 </div>
 
@@ -47,15 +40,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label required class="form-control-label" for="field_indicateur">Indicateur</label>
-                    <input type="text" class="form-control" name="indicateur" id="field_indicateur"
-                           formControlName="indicateur"/>
+                    <label class="form-control-label" for="field_processus">Processus</label>
+                    <select class="form-control" id="field_processus" name="processus" formControlName="processus">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="processusSMIOption.id === editForm.get('processus')!.value?.id ? editForm.get('processus')!.value : processusSMIOption" *ngFor="let processusSMIOption of processussmis; trackBy: trackById">{{ processusSMIOption.processus }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_indicateur">Indicateur</label>
+                    <select class="form-control" id="field_indicateur" name="indicateur" formControlName="indicateur">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="indicateurSMIOption.id === editForm.get('indicateur')!.value?.id ? editForm.get('indicateur')!.value : indicateurSMIOption" *ngFor="let indicateurSMIOption of indicateursmis; trackBy: trackById">{{ indicateurSMIOption.indicateur }}</option>
+                    </select>
                 </div>
             </div>
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

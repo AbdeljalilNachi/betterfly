@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new NonConformite(0, 'AAAAAAA', currentDate, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new NonConformite(0, currentDate, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -69,7 +69,6 @@ describe('Service Tests', () => {
       it('should update a NonConformite', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             causesPotentielles: 'BBBBBB',
@@ -95,7 +94,6 @@ describe('Service Tests', () => {
       it('should return a list of NonConformite', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             date: currentDate.format(DATE_FORMAT),
             description: 'BBBBBB',
             causesPotentielles: 'BBBBBB',

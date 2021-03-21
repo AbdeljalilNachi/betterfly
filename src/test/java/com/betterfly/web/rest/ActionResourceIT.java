@@ -32,6 +32,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.betterfly.domain.enumeration.TypeAction;
 import com.betterfly.domain.enumeration.Statut;
 import com.betterfly.domain.enumeration.Efficace;
 /**
@@ -49,8 +50,8 @@ public class ActionResourceIT {
     private static final String DEFAULT_ACTION = "AAAAAAAAAA";
     private static final String UPDATED_ACTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+    private static final TypeAction DEFAULT_TYPE = TypeAction.ACTION_FACE_AU_RISQUE;
+    private static final TypeAction UPDATED_TYPE = TypeAction.ACTION_CORRECTIVE;
 
     private static final LocalDate DEFAULT_DELAI = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DELAI = LocalDate.now(ZoneId.systemDefault());
@@ -203,7 +204,7 @@ public class ActionResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(action.getId().intValue())))
             .andExpect(jsonPath("$.[*].datePlanification").value(hasItem(DEFAULT_DATE_PLANIFICATION.toString())))
             .andExpect(jsonPath("$.[*].action").value(hasItem(DEFAULT_ACTION)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].delai").value(hasItem(DEFAULT_DELAI.toString())))
             .andExpect(jsonPath("$.[*].avancement").value(hasItem(DEFAULT_AVANCEMENT)))
             .andExpect(jsonPath("$.[*].realisee").value(hasItem(DEFAULT_REALISEE.booleanValue())))
@@ -226,7 +227,7 @@ public class ActionResourceIT {
             .andExpect(jsonPath("$.id").value(action.getId().intValue()))
             .andExpect(jsonPath("$.datePlanification").value(DEFAULT_DATE_PLANIFICATION.toString()))
             .andExpect(jsonPath("$.action").value(DEFAULT_ACTION))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.delai").value(DEFAULT_DELAI.toString()))
             .andExpect(jsonPath("$.avancement").value(DEFAULT_AVANCEMENT))
             .andExpect(jsonPath("$.realisee").value(DEFAULT_REALISEE.booleanValue()))
@@ -347,7 +348,7 @@ public class ActionResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(action.getId().intValue())))
             .andExpect(jsonPath("$.[*].datePlanification").value(hasItem(DEFAULT_DATE_PLANIFICATION.toString())))
             .andExpect(jsonPath("$.[*].action").value(hasItem(DEFAULT_ACTION)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].delai").value(hasItem(DEFAULT_DELAI.toString())))
             .andExpect(jsonPath("$.[*].avancement").value(hasItem(DEFAULT_AVANCEMENT)))
             .andExpect(jsonPath("$.[*].realisee").value(hasItem(DEFAULT_REALISEE.booleanValue())))

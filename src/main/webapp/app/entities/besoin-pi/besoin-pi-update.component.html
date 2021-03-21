@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-besoin-pi-heading">Créer ou mettre à jour Besoin PI</h2>
+            <h2 id="jhi-besoin-pi-heading">Create or edit a Besoin PI</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,16 +12,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_processus">Processus</label>
-                    <select required class="form-control" name="processus" formControlName="processus" id="field_processus">
-                        <option *ngFor="let pro of pros" value={{pro}}>{{pro}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_dateIdentification">Date Identification</label>
                     <div class="input-group">
-                        <input required id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
+                        <input id="field_dateIdentification" type="text" class="form-control" name="dateIdentification" ngbDatepicker #dateIdentificationDp="ngbDatepicker" formControlName="dateIdentification"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="dateIdentificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
@@ -30,14 +23,14 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_piPertinentes">Pi Pertinentes</label>
-                    <input required type="text" class="form-control" name="piPertinentes" id="field_piPertinentes"
+                    <input type="text" class="form-control" name="piPertinentes" id="field_piPertinentes"
                            formControlName="piPertinentes"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_pertinente">Pertinente</label>
                     <input type="checkbox" class="form-control" name="pertinente" id="field_pertinente"
-                           formControlName="pertinente" checked="checked" />
+                           formControlName="pertinente"/>
                 </div>
 
                 <div class="form-group">
@@ -51,11 +44,19 @@
                     <input type="checkbox" class="form-control" name="afficher" id="field_afficher"
                            formControlName="afficher"/>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_processus">Processus</label>
+                    <select class="form-control" id="field_processus" name="processus" formControlName="processus">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="processusSMIOption.id === editForm.get('processus')!.value?.id ? editForm.get('processus')!.value : processusSMIOption" *ngFor="let processusSMIOption of processussmis; trackBy: trackById">{{ processusSMIOption.processus }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
 
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">

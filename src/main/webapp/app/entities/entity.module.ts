@@ -69,7 +69,26 @@ import { RouterModule } from '@angular/router';
         path: 'indicateur-smi',
         loadChildren: () => import('./indicateur-smi/indicateur-smi.module').then(m => m.BetterFlyIndicateurSMIModule),
       },
-     
+      {
+        path: 'result-indicateurs',
+        loadChildren: () => import('./result-indicateurs/result-indicateurs.module').then(m => m.BetterFlyResultIndicateursModule),
+      },
+      {
+        path: 'audit',
+        loadChildren: () => import('./audit/audit.module').then(m => m.BetterFlyAuditModule),
+      },
+      {
+        path: 'constat-audit',
+        loadChildren: () => import('./constat-audit/constat-audit.module').then(m => m.BetterFlyConstatAuditModule),
+      },
+      {
+        path: 'planification-rdd',
+        loadChildren: () => import('./planification-rdd/planification-rdd.module').then(m => m.BetterFlyPlanificationRDDModule),
+      },
+      {
+        path: 'document',
+        loadChildren: () => import('./document/document.module').then(m => m.BetterFlyDocumentModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

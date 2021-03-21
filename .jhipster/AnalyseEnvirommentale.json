@@ -6,10 +6,6 @@
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "processus",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "businessUnit",
       "fieldType": "String"
     },
@@ -67,7 +63,29 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "action",
+      "otherEntityRelationshipName": "analyseEnvirommentale",
+      "relationshipName": "action",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "analyseEnvirommentale",
+      "relationshipName": "delegue",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "processusSMI",
+      "otherEntityRelationshipName": "analyseEnvirommentale",
+      "relationshipName": "processus",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210302225015",
   "entityTableName": "analyse_envirommentale",
   "dto": "no",
@@ -78,5 +96,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
 }

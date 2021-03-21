@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resultIndicateurs">
+            <h2><span>Result Indicateurs</span> {{ resultIndicateurs.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Annee</span></dt>
+                <dd>
+                    <span>{{ resultIndicateurs.annee }}</span>
+                </dd>
+                <dt><span>Observation</span></dt>
+                <dd>
+                    <span>{{ resultIndicateurs.observation }}</span>
+                </dd>
+                <dt><span>Indicateur</span></dt>
+                <dd>
+                    <div *ngIf="resultIndicateurs.indicateur">
+                        <a [routerLink]="['/indicateur-smi', resultIndicateurs.indicateur?.id, 'view']">{{ resultIndicateurs.indicateur?.indicateur }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/result-indicateurs', resultIndicateurs.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

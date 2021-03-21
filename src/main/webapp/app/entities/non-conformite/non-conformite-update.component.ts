@@ -7,8 +7,14 @@ import { Observable } from 'rxjs';
 
 import { INonConformite, NonConformite } from 'app/shared/model/non-conformite.model';
 import { NonConformiteService } from './non-conformite.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
+type SelectableEntity = IAction | IUser | IProcessusSMI;
 
 @Component({
   selector: 'jhi-non-conformite-update',
@@ -16,36 +22,53 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class NonConformiteUpdateComponent implements OnInit {
   isSaving = false;
+  actions: IAction[] = [];
+  users: IUser[] = [];
+  processussmis: IProcessusSMI[] = [];
   dateDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
-    processus: [],
     date: [],
     description: [],
     causesPotentielles: [],
     origine: [],
+    action: [],
+    delegue: [],
+    processus: [],
   });
 
-  constructor(protected nonConformiteService: NonConformiteService, 
-    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected nonConformiteService: NonConformiteService,
+    protected actionService: ActionService,
+    protected userService: UserService,
+    protected processusSMIService: ProcessusSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ nonConformite }) => {
       this.updateForm(nonConformite);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
   updateForm(nonConformite: INonConformite): void {
     this.editForm.patchValue({
       id: nonConformite.id,
-      processus: nonConformite.processus,
       date: nonConformite.date,
       description: nonConformite.description,
       causesPotentielles: nonConformite.causesPotentielles,
       origine: nonConformite.origine,
+      action: nonConformite.action,
+      delegue: nonConformite.delegue,
+      processus: nonConformite.processus,
     });
   }
 
@@ -67,11 +90,13 @@ export class NonConformiteUpdateComponent implements OnInit {
     return {
       ...new NonConformite(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       date: this.editForm.get(['date'])!.value,
       description: this.editForm.get(['description'])!.value,
       causesPotentielles: this.editForm.get(['causesPotentielles'])!.value,
       origine: this.editForm.get(['origine'])!.value,
+      action: this.editForm.get(['action'])!.value,
+      delegue: this.editForm.get(['delegue'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
     };
   }
 
@@ -91,13 +116,7 @@ export class NonConformiteUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }

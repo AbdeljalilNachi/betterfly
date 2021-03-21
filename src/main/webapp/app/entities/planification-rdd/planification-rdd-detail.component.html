@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="planificationRDD">
+            <h2><span>Planification RDD</span> {{ planificationRDD.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>N Rdd</span></dt>
+                <dd>
+                    <span>{{ planificationRDD.nRdd }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ planificationRDD.date }}</span>
+                </dd>
+                <dt><span>Realisee</span></dt>
+                <dd>
+                    <span>{{ planificationRDD.realisee }}</span>
+                </dd>
+                <dt><span>Presentation</span></dt>
+                <dd>
+                    <div *ngIf="planificationRDD.presentation">
+                        <a (click)="openFile(planificationRDD.presentationContentType, planificationRDD.presentation)">open</a>
+                        {{ planificationRDD.presentationContentType }}, {{ byteSize(planificationRDD.presentation) }}
+                    </div>
+                </dd>
+                <dt><span>Standard</span></dt>
+                <dd>
+                    <span>{{ planificationRDD.standard }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/planification-rdd', planificationRDD.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

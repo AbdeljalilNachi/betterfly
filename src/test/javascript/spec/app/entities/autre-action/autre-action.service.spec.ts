@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(AutreActionService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new AutreAction(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new AutreAction(0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -54,7 +54,6 @@ describe('Service Tests', () => {
       it('should update a AutreAction', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             origineAction: 'BBBBBB',
             origine: 'BBBBBB',
           },
@@ -73,7 +72,6 @@ describe('Service Tests', () => {
       it('should return a list of AutreAction', () => {
         const returnedFromService = Object.assign(
           {
-            processus: 'BBBBBB',
             origineAction: 'BBBBBB',
             origine: 'BBBBBB',
           },

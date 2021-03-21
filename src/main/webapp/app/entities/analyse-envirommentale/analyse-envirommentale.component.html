@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Analyses Envirommentales</span>
+        <span>Analyse Envirommentales</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-analyse-envirommentale" [routerLink]="['/analyse-envirommentale/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Analyse Envirommentale
+            Créer un nouveau Analyse Envirommentale
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="analyseEnvirommentales?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun analyseEnvirommentale trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="analyseEnvirommentales && analyseEnvirommentales.length > 0">
@@ -42,30 +42,55 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="businessUnit"><span>Business Unit</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="activite"><span>Activite</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="aspectEnvironnemental"><span>Aspect Environnemental</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="impactEnvironnemental"><span>Impact Environnemental</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="competencesRequises"><span>Competences Requises</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="situation"><span>Situation</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="frequence"><span>Frequence</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="sensibiliteMilieu"><span>Sensibilite Milieu</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col"></th>
+                    <th scope="col"  jhiSortBy="coefficientMaitrise"><span>Coefficient Maitrise</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gravite"><span>Gravite</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="criticite"><span>Criticite</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="maitriseExistante"><span>Maitrise Existante</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.id"><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="delegue.id"><span>Delegue</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let analyseEnvirommentale of analyseEnvirommentales ;trackBy: trackId">
                     <td><a [routerLink]="['/analyse-envirommentale', analyseEnvirommentale.id, 'view']">{{ analyseEnvirommentale.id }}</a></td>
                     <td>{{ analyseEnvirommentale.date | date:'mediumDate' }}</td>
-                    <td>{{ analyseEnvirommentale.processus }}</td>
                     <td>{{ analyseEnvirommentale.businessUnit }}</td>
                     <td>{{ analyseEnvirommentale.activite }}</td>
                     <td>{{ analyseEnvirommentale.aspectEnvironnemental }}</td>
                     <td>{{ analyseEnvirommentale.impactEnvironnemental }}</td>
                     <td>{{ analyseEnvirommentale.competencesRequises }}</td>
+                    <td>{{ analyseEnvirommentale.situation }}</td>
                     <td>{{ analyseEnvirommentale.frequence }}</td>
                     <td>{{ analyseEnvirommentale.sensibiliteMilieu }}</td>
-
+                    <td>{{ analyseEnvirommentale.coefficientMaitrise }}</td>
+                    <td>{{ analyseEnvirommentale.gravite }}</td>
+                    <td>{{ analyseEnvirommentale.criticite }}</td>
+                    <td>{{ analyseEnvirommentale.maitriseExistante }}</td>
+                    <td>{{ analyseEnvirommentale.origine }}</td>
+                    <td>
+                        <div *ngIf="analyseEnvirommentale.action">
+                            <a [routerLink]="['/action', analyseEnvirommentale.action?.id, 'view']" >{{ analyseEnvirommentale.action?.action }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ analyseEnvirommentale.delegue?.login }}
+                    </td>
+                    <td>
+                        <div *ngIf="analyseEnvirommentale.processus">
+                            <a [routerLink]="['/processus-smi', analyseEnvirommentale.processus?.id, 'view']" >{{ analyseEnvirommentale.processus?.processus }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

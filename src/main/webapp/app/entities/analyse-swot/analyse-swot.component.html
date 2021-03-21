@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Analyses SWOT</span>
+        <span>Analyse SWOTS</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-analyse-swot" [routerLink]="['/analyse-swot/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Analyse SWOT
+            Créer un nouveau Analyse SWOT
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="analyseSWOTS?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun analyseSWOTS found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="analyseSWOTS && analyseSWOTS.length > 0">
@@ -41,30 +41,32 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateIdentification"><span>Date Identification</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
-                    
-                <!--
                     <th scope="col"  jhiSortBy="pilote"><span>Pilote</span> <fa-icon icon="sort"></fa-icon></th>
-                 -->   <th scope="col"  jhiSortBy="type"><span>Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="type"><span>Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="bu"><span>Bu</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="commentaire"><span>Commentaire</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="afficher"><span>Afficher</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let analyseSWOT of analyseSWOTS ;trackBy: trackId">
                     <td><a [routerLink]="['/analyse-swot', analyseSWOT.id, 'view']">{{ analyseSWOT.id }}</a></td>
-                    <td>{{ analyseSWOT.processus }}</td>
                     <td>{{ analyseSWOT.dateIdentification | date:'mediumDate' }}</td>
                     <td>{{ analyseSWOT.description }}</td>
-                <!--    <td>{{ analyseSWOT.pilote }}</td> -->
+                    <td>{{ analyseSWOT.pilote }}</td>
                     <td>{{ analyseSWOT.type }}</td>
                     <td>{{ analyseSWOT.bu }}</td>
                     <td>{{ analyseSWOT.commentaire }}</td>
                     <td>{{ analyseSWOT.afficher }}</td>
+                    <td>
+                        <div *ngIf="analyseSWOT.processus">
+                            <a [routerLink]="['/processus-smi', analyseSWOT.processus?.id, 'view']" >{{ analyseSWOT.processus?.processus }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

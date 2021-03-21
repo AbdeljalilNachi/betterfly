@@ -7,8 +7,14 @@ import { Observable } from 'rxjs';
 
 import { IObligationConformite, ObligationConformite } from 'app/shared/model/obligation-conformite.model';
 import { ObligationConformiteService } from './obligation-conformite.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IAction } from 'app/shared/model/action.model';
+import { ActionService } from 'app/entities/action/action.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
 
+type SelectableEntity = IAction | IUser | IProcessusSMI;
 
 @Component({
   selector: 'jhi-obligation-conformite-update',
@@ -16,8 +22,11 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class ObligationConformiteUpdateComponent implements OnInit {
   isSaving = false;
+  actions: IAction[] = [];
+  users: IUser[] = [];
+  processussmis: IProcessusSMI[] = [];
   dateDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
     date: [],
@@ -29,21 +38,30 @@ export class ObligationConformiteUpdateComponent implements OnInit {
     conforme: [],
     statut: [],
     observation: [],
+    origine: [],
+    action: [],
+    delegue: [],
     processus: [],
-    oRIGINE: [],
   });
 
   constructor(
     protected obligationConformiteService: ObligationConformiteService,
+    protected actionService: ActionService,
+    protected userService: UserService,
+    protected processusSMIService: ProcessusSMIService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-    ,
-    private processusSMIService : ProcessusSMIService ) {}
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ obligationConformite }) => {
       this.updateForm(obligationConformite);
+
+      this.actionService.query().subscribe((res: HttpResponse<IAction[]>) => (this.actions = res.body || []));
+
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
     });
   }
 
@@ -59,8 +77,10 @@ export class ObligationConformiteUpdateComponent implements OnInit {
       conforme: obligationConformite.conforme,
       statut: obligationConformite.statut,
       observation: obligationConformite.observation,
+      origine: obligationConformite.origine,
+      action: obligationConformite.action,
+      delegue: obligationConformite.delegue,
       processus: obligationConformite.processus,
-      oRIGINE: obligationConformite.oRIGINE,
     });
   }
 
@@ -91,8 +111,10 @@ export class ObligationConformiteUpdateComponent implements OnInit {
       conforme: this.editForm.get(['conforme'])!.value,
       statut: this.editForm.get(['statut'])!.value,
       observation: this.editForm.get(['observation'])!.value,
+      origine: this.editForm.get(['origine'])!.value,
+      action: this.editForm.get(['action'])!.value,
+      delegue: this.editForm.get(['delegue'])!.value,
       processus: this.editForm.get(['processus'])!.value,
-      oRIGINE: this.editForm.get(['oRIGINE'])!.value,
     };
   }
 
@@ -112,13 +134,7 @@ export class ObligationConformiteUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }

@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IAction, Action } from 'app/shared/model/action.model';
 import { ActionService } from './action.service';
-import { Statut } from '../../shared/model/enumerations/statut.model';
 
 @Component({
   selector: 'jhi-action-update',
@@ -27,9 +26,9 @@ export class ActionUpdateComponent implements OnInit {
     avancement: [],
     realisee: [],
     critereResultat: [],
-    efficace:  [],
     ressourcesNecessaires: [],
     statut: [],
+    efficace: [],
   });
 
   constructor(protected actionService: ActionService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -50,9 +49,9 @@ export class ActionUpdateComponent implements OnInit {
       avancement: action.avancement,
       realisee: action.realisee,
       critereResultat: action.critereResultat,
-      efficace: action.efficace,
       ressourcesNecessaires: action.ressourcesNecessaires,
       statut: action.statut,
+      efficace: action.efficace,
     });
   }
 
@@ -81,9 +80,9 @@ export class ActionUpdateComponent implements OnInit {
       avancement: this.editForm.get(['avancement'])!.value,
       realisee: this.editForm.get(['realisee'])!.value,
       critereResultat: this.editForm.get(['critereResultat'])!.value,
-      efficace: this.editForm.get(['efficace'])!.value,
       ressourcesNecessaires: this.editForm.get(['ressourcesNecessaires'])!.value,
-       statut: Statut.EN_COURS,
+      statut: this.editForm.get(['statut'])!.value,
+      efficace: this.editForm.get(['efficace'])!.value,
     };
   }
 

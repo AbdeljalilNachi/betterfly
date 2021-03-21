@@ -15,19 +15,25 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="processus" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="axedelapolitiqueqse" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="objectifqse" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="indicateur" type="varchar(255)">
+            <column name="origine" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="origine" type="varchar(255)">
+            <column name="action_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="delegue_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="processus_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="indicateur_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -53,10 +59,8 @@
                   separator=";"
                   tableName="objectif">
             <column name="id" type="numeric"/>
-            <column name="processus" type="string"/>
             <column name="axedelapolitiqueqse" type="string"/>
             <column name="objectifqse" type="string"/>
-            <column name="indicateur" type="string"/>
             <column name="origine" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

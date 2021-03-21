@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="document">
+            <h2><span>Document</span> {{ document.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ document.date }}</span>
+                </dd>
+                <dt><span>Intitule</span></dt>
+                <dd>
+                    <span>{{ document.intitule }}</span>
+                </dd>
+                <dt><span>Code</span></dt>
+                <dd>
+                    <span>{{ document.code }}</span>
+                </dd>
+                <dt><span>Version</span></dt>
+                <dd>
+                    <span>{{ document.version }}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ document.type }}</span>
+                </dd>
+                <dt><span>Piece Jointe</span></dt>
+                <dd>
+                    <div *ngIf="document.pieceJointe">
+                        <a (click)="openFile(document.pieceJointeContentType, document.pieceJointe)">open</a>
+                        {{ document.pieceJointeContentType }}, {{ byteSize(document.pieceJointe) }}
+                    </div>
+                </dd>
+                <dt><span>En Application</span></dt>
+                <dd>
+                    <span>{{ document.enApplication }}</span>
+                </dd>
+                <dt><span>Appouve</span></dt>
+                <dd>
+                    <span>{{ document.appouve }}</span>
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="document.processus">
+                        <a [routerLink]="['/processus-smi', document.processus?.id, 'view']">{{ document.processus?.processus }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document', document.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

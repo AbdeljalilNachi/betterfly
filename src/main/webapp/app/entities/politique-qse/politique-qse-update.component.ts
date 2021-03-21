@@ -7,8 +7,12 @@ import { Observable } from 'rxjs';
 
 import { IPolitiqueQSE, PolitiqueQSE } from 'app/shared/model/politique-qse.model';
 import { PolitiqueQSEService } from './politique-qse.service';
-import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service.ts';
+import { IProcessusSMI } from 'app/shared/model/processus-smi.model';
+import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.service';
+import { IIndicateurSMI } from 'app/shared/model/indicateur-smi.model';
+import { IndicateurSMIService } from 'app/entities/indicateur-smi/indicateur-smi.service';
 
+type SelectableEntity = IProcessusSMI | IIndicateurSMI;
 
 @Component({
   selector: 'jhi-politique-qse-update',
@@ -16,37 +20,46 @@ import { ProcessusSMIService } from 'app/entities/processus-smi/processus-smi.se
 })
 export class PolitiqueQSEUpdateComponent implements OnInit {
   isSaving = false;
+  processussmis: IProcessusSMI[] = [];
+  indicateursmis: IIndicateurSMI[] = [];
   dateDp: any;
-  pros: String[] | null = null;
+
   editForm = this.fb.group({
     id: [],
-    processus: [],
     date: [],
     axePolitiqueQSE: [],
     objectifQSE: [],
     vigueur: [],
+    processus: [],
     indicateur: [],
   });
 
-  constructor(protected politiqueQSEService: PolitiqueQSEService, 
-    protected activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private processusSMIService : ProcessusSMIService ) {}
+  constructor(
+    protected politiqueQSEService: PolitiqueQSEService,
+    protected processusSMIService: ProcessusSMIService,
+    protected indicateurSMIService: IndicateurSMIService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.loadAll() ;
     this.activatedRoute.data.subscribe(({ politiqueQSE }) => {
       this.updateForm(politiqueQSE);
+
+      this.processusSMIService.query().subscribe((res: HttpResponse<IProcessusSMI[]>) => (this.processussmis = res.body || []));
+
+      this.indicateurSMIService.query().subscribe((res: HttpResponse<IIndicateurSMI[]>) => (this.indicateursmis = res.body || []));
     });
   }
 
   updateForm(politiqueQSE: IPolitiqueQSE): void {
     this.editForm.patchValue({
       id: politiqueQSE.id,
-      processus: politiqueQSE.processus,
       date: politiqueQSE.date,
       axePolitiqueQSE: politiqueQSE.axePolitiqueQSE,
       objectifQSE: politiqueQSE.objectifQSE,
       vigueur: politiqueQSE.vigueur,
+      processus: politiqueQSE.processus,
       indicateur: politiqueQSE.indicateur,
     });
   }
@@ -69,11 +82,11 @@ export class PolitiqueQSEUpdateComponent implements OnInit {
     return {
       ...new PolitiqueQSE(),
       id: this.editForm.get(['id'])!.value,
-      processus: this.editForm.get(['processus'])!.value,
       date: this.editForm.get(['date'])!.value,
       axePolitiqueQSE: this.editForm.get(['axePolitiqueQSE'])!.value,
       objectifQSE: this.editForm.get(['objectifQSE'])!.value,
       vigueur: this.editForm.get(['vigueur'])!.value,
+      processus: this.editForm.get(['processus'])!.value,
       indicateur: this.editForm.get(['indicateur'])!.value,
     };
   }
@@ -94,13 +107,7 @@ export class PolitiqueQSEUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private loadAll(): void {
-    this.processusSMIService .getProcs()
-      .subscribe((res: String[]) => this.onSuccessLogins(res));
-
-  }
-
-  private onSuccessLogins(pros: String[] | null): void {
-    this.pros = pros;
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }

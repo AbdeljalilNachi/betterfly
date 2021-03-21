@@ -2,10 +2,6 @@
   "name": "IndicateurSMI",
   "fields": [
     {
-      "fieldName": "processus",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "dateIdentification",
       "fieldType": "LocalDate"
     },
@@ -44,17 +40,17 @@
     {
       "fieldName": "vigueur",
       "fieldType": "Boolean"
-    },
-    {
-      "fieldName": "annee",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "observation",
-      "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "processusSMI",
+      "otherEntityRelationshipName": "indicateurSMI",
+      "relationshipName": "processus",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210302225415",
   "entityTableName": "indicateur_smi",
   "dto": "no",
@@ -65,5 +61,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
 }

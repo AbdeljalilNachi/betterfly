@@ -42,9 +42,6 @@ import com.betterfly.domain.enumeration.TypeAnalyseSWOT;
 @WithMockUser
 public class AnalyseSWOTResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATE_IDENTIFICATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_IDENTIFICATION = LocalDate.now(ZoneId.systemDefault());
 
@@ -93,7 +90,6 @@ public class AnalyseSWOTResourceIT {
      */
     public static AnalyseSWOT createEntity(EntityManager em) {
         AnalyseSWOT analyseSWOT = new AnalyseSWOT()
-            .processus(DEFAULT_PROCESSUS)
             .dateIdentification(DEFAULT_DATE_IDENTIFICATION)
             .description(DEFAULT_DESCRIPTION)
             .pilote(DEFAULT_PILOTE)
@@ -111,7 +107,6 @@ public class AnalyseSWOTResourceIT {
      */
     public static AnalyseSWOT createUpdatedEntity(EntityManager em) {
         AnalyseSWOT analyseSWOT = new AnalyseSWOT()
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .description(UPDATED_DESCRIPTION)
             .pilote(UPDATED_PILOTE)
@@ -141,7 +136,6 @@ public class AnalyseSWOTResourceIT {
         List<AnalyseSWOT> analyseSWOTList = analyseSWOTRepository.findAll();
         assertThat(analyseSWOTList).hasSize(databaseSizeBeforeCreate + 1);
         AnalyseSWOT testAnalyseSWOT = analyseSWOTList.get(analyseSWOTList.size() - 1);
-        assertThat(testAnalyseSWOT.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testAnalyseSWOT.getDateIdentification()).isEqualTo(DEFAULT_DATE_IDENTIFICATION);
         assertThat(testAnalyseSWOT.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testAnalyseSWOT.getPilote()).isEqualTo(DEFAULT_PILOTE);
@@ -188,7 +182,6 @@ public class AnalyseSWOTResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(analyseSWOT.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].pilote").value(hasItem(DEFAULT_PILOTE)))
@@ -209,7 +202,6 @@ public class AnalyseSWOTResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(analyseSWOT.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.dateIdentification").value(DEFAULT_DATE_IDENTIFICATION.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.pilote").value(DEFAULT_PILOTE))
@@ -239,7 +231,6 @@ public class AnalyseSWOTResourceIT {
         // Disconnect from session so that the updates on updatedAnalyseSWOT are not directly saved in db
         em.detach(updatedAnalyseSWOT);
         updatedAnalyseSWOT
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .description(UPDATED_DESCRIPTION)
             .pilote(UPDATED_PILOTE)
@@ -257,7 +248,6 @@ public class AnalyseSWOTResourceIT {
         List<AnalyseSWOT> analyseSWOTList = analyseSWOTRepository.findAll();
         assertThat(analyseSWOTList).hasSize(databaseSizeBeforeUpdate);
         AnalyseSWOT testAnalyseSWOT = analyseSWOTList.get(analyseSWOTList.size() - 1);
-        assertThat(testAnalyseSWOT.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testAnalyseSWOT.getDateIdentification()).isEqualTo(UPDATED_DATE_IDENTIFICATION);
         assertThat(testAnalyseSWOT.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testAnalyseSWOT.getPilote()).isEqualTo(UPDATED_PILOTE);
@@ -324,7 +314,6 @@ public class AnalyseSWOTResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(analyseSWOT.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].pilote").value(hasItem(DEFAULT_PILOTE)))

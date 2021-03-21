@@ -1,0 +1,40 @@
+{
+  "name": "PlanificationRDD",
+  "fields": [
+    {
+      "fieldName": "nRdd",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "realisee",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "presentation",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "standard",
+      "fieldType": "Standard",
+      "fieldValues": "ISO9001,ISO14001,ISO45001"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20210318143117",
+  "entityTableName": "planification_rdd",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
+}

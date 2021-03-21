@@ -1,5 +1,6 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -33,8 +34,9 @@ public class ResultatIndicateur implements Serializable {
     @Column(name = "resultat")
     private Float resultat;
 
-    @Column(name = "indicateur")
-    private String indicateur;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "resultats", allowSetters = true)
+    private ResultIndicateurs resultIndicateurs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -84,17 +86,17 @@ public class ResultatIndicateur implements Serializable {
         this.resultat = resultat;
     }
 
-    public String getIndicateur() {
-        return indicateur;
+    public ResultIndicateurs getResultIndicateurs() {
+        return resultIndicateurs;
     }
 
-    public ResultatIndicateur indicateur(String indicateur) {
-        this.indicateur = indicateur;
+    public ResultatIndicateur resultIndicateurs(ResultIndicateurs resultIndicateurs) {
+        this.resultIndicateurs = resultIndicateurs;
         return this;
     }
 
-    public void setIndicateur(String indicateur) {
-        this.indicateur = indicateur;
+    public void setResultIndicateurs(ResultIndicateurs resultIndicateurs) {
+        this.resultIndicateurs = resultIndicateurs;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -122,7 +124,6 @@ public class ResultatIndicateur implements Serializable {
             ", mois='" + getMois() + "'" +
             ", cible=" + getCible() +
             ", resultat=" + getResultat() +
-            ", indicateur='" + getIndicateur() + "'" +
             "}";
     }
 }

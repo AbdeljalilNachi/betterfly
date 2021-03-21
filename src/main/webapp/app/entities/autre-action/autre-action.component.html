@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Autres Actions</span>
+        <span>Autre Actions</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-autre-action" [routerLink]="['/autre-action/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Autre Action
+            Créer un nouveau Autre Action
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="autreActions?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun autreAction trouvé</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="autreActions && autreActions.length > 0">
@@ -41,18 +41,32 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="origineAction"><span>Origine Action</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="origine"><span>Origine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="action.id"><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="delegue.id"><span>Delegue</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let autreAction of autreActions ;trackBy: trackId">
                     <td><a [routerLink]="['/autre-action', autreAction.id, 'view']">{{ autreAction.id }}</a></td>
-                    <td>{{ autreAction.processus }}</td>
                     <td>{{ autreAction.origineAction }}</td>
                     <td>{{ autreAction.origine }}</td>
+                    <td>
+                        <div *ngIf="autreAction.action">
+                            <a [routerLink]="['/action', autreAction.action?.id, 'view']" >{{ autreAction.action?.action }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ autreAction.delegue?.login }}
+                    </td>
+                    <td>
+                        <div *ngIf="autreAction.processus">
+                            <a [routerLink]="['/processus-smi', autreAction.processus?.id, 'view']" >{{ autreAction.processus?.processus }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

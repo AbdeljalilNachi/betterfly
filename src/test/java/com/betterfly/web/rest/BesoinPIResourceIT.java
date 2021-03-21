@@ -41,9 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class BesoinPIResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATE_IDENTIFICATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_IDENTIFICATION = LocalDate.now(ZoneId.systemDefault());
 
@@ -86,7 +83,6 @@ public class BesoinPIResourceIT {
      */
     public static BesoinPI createEntity(EntityManager em) {
         BesoinPI besoinPI = new BesoinPI()
-            .processus(DEFAULT_PROCESSUS)
             .dateIdentification(DEFAULT_DATE_IDENTIFICATION)
             .piPertinentes(DEFAULT_PI_PERTINENTES)
             .pertinente(DEFAULT_PERTINENTE)
@@ -102,7 +98,6 @@ public class BesoinPIResourceIT {
      */
     public static BesoinPI createUpdatedEntity(EntityManager em) {
         BesoinPI besoinPI = new BesoinPI()
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .piPertinentes(UPDATED_PI_PERTINENTES)
             .pertinente(UPDATED_PERTINENTE)
@@ -130,7 +125,6 @@ public class BesoinPIResourceIT {
         List<BesoinPI> besoinPIList = besoinPIRepository.findAll();
         assertThat(besoinPIList).hasSize(databaseSizeBeforeCreate + 1);
         BesoinPI testBesoinPI = besoinPIList.get(besoinPIList.size() - 1);
-        assertThat(testBesoinPI.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testBesoinPI.getDateIdentification()).isEqualTo(DEFAULT_DATE_IDENTIFICATION);
         assertThat(testBesoinPI.getPiPertinentes()).isEqualTo(DEFAULT_PI_PERTINENTES);
         assertThat(testBesoinPI.isPertinente()).isEqualTo(DEFAULT_PERTINENTE);
@@ -175,7 +169,6 @@ public class BesoinPIResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(besoinPI.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].piPertinentes").value(hasItem(DEFAULT_PI_PERTINENTES)))
             .andExpect(jsonPath("$.[*].pertinente").value(hasItem(DEFAULT_PERTINENTE.booleanValue())))
@@ -194,7 +187,6 @@ public class BesoinPIResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(besoinPI.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.dateIdentification").value(DEFAULT_DATE_IDENTIFICATION.toString()))
             .andExpect(jsonPath("$.piPertinentes").value(DEFAULT_PI_PERTINENTES))
             .andExpect(jsonPath("$.pertinente").value(DEFAULT_PERTINENTE.booleanValue()))
@@ -222,7 +214,6 @@ public class BesoinPIResourceIT {
         // Disconnect from session so that the updates on updatedBesoinPI are not directly saved in db
         em.detach(updatedBesoinPI);
         updatedBesoinPI
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .piPertinentes(UPDATED_PI_PERTINENTES)
             .pertinente(UPDATED_PERTINENTE)
@@ -238,7 +229,6 @@ public class BesoinPIResourceIT {
         List<BesoinPI> besoinPIList = besoinPIRepository.findAll();
         assertThat(besoinPIList).hasSize(databaseSizeBeforeUpdate);
         BesoinPI testBesoinPI = besoinPIList.get(besoinPIList.size() - 1);
-        assertThat(testBesoinPI.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testBesoinPI.getDateIdentification()).isEqualTo(UPDATED_DATE_IDENTIFICATION);
         assertThat(testBesoinPI.getPiPertinentes()).isEqualTo(UPDATED_PI_PERTINENTES);
         assertThat(testBesoinPI.isPertinente()).isEqualTo(UPDATED_PERTINENTE);
@@ -303,7 +293,6 @@ public class BesoinPIResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(besoinPI.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].piPertinentes").value(hasItem(DEFAULT_PI_PERTINENTES)))
             .andExpect(jsonPath("$.[*].pertinente").value(hasItem(DEFAULT_PERTINENTE.booleanValue())))

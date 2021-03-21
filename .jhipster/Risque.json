@@ -2,10 +2,6 @@
   "name": "Risque",
   "fields": [
     {
-      "fieldName": "processus",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "dateIdentification",
       "fieldType": "LocalDate"
     },
@@ -54,7 +50,29 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "action",
+      "otherEntityRelationshipName": "risque",
+      "relationshipName": "action",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "risque",
+      "relationshipName": "delegue",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "processusSMI",
+      "otherEntityRelationshipName": "risque",
+      "relationshipName": "processus",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210302224215",
   "entityTableName": "risque",
   "dto": "no",
@@ -65,5 +83,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
 }

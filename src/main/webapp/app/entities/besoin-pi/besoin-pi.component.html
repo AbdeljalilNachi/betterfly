@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span>Besoins Parties Intéressés</span>
+        <span>Besoin PIS</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-besoin-pi" [routerLink]="['/besoin-pi/new']">
             <fa-icon icon="plus"></fa-icon>
             <span class="hidden-sm-down">
-           Créer un nouveau Besoin PI
+            Créer un nouveau Besoin PI
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="alert alert-warning" id="no-result" *ngIf="besoinPIS?.length === 0">
-        <span>Aucun élément trouvé</span>
+        <span>Aucun besoinPIS found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="besoinPIS && besoinPIS.length > 0">
@@ -41,24 +41,28 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="processus"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateIdentification"><span>Date Identification</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="piPertinentes"><span>Pi Pertinentes</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="pertinente"><span>Pertinente</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="priseEnCharge"><span>Prise En Charge</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="afficher"><span>Afficher</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="processus.id"><span>Processus</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let besoinPI of besoinPIS ;trackBy: trackId">
                     <td><a [routerLink]="['/besoin-pi', besoinPI.id, 'view']">{{ besoinPI.id }}</a></td>
-                    <td>{{ besoinPI.processus }}</td>
                     <td>{{ besoinPI.dateIdentification | date:'mediumDate' }}</td>
                     <td>{{ besoinPI.piPertinentes }}</td>
                     <td>{{ besoinPI.pertinente }}</td>
                     <td>{{ besoinPI.priseEnCharge }}</td>
                     <td>{{ besoinPI.afficher }}</td>
+                    <td>
+                        <div *ngIf="besoinPI.processus">
+                            <a [routerLink]="['/processus-smi', besoinPI.processus?.id, 'view']" >{{ besoinPI.processus?.processus }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

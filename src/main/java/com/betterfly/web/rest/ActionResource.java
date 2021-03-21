@@ -1,8 +1,6 @@
 package com.betterfly.web.rest;
 
 import com.betterfly.domain.Action;
-import com.betterfly.domain.ProcessusSMI;
-import com.betterfly.domain.enumeration.Statut ; 
 import com.betterfly.repository.ActionRepository;
 import com.betterfly.repository.search.ActionSearchRepository;
 import com.betterfly.web.rest.errors.BadRequestAlertException;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,40 +53,6 @@ public class ActionResource {
         this.actionSearchRepository = actionSearchRepository;
     }
 
-    
-    private void setStatut(Action action )  
-    {
-    	 if ( action.isRealisee()  )
-         {
-         	switch (action.getEfficace())
-         	{
-         	case EFFICACE  :   		action.setStatut(Statut.REALISEE_EFFICACE)  ;  break  ;
-         	case NON_EFFICACE  : 	action.setStatut(Statut.REALISEE_NON_EFFICACE)  ;  break  ;
-         	case A_EVALUER  :  		action.setStatut(Statut.REALISEE_A_EVALUER)  ; break  ;
-         	default  :  			action.setStatut(Statut.REALISEE_A_EVALUER)  ; break  ;
-         	
-         	}
-         }
-         else  if (action.getDelai().isAfter(LocalDate.now()) )
-         {
-         	action.setStatut(Statut.RETARD)  ;
-         	
-         }
-         else  if (action.getAvancement() == "" )
-         {
-         	action.setStatut(Statut.PLANIFIEE)  ;
-         	
-         }
-         
-         else 
-         {
-         	action.setStatut(Statut.EN_COURS)  ;
-         	
-         }
-    	
-    }
-    
-    
     /**
      * {@code POST  /actions} : Create a new action.
      *
@@ -103,23 +66,12 @@ public class ActionResource {
         if (action.getId() != null) {
             throw new BadRequestAlertException("A new action cannot already have an ID", ENTITY_NAME, "idexists");
         }
-       
-        setStatut( action )  ;
-        
-        
         Action result = actionRepository.save(action);
         actionSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/actions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
-    
-    @GetMapping("/actions-names")
-    public ResponseEntity<List<String>> getAllProcessusNames() {
-       final List<String> actionsNames = actionRepository.findAll().stream().map(Action::getAction).collect(Collectors.toList());
-        return new ResponseEntity<>(actionsNames,  HttpStatus.OK);
-    }
-    
 
     /**
      * {@code PUT  /actions} : Updates an existing action.
@@ -136,10 +88,6 @@ public class ActionResource {
         if (action.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        
-        setStatut( action )  ;
-        
-        
         Action result = actionRepository.save(action);
         actionSearchRepository.save(result);
         return ResponseEntity.ok()
@@ -188,7 +136,6 @@ public class ActionResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 
-  
     /**
      * {@code SEARCH  /_search/actions?query=:query} : search for the action corresponding
      * to the query.

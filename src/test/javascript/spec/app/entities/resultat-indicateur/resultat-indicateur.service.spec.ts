@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(ResultatIndicateurService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new ResultatIndicateur(0, Mois.JAN, 0, 0, 'AAAAAAA');
+      elemDefault = new ResultatIndicateur(0, Mois.JAN, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -58,7 +58,6 @@ describe('Service Tests', () => {
             mois: 'BBBBBB',
             cible: 1,
             resultat: 1,
-            indicateur: 'BBBBBB',
           },
           elemDefault
         );
@@ -78,7 +77,6 @@ describe('Service Tests', () => {
             mois: 'BBBBBB',
             cible: 1,
             resultat: 1,
-            indicateur: 'BBBBBB',
           },
           elemDefault
         );

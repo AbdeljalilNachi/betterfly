@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="constatAudit">
+            <h2><span>Constat Audit</span> {{ constatAudit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{ constatAudit.type }}</span>
+                </dd>
+                <dt><span>Constat</span></dt>
+                <dd>
+                    <span>{{ constatAudit.constat }}</span>
+                </dd>
+                <dt><span>Origine</span></dt>
+                <dd>
+                    <span>{{ constatAudit.origine }}</span>
+                </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="constatAudit.action">
+                        <a [routerLink]="['/action', constatAudit.action?.id, 'view']">{{ constatAudit.action?.action }}</a>
+                    </div>
+                </dd>
+                <dt><span>Delegue</span></dt>
+                <dd>
+                    {{ constatAudit.delegue?.login }}
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="constatAudit.processus">
+                        <a [routerLink]="['/processus-smi', constatAudit.processus?.id, 'view']">{{ constatAudit.processus?.processus }}</a>
+                    </div>
+                </dd>
+                <dt><span>Audit</span></dt>
+                <dd>
+                    <div *ngIf="constatAudit.audit">
+                        <a [routerLink]="['/audit', constatAudit.audit?.id, 'view']">{{ constatAudit.audit?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/constat-audit', constatAudit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

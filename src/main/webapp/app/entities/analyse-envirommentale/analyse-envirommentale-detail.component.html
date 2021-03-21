@@ -12,10 +12,6 @@
                 <dd>
                     <span>{{ analyseEnvirommentale.date }}</span>
                 </dd>
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ analyseEnvirommentale.processus }}</span>
-                </dd>
                 <dt><span>Business Unit</span></dt>
                 <dd>
                     <span>{{ analyseEnvirommentale.businessUnit }}</span>
@@ -68,18 +64,34 @@
                 <dd>
                     <span>{{ analyseEnvirommentale.origine }}</span>
                 </dd>
+                <dt><span>Action</span></dt>
+                <dd>
+                    <div *ngIf="analyseEnvirommentale.action">
+                        <a [routerLink]="['/action', analyseEnvirommentale.action?.id, 'view']">{{ analyseEnvirommentale.action?.action }}</a>
+                    </div>
+                </dd>
+                <dt><span>Delegue</span></dt>
+                <dd>
+                    {{ analyseEnvirommentale.delegue?.login }}
+                </dd>
+                <dt><span>Processus</span></dt>
+                <dd>
+                    <div *ngIf="analyseEnvirommentale.processus">
+                        <a [routerLink]="['/processus-smi', analyseEnvirommentale.processus?.id, 'view']">{{ analyseEnvirommentale.processus?.processus }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/analyse-envirommentale', analyseEnvirommentale.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

@@ -41,9 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class IndicateurSMIResourceIT {
 
-    private static final String DEFAULT_PROCESSUS = "AAAAAAAAAA";
-    private static final String UPDATED_PROCESSUS = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATE_IDENTIFICATION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_IDENTIFICATION = LocalDate.now(ZoneId.systemDefault());
 
@@ -74,12 +71,6 @@ public class IndicateurSMIResourceIT {
     private static final Boolean DEFAULT_VIGUEUR = false;
     private static final Boolean UPDATED_VIGUEUR = true;
 
-    private static final Integer DEFAULT_ANNEE = 1;
-    private static final Integer UPDATED_ANNEE = 2;
-
-    private static final String DEFAULT_OBSERVATION = "AAAAAAAAAA";
-    private static final String UPDATED_OBSERVATION = "BBBBBBBBBB";
-
     @Autowired
     private IndicateurSMIRepository indicateurSMIRepository;
 
@@ -107,7 +98,6 @@ public class IndicateurSMIResourceIT {
      */
     public static IndicateurSMI createEntity(EntityManager em) {
         IndicateurSMI indicateurSMI = new IndicateurSMI()
-            .processus(DEFAULT_PROCESSUS)
             .dateIdentification(DEFAULT_DATE_IDENTIFICATION)
             .indicateur(DEFAULT_INDICATEUR)
             .formuleCalcul(DEFAULT_FORMULE_CALCUL)
@@ -117,9 +107,7 @@ public class IndicateurSMIResourceIT {
             .periodicite(DEFAULT_PERIODICITE)
             .responsableCalcul(DEFAULT_RESPONSABLE_CALCUL)
             .observations(DEFAULT_OBSERVATIONS)
-            .vigueur(DEFAULT_VIGUEUR)
-            .annee(DEFAULT_ANNEE)
-            .observation(DEFAULT_OBSERVATION);
+            .vigueur(DEFAULT_VIGUEUR);
         return indicateurSMI;
     }
     /**
@@ -130,7 +118,6 @@ public class IndicateurSMIResourceIT {
      */
     public static IndicateurSMI createUpdatedEntity(EntityManager em) {
         IndicateurSMI indicateurSMI = new IndicateurSMI()
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .indicateur(UPDATED_INDICATEUR)
             .formuleCalcul(UPDATED_FORMULE_CALCUL)
@@ -140,9 +127,7 @@ public class IndicateurSMIResourceIT {
             .periodicite(UPDATED_PERIODICITE)
             .responsableCalcul(UPDATED_RESPONSABLE_CALCUL)
             .observations(UPDATED_OBSERVATIONS)
-            .vigueur(UPDATED_VIGUEUR)
-            .annee(UPDATED_ANNEE)
-            .observation(UPDATED_OBSERVATION);
+            .vigueur(UPDATED_VIGUEUR);
         return indicateurSMI;
     }
 
@@ -165,7 +150,6 @@ public class IndicateurSMIResourceIT {
         List<IndicateurSMI> indicateurSMIList = indicateurSMIRepository.findAll();
         assertThat(indicateurSMIList).hasSize(databaseSizeBeforeCreate + 1);
         IndicateurSMI testIndicateurSMI = indicateurSMIList.get(indicateurSMIList.size() - 1);
-        assertThat(testIndicateurSMI.getProcessus()).isEqualTo(DEFAULT_PROCESSUS);
         assertThat(testIndicateurSMI.getDateIdentification()).isEqualTo(DEFAULT_DATE_IDENTIFICATION);
         assertThat(testIndicateurSMI.getIndicateur()).isEqualTo(DEFAULT_INDICATEUR);
         assertThat(testIndicateurSMI.getFormuleCalcul()).isEqualTo(DEFAULT_FORMULE_CALCUL);
@@ -176,8 +160,6 @@ public class IndicateurSMIResourceIT {
         assertThat(testIndicateurSMI.getResponsableCalcul()).isEqualTo(DEFAULT_RESPONSABLE_CALCUL);
         assertThat(testIndicateurSMI.getObservations()).isEqualTo(DEFAULT_OBSERVATIONS);
         assertThat(testIndicateurSMI.isVigueur()).isEqualTo(DEFAULT_VIGUEUR);
-        assertThat(testIndicateurSMI.getAnnee()).isEqualTo(DEFAULT_ANNEE);
-        assertThat(testIndicateurSMI.getObservation()).isEqualTo(DEFAULT_OBSERVATION);
 
         // Validate the IndicateurSMI in Elasticsearch
         verify(mockIndicateurSMISearchRepository, times(1)).save(testIndicateurSMI);
@@ -217,7 +199,6 @@ public class IndicateurSMIResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(indicateurSMI.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)))
             .andExpect(jsonPath("$.[*].formuleCalcul").value(hasItem(DEFAULT_FORMULE_CALCUL)))
@@ -227,9 +208,7 @@ public class IndicateurSMIResourceIT {
             .andExpect(jsonPath("$.[*].periodicite").value(hasItem(DEFAULT_PERIODICITE)))
             .andExpect(jsonPath("$.[*].responsableCalcul").value(hasItem(DEFAULT_RESPONSABLE_CALCUL)))
             .andExpect(jsonPath("$.[*].observations").value(hasItem(DEFAULT_OBSERVATIONS)))
-            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())))
-            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
-            .andExpect(jsonPath("$.[*].observation").value(hasItem(DEFAULT_OBSERVATION)));
+            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
     
     @Test
@@ -243,7 +222,6 @@ public class IndicateurSMIResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(indicateurSMI.getId().intValue()))
-            .andExpect(jsonPath("$.processus").value(DEFAULT_PROCESSUS))
             .andExpect(jsonPath("$.dateIdentification").value(DEFAULT_DATE_IDENTIFICATION.toString()))
             .andExpect(jsonPath("$.indicateur").value(DEFAULT_INDICATEUR))
             .andExpect(jsonPath("$.formuleCalcul").value(DEFAULT_FORMULE_CALCUL))
@@ -253,9 +231,7 @@ public class IndicateurSMIResourceIT {
             .andExpect(jsonPath("$.periodicite").value(DEFAULT_PERIODICITE))
             .andExpect(jsonPath("$.responsableCalcul").value(DEFAULT_RESPONSABLE_CALCUL))
             .andExpect(jsonPath("$.observations").value(DEFAULT_OBSERVATIONS))
-            .andExpect(jsonPath("$.vigueur").value(DEFAULT_VIGUEUR.booleanValue()))
-            .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE))
-            .andExpect(jsonPath("$.observation").value(DEFAULT_OBSERVATION));
+            .andExpect(jsonPath("$.vigueur").value(DEFAULT_VIGUEUR.booleanValue()));
     }
     @Test
     @Transactional
@@ -278,7 +254,6 @@ public class IndicateurSMIResourceIT {
         // Disconnect from session so that the updates on updatedIndicateurSMI are not directly saved in db
         em.detach(updatedIndicateurSMI);
         updatedIndicateurSMI
-            .processus(UPDATED_PROCESSUS)
             .dateIdentification(UPDATED_DATE_IDENTIFICATION)
             .indicateur(UPDATED_INDICATEUR)
             .formuleCalcul(UPDATED_FORMULE_CALCUL)
@@ -288,9 +263,7 @@ public class IndicateurSMIResourceIT {
             .periodicite(UPDATED_PERIODICITE)
             .responsableCalcul(UPDATED_RESPONSABLE_CALCUL)
             .observations(UPDATED_OBSERVATIONS)
-            .vigueur(UPDATED_VIGUEUR)
-            .annee(UPDATED_ANNEE)
-            .observation(UPDATED_OBSERVATION);
+            .vigueur(UPDATED_VIGUEUR);
 
         restIndicateurSMIMockMvc.perform(put("/api/indicateur-smis")
             .contentType(MediaType.APPLICATION_JSON)
@@ -301,7 +274,6 @@ public class IndicateurSMIResourceIT {
         List<IndicateurSMI> indicateurSMIList = indicateurSMIRepository.findAll();
         assertThat(indicateurSMIList).hasSize(databaseSizeBeforeUpdate);
         IndicateurSMI testIndicateurSMI = indicateurSMIList.get(indicateurSMIList.size() - 1);
-        assertThat(testIndicateurSMI.getProcessus()).isEqualTo(UPDATED_PROCESSUS);
         assertThat(testIndicateurSMI.getDateIdentification()).isEqualTo(UPDATED_DATE_IDENTIFICATION);
         assertThat(testIndicateurSMI.getIndicateur()).isEqualTo(UPDATED_INDICATEUR);
         assertThat(testIndicateurSMI.getFormuleCalcul()).isEqualTo(UPDATED_FORMULE_CALCUL);
@@ -312,8 +284,6 @@ public class IndicateurSMIResourceIT {
         assertThat(testIndicateurSMI.getResponsableCalcul()).isEqualTo(UPDATED_RESPONSABLE_CALCUL);
         assertThat(testIndicateurSMI.getObservations()).isEqualTo(UPDATED_OBSERVATIONS);
         assertThat(testIndicateurSMI.isVigueur()).isEqualTo(UPDATED_VIGUEUR);
-        assertThat(testIndicateurSMI.getAnnee()).isEqualTo(UPDATED_ANNEE);
-        assertThat(testIndicateurSMI.getObservation()).isEqualTo(UPDATED_OBSERVATION);
 
         // Validate the IndicateurSMI in Elasticsearch
         verify(mockIndicateurSMISearchRepository, times(1)).save(testIndicateurSMI);
@@ -373,7 +343,6 @@ public class IndicateurSMIResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(indicateurSMI.getId().intValue())))
-            .andExpect(jsonPath("$.[*].processus").value(hasItem(DEFAULT_PROCESSUS)))
             .andExpect(jsonPath("$.[*].dateIdentification").value(hasItem(DEFAULT_DATE_IDENTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].indicateur").value(hasItem(DEFAULT_INDICATEUR)))
             .andExpect(jsonPath("$.[*].formuleCalcul").value(hasItem(DEFAULT_FORMULE_CALCUL)))
@@ -383,8 +352,6 @@ public class IndicateurSMIResourceIT {
             .andExpect(jsonPath("$.[*].periodicite").value(hasItem(DEFAULT_PERIODICITE)))
             .andExpect(jsonPath("$.[*].responsableCalcul").value(hasItem(DEFAULT_RESPONSABLE_CALCUL)))
             .andExpect(jsonPath("$.[*].observations").value(hasItem(DEFAULT_OBSERVATIONS)))
-            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())))
-            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
-            .andExpect(jsonPath("$.[*].observation").value(hasItem(DEFAULT_OBSERVATION)));
+            .andExpect(jsonPath("$.[*].vigueur").value(hasItem(DEFAULT_VIGUEUR.booleanValue())));
     }
 }

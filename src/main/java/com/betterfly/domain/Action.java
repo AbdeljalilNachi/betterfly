@@ -7,6 +7,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.betterfly.domain.enumeration.TypeAction;
+
 import com.betterfly.domain.enumeration.Statut;
 
 import com.betterfly.domain.enumeration.Efficace;
@@ -32,8 +34,9 @@ public class Action implements Serializable {
     @Column(name = "action")
     private String action;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private String type;
+    private TypeAction type;
 
     @Column(name = "delai")
     private LocalDate delai;
@@ -93,16 +96,16 @@ public class Action implements Serializable {
         this.action = action;
     }
 
-    public String getType() {
+    public TypeAction getType() {
         return type;
     }
 
-    public Action type(String type) {
+    public Action type(TypeAction type) {
         this.type = type;
         return this;
     }
 
-    public void setType(String type) {
+    public void setType(TypeAction type) {
         this.type = type;
     }
 

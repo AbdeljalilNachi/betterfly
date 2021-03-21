@@ -22,7 +22,15 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "action",
+      "otherEntityRelationshipName": "constat",
+      "relationshipName": "action",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20210302224415",
   "entityTableName": "constat",
   "dto": "no",
@@ -33,5 +41,6 @@
   "readOnly": false,
   "embedded": false,
   "clientRootFolder": "",
-  "applications": "*"
+  "applications": ["betterFly"],
+  "searchEngine": "elasticsearch"
 }

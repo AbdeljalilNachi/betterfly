@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Processus</span></dt>
-                <dd>
-                    <span>{{ indicateurSMI.processus }}</span>
-                </dd>
                 <dt><span>Date Identification</span></dt>
                 <dd>
                     <span>{{ indicateurSMI.dateIdentification }}</span>
@@ -52,26 +48,24 @@
                 <dd>
                     <span>{{ indicateurSMI.vigueur }}</span>
                 </dd>
-                <dt><span>Annee</span></dt>
+                <dt><span>Processus</span></dt>
                 <dd>
-                    <span>{{ indicateurSMI.annee }}</span>
-                </dd>
-                <dt><span>Observation</span></dt>
-                <dd>
-                    <span>{{ indicateurSMI.observation }}</span>
+                    <div *ngIf="indicateurSMI.processus">
+                        <a [routerLink]="['/processus-smi', indicateurSMI.processus?.id, 'view']">{{ indicateurSMI.processus?.processus }}</a>
+                    </div>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/indicateur-smi', indicateurSMI.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Mettre à jour</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
             </button>
         </div>
     </div>

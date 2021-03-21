@@ -1,7 +1,6 @@
 package com.betterfly.web.rest;
 
 import com.betterfly.domain.ProcessusSMI;
-import com.betterfly.domain.User;
 import com.betterfly.repository.ProcessusSMIRepository;
 import com.betterfly.repository.search.ProcessusSMISearchRepository;
 import com.betterfly.web.rest.errors.BadRequestAlertException;
@@ -100,30 +99,15 @@ public class ProcessusSMIResource {
      * {@code GET  /processus-smis} : get all the processusSMIS.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of processusSMIS in body.
      */
     @GetMapping("/processus-smis")
-    public ResponseEntity<List<ProcessusSMI>> getAllProcessusSMIS(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<ProcessusSMI>> getAllProcessusSMIS(Pageable pageable) {
         log.debug("REST request to get a page of ProcessusSMIS");
-        Page<ProcessusSMI> page;
-        if (eagerload) {
-            page = processusSMIRepository.findAllWithEagerRelationships(pageable);
-        } else {
-            page = processusSMIRepository.findAll(pageable);
-        }
+        Page<ProcessusSMI> page = processusSMIRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
-    
-    @GetMapping("/processus-names")
-    public ResponseEntity<List<String>> getAllProcessusNames() {
-       final List<String> procNames = processusSMIRepository.findAll().stream().map(ProcessusSMI::getProcessus).collect(Collectors.toList());
-        return new ResponseEntity<>(procNames,  HttpStatus.OK);
-    }
-    
-    
-
 
     /**
      * {@code GET  /processus-smis/:id} : get the "id" processusSMI.
@@ -134,7 +118,7 @@ public class ProcessusSMIResource {
     @GetMapping("/processus-smis/{id}")
     public ResponseEntity<ProcessusSMI> getProcessusSMI(@PathVariable Long id) {
         log.debug("REST request to get ProcessusSMI : {}", id);
-        Optional<ProcessusSMI> processusSMI = processusSMIRepository.findOneWithEagerRelationships(id);
+        Optional<ProcessusSMI> processusSMI = processusSMIRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(processusSMI);
     }
 

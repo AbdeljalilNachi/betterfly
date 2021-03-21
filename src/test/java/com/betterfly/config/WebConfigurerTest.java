@@ -3,7 +3,6 @@ package com.betterfly.config;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.web.filter.CachingHttpHeadersFilter;
-import org.h2.server.web.WebServlet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
@@ -59,7 +58,6 @@ public class WebConfigurerTest {
         webConfigurer.onStartup(servletContext);
 
 
-        verify(servletContext, never()).addServlet(eq("H2Console"), any(WebServlet.class));
     }
 
     @Test
@@ -68,7 +66,6 @@ public class WebConfigurerTest {
         webConfigurer.onStartup(servletContext);
 
 
-        verify(servletContext).addServlet(eq("H2Console"), any(WebServlet.class));
     }
 
     @Test

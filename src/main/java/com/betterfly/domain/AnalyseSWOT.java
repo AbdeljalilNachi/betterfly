@@ -1,18 +1,12 @@
 package com.betterfly.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 import com.betterfly.domain.enumeration.TypeAnalyseSWOT;
 
@@ -30,9 +24,6 @@ public class AnalyseSWOT implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @Column(name = "processus")
-    private String processus;
 
     @Column(name = "date_identification")
     private LocalDate dateIdentification;
@@ -56,6 +47,10 @@ public class AnalyseSWOT implements Serializable {
     @Column(name = "afficher")
     private Boolean afficher;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = "analyseSWOTS", allowSetters = true)
+    private ProcessusSMI processus;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -63,19 +58,6 @@ public class AnalyseSWOT implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getProcessus() {
-        return processus;
-    }
-
-    public AnalyseSWOT processus(String processus) {
-        this.processus = processus;
-        return this;
-    }
-
-    public void setProcessus(String processus) {
-        this.processus = processus;
     }
 
     public LocalDate getDateIdentification() {
@@ -168,6 +150,19 @@ public class AnalyseSWOT implements Serializable {
     public void setAfficher(Boolean afficher) {
         this.afficher = afficher;
     }
+
+    public ProcessusSMI getProcessus() {
+        return processus;
+    }
+
+    public AnalyseSWOT processus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+        return this;
+    }
+
+    public void setProcessus(ProcessusSMI processusSMI) {
+        this.processus = processusSMI;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -191,7 +186,6 @@ public class AnalyseSWOT implements Serializable {
     public String toString() {
         return "AnalyseSWOT{" +
             "id=" + getId() +
-            ", processus='" + getProcessus() + "'" +
             ", dateIdentification='" + getDateIdentification() + "'" +
             ", description='" + getDescription() + "'" +
             ", pilote='" + getPilote() + "'" +

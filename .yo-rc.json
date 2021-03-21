@@ -14,7 +14,7 @@
     "enableHibernateCache": false,
     "websocket": false,
     "databaseType": "sql",
-    "devDatabaseType": "h2Disk",
+    "devDatabaseType": "postgresql",
     "prodDatabaseType": "postgresql",
     "searchEngine": "elasticsearch",
     "messageBroker": false,
@@ -36,6 +36,33 @@
     "otherModules": [],
     "enableTranslation": false,
     "blueprints": [],
-    "lastLiquibaseTimestamp": 1614692672000
-  }
+    "lastLiquibaseTimestamp": 1614692672000,
+    "skipUserManagement": false,
+    "languages": ["en", "fr"],
+    "nativeLanguage": "en",
+    "skipClient": false,
+    "skipServer": false
+  },
+  "entities": [
+    "Action",
+    "AnalyseEnvirommentale",
+    "AnalyseSST",
+    "AnalyseSWOT",
+    "AutreAction",
+    "BesoinPI",
+    "IndicateurSMI",
+    "ResultIndicateurs",
+    "ResultatIndicateur",
+    "NonConformite",
+    "Objectif",
+    "ObligationConformite",
+    "PolitiqueQSE",
+    "ProcessusSMI",
+    "Reclamation",
+    "Risque",
+    "Audit",
+    "ConstatAudit",
+    "PlanificationRDD",
+    "Document"
+  ]
 }
