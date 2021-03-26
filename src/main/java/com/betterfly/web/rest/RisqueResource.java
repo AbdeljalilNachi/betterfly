@@ -88,7 +88,7 @@ public class RisqueResource {
         if (risque.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Risque result = risqueRepository.save(risque);
+        Risque result = risqueRepository.save(risque);       
         risqueSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, risque.getId().toString()))

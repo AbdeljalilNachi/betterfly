@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-risque-heading">Create or edit a Risque</h2>
+            <h2 id="jhi-risque-heading">Créer ou mettre à jour : Risque</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -50,22 +50,18 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_gravite">Gravite</label>
                     <select class="form-control" name="gravite" formControlName="gravite" id="field_gravite">
-                        <option value="ONE">ONE</option>
-                        <option value="TWO">TWO</option>
-                        <option value="THREE">THREE</option>
-                        <option value="FOUR">FOUR</option>
-                        <option value="FIVE">FIVE</option>
+                        <option value="ONE">1</option>
+                        <option value="TWO">2</option>
+                        <option value="THREE">3</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_probabilite">Probabilite</label>
                     <select class="form-control" name="probabilite" formControlName="probabilite" id="field_probabilite">
-                        <option value="ONE">ONE</option>
-                        <option value="TWO">TWO</option>
-                        <option value="THREE">THREE</option>
-                        <option value="FOUR">FOUR</option>
-                        <option value="FIVE">FIVE</option>
+                        <option value="ONE">1</option>
+                        <option value="TWO">2</option>
+                        <option value="THREE">3</option>
                     </select>
                 </div>
 
@@ -93,7 +89,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_origine">Origine</label>
-                    <input type="text" class="form-control" name="origine" id="field_origine"
+                    <input type="hidden" class="form-control" name="origine" id="field_origine"
                            formControlName="origine"/>
                 </div>
 
@@ -103,6 +99,18 @@
                         <option [ngValue]="null"></option>
                         <option [ngValue]="actionOption.id === editForm.get('action')!.value?.id ? editForm.get('action')!.value : actionOption" *ngFor="let actionOption of actions; trackBy: trackById">{{ actionOption.action }}</option>
                     </select>
+
+                    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-action" 
+                    onClick="MyWindow=window.open('http://localhost:9000/action/new','MyWindow','width=1000,height=700'); return false;" >
+                        <fa-icon icon="plus"></fa-icon>
+                        <span class="hidden-sm-down">
+                        Créer l'action
+                        </span>
+                    </button>
+
+
+
+
                 </div>
 
                 <div class="form-group">
